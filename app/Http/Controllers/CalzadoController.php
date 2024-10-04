@@ -9,9 +9,12 @@ class CalzadoController extends Controller
     public function index()
     {
         // Obtener todos los calzados
-        $calzados = Calzado::with(['loteMercaderia', 'modelo', 'talla', 'material'])->get();
+        $calzados = Calzado::with(['modelo', 'material', 'talla'])->get();
 
         // Pasar los calzados a la vista
-        return view('index', compact('calzados'));
+        return view('cliente.index', compact('calzados'));
+    }
+    public function create(){
+        return view('admin.calzados.create');
     }
 }

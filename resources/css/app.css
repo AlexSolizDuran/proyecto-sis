@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav{
+    background-color: #00f71596;
+    padding: 30px;
+    text-align: center;
+}
+nav a{
+    font-family: sans-serif;
+    font-size: 50px;
+    color: #ec3110ce;
+    text-decoration: none;
+}
+.boton {
+    text-align: center;
+}
+.btn {
+    display: inline-block; /* Asegúrate de que el botón se comporte como un bloque en línea */
+    padding: 10px 20px; /* Ajusta el padding del botón */
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    font-size: 50px;
+    text-decoration: none; /* Quita el subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Suavizar el cambio de color */
+}
+.tabla{
+    inline-size: 100%; /* Ancho completo */
+    border-collapse: collapse; /* Elimina el espacio entre las celdas */
+    margin: 20px 0; /* Espaciado alrededor de la tabla */
+    font-size: 16px; /* Tamaño de fuente */
+}
+.tabla th, .tabla td {
+    padding: 12px; /* Espaciado interno en celdas */
+    text-align: start; /* Alinear texto a la izquierda */
+    border: 1px solid #dddddd; /* Borde gris claro */
+}
+.tabla th {
+    background-color: #007bff; /* Color de fondo para encabezados */
+    color: white; /* Color del texto en encabezados */
+}
+
+
+
+.tabla tr:hover {
+    background-color: #f1f1f1; /* Color de fondo al pasar el ratón */
+}
+.centrar{
+    text-align: center;
+}
+.formulario-calzado {
+    max-inline-size: 600px; /* Ancho máximo del formulario */
+    margin: 20px auto; /* Centrar el formulario */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #dddddd; /* Borde ligero */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #f9f9f9; /* Color de fondo */
+}
+
+.formulario-calzado label {
+    display: block; /* Cada etiqueta en una nueva línea */
+    margin-block-end: 5px; /* Espaciado inferior */
+}
+
+.formulario-calzado input,
+.formulario-calzado select {
+    inline-size: 100%; /* Ancho completo */
+    padding: 10px; /* Espaciado interno */
+    margin-block-end: 15px; /* Espaciado inferior */
+    border: 1px solid #cccccc; /* Borde */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+.formulario-calzado button {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+}
+
+.formulario-calzado button:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el ratón */
+}

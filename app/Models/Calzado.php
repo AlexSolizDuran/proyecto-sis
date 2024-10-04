@@ -44,4 +44,14 @@ class Calzado extends Model
     {
         return $this->belongsTo(Material::class, 'cod_material', 'cod');
     }
+
+    public function materialn(){
+        return $this-> material ? $this->material->nombre : 'sin material';
+    }
+    public function modelon(){
+        return $this->modelo ? $this->modelo->nombre : 'sin modelo';
+    }
+    public function tallan(){
+        return $this->talla ? $this->talla->numero : 'sin talla';
+    }
 }
