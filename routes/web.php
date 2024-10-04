@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CalzadoController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/calzados', [CalzadoController::class, 'index'])->name('index');
+
