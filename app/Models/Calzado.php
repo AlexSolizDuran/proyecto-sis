@@ -10,6 +10,8 @@ class Calzado extends Model
     use HasFactory;
     protected $table = 'calzado';
     protected $primaryKey = 'cod';
+    public $incrementing = false;
+    public $timestamps = false;
 
     protected $fillable = [ // Atributos que se pueden llenar masivamente
         'cod',
@@ -21,6 +23,20 @@ class Calzado extends Model
         'cod_talla',
         'cod_material',
     ];
+
+    public function getGeneroCompletoAttribute()
+    {
+        switch ($this->genero) {
+            case 'm':
+                return 'Masculino';
+            case 'f':
+                return 'Femenino';
+            case 'u':
+                return 'Unisex';
+            default:
+                return 'No definido';
+        }
+    }
 
     public function loteMercaderia()
     {
@@ -45,13 +61,5 @@ class Calzado extends Model
         return $this->belongsTo(Material::class, 'cod_material', 'cod');
     }
 
-    public function materialn(){
-        return $this-> material ? $this->material->nombre : 'sin material';
-    }
-    public function modelon(){
-        return $this->modelo ? $this->modelo->nombre : 'sin modelo';
-    }
-    public function tallan(){
-        return $this->talla ? $this->talla->numero : 'sin talla';
-    }
+    
 }

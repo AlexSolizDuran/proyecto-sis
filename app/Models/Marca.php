@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Marca extends Model
 {
     use HasFactory;
-    protected $table = 'marcar';
+    protected $table = 'marca';
     protected $primaryKey = 'cod';
 
     protected $filliable = ['nombre',];
-    
+
 }

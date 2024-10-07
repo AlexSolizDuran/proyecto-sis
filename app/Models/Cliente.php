@@ -12,9 +12,10 @@ class Cliente extends Model
     protected $table = 'cliente';
     protected $primaryKey = 'ci_persona';
     public $incrementing = false;
+    public $timestamps = false;
 
-    protected $filliable = ['ci_persona','direccion','gmail',];
-
+    protected $fillable = ['ci_persona','direccion','gmail',];
+    
     public function persona()
     {
         return $this->belongsTo(Persona::class, 'ci_persona', 'ci');

@@ -2,18 +2,18 @@
 
 @section('contenido')
     
-<div>
+<div class="container">
     <h1 class="centrar">Lista de Calzados</h1>
-    <table class="tabla ">
+    <table class="table ">
         <thead>
             <tr>
                 <th>Código</th>
                 <th>Género</th>
                 <th>Precio por Unidad</th>
                 <th>Cantidad de Pares</th>
-                <th>Código Modelo</th>
-                <th>Código Talla</th>
-                <th>Código Material</th>
+                <th>Modelo</th>
+                <th>Talla</th>
+                <th>Material</th>
             </tr>
         </thead>
         <tbody>
@@ -23,9 +23,9 @@
                     <td>{{ $calzado->genero }}</td>
                     <td>{{ $calzado->precio_unidad }} Bs</td>
                     <td>{{ $calzado->cantidad_pares }}</td>   
-                    <td>{{ $calzado->modelon() }}</td>
-                    <td>{{ $calzado->tallan() }}</td>
-                    <td>{{ $calzado->materialn() }}</td>
+                    <td>{{ $calzado->modelo->nombre }}</td>
+                    <td>{{ $calzado->talla->numero }}</td>
+                    <td>{{ $calzado->material->nombre }}</td>
                 </tr>
             @endforeach
         </tbody>

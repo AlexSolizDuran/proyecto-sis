@@ -20,7 +20,8 @@ class NotaVenta extends Model
     public function administrador(){
         return $this->hasMany(Administrador::class, 'cod_admin','cod');
     }
-    public function registroventa(){
-        return $this->hasMany(RegistroVenta::class,'nro_venta','nro');
+    public function registroventa()
+    {
+        return $this->hasMany(RegistroVenta::class, 'nro_venta', 'nro');
     }
 }

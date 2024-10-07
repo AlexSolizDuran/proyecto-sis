@@ -13,7 +13,8 @@ class Persona extends Model
     //clave primaria
     protected $primaryKey = 'ci';
     public $incrementing = false;
-
+    public $timestamps = false;
+    
     protected $fillable = ['ci','nombre','apellido','cel','tipo',];
 
 

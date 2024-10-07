@@ -24,7 +24,7 @@ class RegistroVenta extends Model
     }
 
     // Relación con el modelo NotaVenta
-    public function notaVenta()
+    public function notaventa()
     {
         return $this->belongsTo(NotaVenta::class, 'nro_venta', 'nro');
     }
