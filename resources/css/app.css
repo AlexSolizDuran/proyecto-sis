@@ -8,6 +8,7 @@
 
 body{
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f9fa; /* Color de fondo suave */
 }
 
 nav{
@@ -154,4 +155,19 @@ nav a{
 .no-arrows::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+.card {
+    border-radius: 10px; /* Bordes redondeados */
+}
+.btn-light {
+    background-color: #e3f2fd; /* Color claro personalizado */
+    border-color: #4A90E2; /* Color de borde */
+}
+.btn-warning {
+    background-color: #ffca28; /* Color de botón de advertencia */
+    border-color: #ffca28; /* Color de borde */
+}
+.btn:hover {
+    opacity: 0.9; /* Efecto hover */
 }

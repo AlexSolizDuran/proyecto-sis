@@ -30,6 +30,8 @@
                     <td>{{ $cliente->direccion }}</td>
                     <td>{{ $cliente->gmail }}</td>
                     <td>
+                        <a href="{{ route('admin.venta.create', $cliente) }}" class="btn btn-info btn-sm">Realizar venta</a>
+
                         <!-- Botón para ver los detalles de un calzado -->
                         <a href="{{ route('admin.cliente.show', $cliente) }}" class="btn btn-info btn-sm">Ver</a>
 

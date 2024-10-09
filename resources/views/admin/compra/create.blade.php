@@ -1,11 +1,16 @@
 @extends('layout')
 @section('contenido')
 
-<form action="{{ route('lote_mercaderia.store') }}" method="POST" class="formulario">
+<form action="{{ route('admin.compra.store') }}" method="POST" class="formulario">
     @csrf
+
     <div class="form-group">
-        <label for="cod">Código</label>
-        <input type="number" name="cod" id="cod" class="form-control" required>
+        <label for="pais">Pais</label>
+        <select name="pais" id="pais" class="form-control" required>
+            @foreach($paises as $pais)
+                <option value="{{ $pais->cod }}">{{ $pais->nombre }}</option>
+            @endforeach
+        </select>
     </div>
 
     <div class="form-group">
@@ -24,11 +29,6 @@
     </div>
 
     <div class="form-group">
-        <label for="fecha_compra">Fecha de Compra</label>
-        <input type="date" name="fecha_compra" id="fecha_compra" class="form-control" required>
-    </div>
-
-    <div class="form-group">
         <label for="precio_logistica">Precio de Logística</label>
         <input type="number" step="0.01" name="precio_logistica" id="precio_logistica" class="form-control" required>
     </div>
@@ -41,7 +41,8 @@
             @endforeach
         </select>
     </div>
-
-    <button type="submit" >Crear Lote de Mercadería</button>
+    <button type="button" >Mostrar Lista de Productos</button>
+    
 </form>
+
 @endsection

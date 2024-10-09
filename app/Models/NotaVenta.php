@@ -11,8 +11,9 @@ class NotaVenta extends Model
 
     protected $table = 'nota_venta';
     protected $primaryKey = 'nro';
+    public $timestamps = false;
 
-    protected $filliable = ['fecha','monto_total','cantidad','ci_cliente','cod_admin',];
+    protected $fillable = ['fecha','monto_total','cantidad','ci_cliente','cod_admin',];
 
     public function cliente (){
         return $this->belongsTo(Cliente::class, 'ci_cliente','ci_persona');

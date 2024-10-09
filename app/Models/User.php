@@ -44,4 +44,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function administrador()
+    {
+        return $this->belongsTo(Administrador::class, 'cod', 'cod');
+    }
 }

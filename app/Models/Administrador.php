@@ -11,8 +11,12 @@ class Administrador extends Model
     protected $table = 'administrador';
     protected $primaryKey = 'cod';
     public $incrementing = false;
+    public $timestamps = false;
 
     protected $fillable = ['cod','ci_persona',];
+
+
+    
 
     public function persona(){
         return $this->belongsTo(Persona::class, 'ci_persona','ci');

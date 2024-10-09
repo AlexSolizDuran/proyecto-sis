@@ -12,7 +12,7 @@ class Pais extends Model
     protected $primaryKey = 'cod';
     protected $keyType = 'string';
     
-    protected $filliable = ['cod','nombre','horma'];
+    protected $fillable = ['cod','nombre','horma'];
 
-    
+
 }

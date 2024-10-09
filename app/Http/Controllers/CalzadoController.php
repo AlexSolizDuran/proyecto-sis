@@ -9,19 +9,44 @@ use App\Models\Talla;
 use App\Models\Material;
 use App\Models\LoteMercaderia;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CalzadoController extends Controller
 {
-    public function index()
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    public function index(Request $request)
     {
         // Obtener todos los calzados
-        $calzados = Calzado::with(['modelo', 'material', 'talla'])->get();
+        $modelos = Modelo::all();
+        $materiales = Material::all();
+        $tallas = Talla::all();
+        $query = Calzado::query();
 
-        // Pasar los calzados a la vista
-        return view('admin.calzado.index', compact('calzados'));
+        // Filtrar por modelo
+        if ($request->filled('cod_modelo')) {
+            $query->where('cod_modelo', $request->cod_modelo);
+        }
+    
+        // Filtrar por material
+        if ($request->filled('cod_material')) {
+            $query->where('cod_material', $request->cod_material);
+        }
+    
+        // Filtrar por talla
+        if ($request->filled('cod_talla')) {
+            $query->where('cod_talla', $request->cod_talla);
+        }
+    
+        $calzados = $query->get();
+    
+        return view('admin.calzado.index', compact('calzados', 'modelos', 'materiales', 'tallas'));
     }
-
+    
     public function create(){
         
         $marcas = Marca::all(); // Obtener todas las marcas

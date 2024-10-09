@@ -11,6 +11,6 @@ class Marca extends Model
     protected $table = 'marca';
     protected $primaryKey = 'cod';
 
-    protected $filliable = ['nombre',];
+    protected $fillable = ['nombre',];
 
 }

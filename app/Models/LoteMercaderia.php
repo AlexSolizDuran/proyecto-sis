@@ -10,7 +10,7 @@ class LoteMercaderia extends Model
     use HasFactory;
     protected $table = 'lote_mercaderia';
     protected $primaryKey = 'cod';
-    public $incrementing = false;
+    public $incrementing = true;
 
     protected $fillable = [ // Atributos que se pueden llenar masivamente
         'cod',

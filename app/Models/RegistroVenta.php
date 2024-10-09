@@ -10,6 +10,7 @@ class RegistroVenta extends Model
     use HasFactory;
     protected $table = 'registro_venta';
     protected $primaryKey = 'cod';
+    public $timestamps = false;
 
     protected $fillable = [ // Atributos que se pueden llenar masivamente
         'precio_venta',

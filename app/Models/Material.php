@@ -11,6 +11,6 @@ class Material extends Model
     protected $table = 'material';
     protected $primaryKey = 'cod';
 
-    protected $filliable = ['nombre',];
-    
+    protected $fillable = ['nombre',];
+
 }

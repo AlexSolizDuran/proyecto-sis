@@ -11,5 +11,5 @@ class Color extends Model
     protected $table = 'color';
     protected $primaryKey = 'cod';
     
-    protected $filliable = ['nombre','codigo_color',];
+    protected $fillable = ['nombre','codigo_color',];
 }

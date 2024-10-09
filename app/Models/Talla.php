@@ -10,5 +10,5 @@ class Talla extends Model
     use HasFactory;
     protected $table = 'talla';
     protected $primaryKey = 'cod';
-    protected $filliable = ['numero',];
+    protected $fillable = ['numero',];
 }

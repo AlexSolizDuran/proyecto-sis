@@ -38,7 +38,6 @@
                             <a href="{{ route('admin.venta.show', $venta) }}" class="btn btn-info btn-sm">Ver</a>
 
                             <!-- Botón para editar un venta -->
-                            <a href="{{ route('admin.venta.edit', $venta) }}" class="btn btn-primary btn-sm">Editar</a>
 
                             <!-- Botón para eliminar un venta -->
                             <form action="{{ route('admin.venta.destroy', $venta) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar este venta?');">

@@ -4,16 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Models\LoteMercaderia;
 use App\Models\Marca;
+use App\Models\Pais;
+use App\Models\Calzado;
 use Illuminate\Http\Request;
 
-class LoteMercaderiaController extends Controller
+class CompraController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    public function showForm()
+    {
+        // Obtener todos los productos existentes
+        $calzados = Calzado::all();
+
+        // Retornar la vista con la lista de productos
+        return view('admin.compra.store', compact('calazados'));
+    }
     public function index()
     {
-        //
+        $compras = LoteMercaderia::with(['marca'])->get();
+        return view('admin.compra.index', compact('compras'));
     }
 
     /**
@@ -21,8 +36,10 @@ class LoteMercaderiaController extends Controller
      */
     public function create()
     {
-        $marcas = Marca::all(); // Obtener todas las marcas para el formulario
-        return view('admin.lote_mercaderia.create', compact('marcas'));
+        $paises = Pais::all();
+        $marcas = Marca::all();
+        $calzados = Calzado::all();
+        return view('admin.compra.create', compact('marcas','paises','calzados'));
     }
 
     /**

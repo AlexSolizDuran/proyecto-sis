@@ -11,7 +11,7 @@ class Modelo extends Model
     protected $table = 'modelo';
     protected $primaryKey = 'cod';
 
-    protected $filliable = ['nombre','cod_marca',];
+    protected $fillable = ['nombre','cod_marca',];
 
     public function marca(){
         return $this->belongsTo(Marca::class, 'cod_marca','cod');

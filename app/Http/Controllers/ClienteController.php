@@ -8,10 +8,16 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    
+     public function index()
     {
         $clientes = Cliente::with(['persona'])->get();
         return view ('admin.cliente.index', compact('clientes'));
@@ -38,6 +44,7 @@ class ClienteController extends Controller
             'direccion' => 'required|string',
             'gmail' => 'required|string',
         ]);
+        
 
         Persona::create([
             'ci' => $validacion['ci'],
@@ -61,7 +68,7 @@ class ClienteController extends Controller
     public function show(Cliente $cliente)
     {
         $cliente->load('persona');
-
+        dd($cliente);
         return view ('admin.cliente.show', compact('cliente'));
     }
 
@@ -112,7 +119,7 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         
-        $cliente->delete();
+        
         $cliente->persona->delete();
         return redirect()->route('admin.cliente.index')->with('success','cliente a sido eliminado exitosamente');
     }
