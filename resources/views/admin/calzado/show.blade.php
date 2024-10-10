@@ -9,7 +9,6 @@
         <div class="card-body">
 
             <p class="card-text"><strong>Codigo</strong> {{ $calzado->cod }}</p>
-            <p class="card-text"><strong>Codigo de lote:</strong> {{ $calzado->cod_lote }}</p>
             <p class="card-text"><strong>Genero:</strong> {{ $calzado->genero }}</p>
             <p class="card-text"><strong>Precio:</strong> {{ $calzado->precio_unidad }} USD</p>
             <p class="card-text"><strong>Cantidad de pares</strong> {{ $calzado->cantidad_pares }}</p>

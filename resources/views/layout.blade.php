@@ -28,17 +28,11 @@
             </h1>
             @endif
 
-        @else
-        <li class="nav-item dropdown" style="position: relative;">
-            <form action="{{ route('logout') }}" method="POST" style="position: absolute; inset-block-start: 10px; inset-inline-start: 10px;">
-                @csrf
-                <button type="submit" class="btn btn-danger">Logout</button>
-            </form>
-        </li>
+    @else
             <h1 class="top-right-link">
                 <a href='{{ route('admin.inicio') }}'> ADMIN -- {{ Auth::user()->name }} -- {{ Auth::user()->cod }} </a>
             </h1>
-        @endguest
+    @endguest
 
 </nav>
 

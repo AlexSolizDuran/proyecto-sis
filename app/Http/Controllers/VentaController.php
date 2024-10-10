@@ -112,7 +112,7 @@ class VentaController extends Controller
     return redirect()->route('admin.venta.index')->with('success', 'Venta realizada correctamente.');
     }
 
-public function filtrar(Request $request)
+    public function filtrar(Request $request)
     {
         $modelos = Modelo::all();
         $materiales = Material::all();
@@ -156,7 +156,7 @@ public function filtrar(Request $request)
     {
         $venta = NotaVenta::findOrFail($id);
         $venta->delete();
-        return redirect()->route('admin.venta.index')->with('success','cliente a sido eliminado exitosamente');
+        return redirect()->route('admin.venta.index')->with('success','Venta a sido eliminado exitosamente');
  
     }
 }

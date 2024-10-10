@@ -16,8 +16,14 @@ class VistaController extends Controller
         $modelos = Modelo::all();
         $materiales = Material::all();
         $tallas = Talla::all();
+        $marcas = Marca::all();
         $query = Calzado::query();
-
+        //filtrar por marca
+        if ($request->filled('cod_marca')) {
+            $query->whereHas('modelo.marca', function ($q) use ($request) {
+                $q->where('cod', $request->cod_marca); // Cambia 'id' al nombre real de la columna de la marca
+            });
+        }
         // Filtrar por modelo
         if ($request->filled('cod_modelo')) {
             $query->where('cod_modelo', $request->cod_modelo);
@@ -27,7 +33,7 @@ class VistaController extends Controller
         if ($request->filled('cod_material')) {
             $query->where('cod_material', $request->cod_material);
         }
-    
+        
         // Filtrar por talla
         if ($request->filled('cod_talla')) {
             $query->where('cod_talla', $request->cod_talla);
@@ -35,6 +41,6 @@ class VistaController extends Controller
     
         $calzados = $query->get();
     
-        return view('cliente.index', compact('calzados', 'modelos', 'materiales', 'tallas'));
+        return view('cliente.index', compact('calzados', 'modelos', 'materiales', 'tallas','marcas'));
     }
 }

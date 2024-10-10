@@ -25,9 +25,16 @@ class CalzadoController extends Controller
         $modelos = Modelo::all();
         $materiales = Material::all();
         $tallas = Talla::all();
+        $marcas = Marca::all();
         $query = Calzado::query();
 
-        // Filtrar por modelo
+        // Filtrar por marca
+        if ($request->filled('cod_marca')) {
+            $query->whereHas('modelo.marca', function ($q) use ($request) {
+                $q->where('cod', $request->cod_marca); // Cambia 'id' al nombre real de la columna de la marca
+            });
+        }
+        //filtrar por modelo
         if ($request->filled('cod_modelo')) {
             $query->where('cod_modelo', $request->cod_modelo);
         }
@@ -44,7 +51,7 @@ class CalzadoController extends Controller
     
         $calzados = $query->get();
     
-        return view('admin.calzado.index', compact('calzados', 'modelos', 'materiales', 'tallas'));
+        return view('admin.calzado.index', compact('calzados', 'modelos', 'materiales', 'tallas','marcas'));
     }
     
     public function create(){
@@ -60,11 +67,9 @@ class CalzadoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'cod' => 'required|integer',
         'genero' => 'required|string',
         'precio_unidad' => 'required|numeric',
         'cantidad_pares' => 'required|integer',
-        'cod_lote' => 'required|integer',
         'cod_modelo' => 'required|integer',
         'cod_talla' => 'required|integer',
         'cod_material' => 'required|integer',
@@ -92,7 +97,6 @@ class CalzadoController extends Controller
     public function update(Request $request, Calzado $calzado){
 
         $validatedData = $request->validate([
-            'cod' => 'required|numeric',
             'genero' => 'required|string',
             'precio_unidad' => 'required|numeric',
             'cantidad_pares' => 'required|numeric',
@@ -101,18 +105,14 @@ class CalzadoController extends Controller
             'cod_material' => 'required|exists:material,cod',
         ]);
 
-        $calzado->cod = $validatedData['cod'];
         $calzado->genero = $validatedData['genero']; // Almacenará como 'M', 'F' o 'U' automáticamente
         $calzado->precio_unidad = $validatedData['precio_unidad'];
         $calzado->cantidad_pares = $validatedData['cantidad_pares'];
         $calzado->cod_modelo = $validatedData['cod_modelo'];
         $calzado->cod_talla = $validatedData['cod_talla'];
         $calzado->cod_material = $validatedData['cod_material'];
-
-    
         $calzado->save();
 
-    
         return redirect()->route('admin.calzado.index')->with('success', 'Calzado actualizado con éxito.');
 
     }

@@ -8,11 +8,6 @@
         @csrf
         
         <div class="mb-3">
-            <label for="cod" class="form-label">Código</label>
-            <input type="number" class="form-control" id="cod" name="cod" required>
-        </div>
-
-        <div class="mb-3">
             <label for="genero" class="form-label">Género</label>
             <select class="form-select" id="genero" name="genero" required>
                 <option value="">Seleccione un género</option>
@@ -30,16 +25,6 @@
         <div class="mb-3">
             <label for="cantidad_pares" class="form-label">Cantidad de Pares</label>
             <input type="number" class="form-control" id="cantidad_pares" name="cantidad_pares" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="cod_lote" class="form-label">Lote de Mercadería</label>
-            <select class="form-select" id="cod_lote" name="cod_lote" required>
-                <option value="">Seleccione un lote</option>
-                @foreach ($lotes as $lote)
-                    <option value="{{ $lote->cod }}">{{ $lote->cod }} - {{ $lote->cantidad_total_pares }} pares</option>
-                @endforeach
-            </select>
         </div>
 
         <div class="mb-3">

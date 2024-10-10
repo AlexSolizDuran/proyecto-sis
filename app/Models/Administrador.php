@@ -15,9 +15,6 @@ class Administrador extends Model
 
     protected $fillable = ['cod','ci_persona',];
 
-
-    
-
     public function persona(){
         return $this->belongsTo(Persona::class, 'ci_persona','ci');
     }

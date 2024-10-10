@@ -4,6 +4,11 @@
 
 <div class="container mt-5">
     <h1 class="text-center mb-4">Lista de Clientes</h1>
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
     <a href="{{ route('admin.cliente.create') }}" class="btn btn-success mb-3">Crear Nuevo Cliente</a>
 
 

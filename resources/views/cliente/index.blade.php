@@ -9,6 +9,17 @@
     <form action="{{ route('cliente.index') }}" method="GET" class="mb-4">
         <div class="row">
             <div class="col-md-4">
+                <label for="cod_marca" class="form-label">Marca</label>
+                <select class="form-select" id="cod_marca" name="cod_marca">
+                    <option value="">Seleccione una Marca</option>
+                    @foreach ($marcas as $marca)
+                        <option value="{{ $marca->cod }}" {{ request('cod_marca') == $marca->cod ? 'selected' : '' }}>
+                            {{ $marca->nombre }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-4">
                 <label for="cod_modelo" class="form-label">Modelo</label>
                 <select class="form-select" id="cod_modelo" name="cod_modelo">
                     <option value="">Seleccione un modelo</option>
@@ -54,7 +65,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Código</th>
+                    <th>Marca</th>
                     <th>Género</th>
                     <th>Precio Unidad</th>
                     <th>Cantidad Pares</th>
@@ -66,7 +77,7 @@
             <tbody>
                 @foreach ($calzados as $calzado)
                     <tr>
-                        <td>{{ $calzado->cod }}</td>
+                        <td>{{ $calzado->modelo->marca->nombre }}</td>
                         <td>{{ $calzado->genero_completo }}</td>
                         <td>{{ $calzado->precio_unidad }}</td>
                         <td>{{ $calzado->cantidad_pares }}</td>

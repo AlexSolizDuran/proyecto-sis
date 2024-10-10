@@ -33,12 +33,13 @@ Route::resource('cliente',ClienteController::class)->names('admin.cliente');
 //gestionar venta
 Route::resource('venta',VentaController::class)->names('admin.venta');
 
-
-
-Route::post('/ventas/finalizar', [VentaController::class, 'finalizar'])->name('admin.venta.finalizar');
-Route::get('/crear-lote', [CompraController::class, 'showForm'])->name('lote.create');
-
-Route::post('/ventas/buscar-cliente', [VentaController::class, 'buscarCliente'])->name('admin.venta.buscarCliente');
+//realizacion de venta
+Route::post('venta/buscar-cliente', [VentaController::class, 'buscarCliente'])->name('admin.venta.buscarCliente');
 Route::post('venta/agregar-calzado', [VentaController::class, 'addCalzado'])->name('admin.venta.addCalzado');
-Route::post('/cancelar-carrito', [VentaController::class, 'cancelarCarrito'])->name('admin.venta.cancelar');
-Route::get('/filtrar',[VentaController::class,'filtrar'])->name('admin.venta.filtrar');
+Route::post('venta/cancelar-carrito', [VentaController::class, 'cancelarCarrito'])->name('admin.venta.cancelar');
+Route::get('/admin/venta/filtrar', [VentaController::class, 'filtrar'])->name('admin.venta.filtrar');
+//realizacion de lote
+Route::post('compra/lote',[CompraController::class,'lote'])->name('admin.compra.lote');
+Route::post('compra/addlote',[CompraController::class, 'addlote'])->name('admin.compra.addlote');
+Route::post('compra/cancelar',[CompraController::class, 'cancelar'])->name('admin.compra.cancelar');
+Route::get('/admin/compra/filtrar',[CompraController::class,'filtrar'])->name('admin.compra.filtrar');

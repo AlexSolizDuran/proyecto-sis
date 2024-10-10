@@ -4,11 +4,13 @@
     
 <div class="container">
     <h1>Lista de Nota de Ventas</h1>
-
-    <!-- Enlace para crear un nuevo venta -->
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
     <a href="{{ route('admin.venta.create') }}" class="btn btn-success mb-3">Crear Nuevo venta</a>
 
-    <!-- Verificamos si existen ventas -->
     @if($ventas->isEmpty())
         <p>No hay ventas disponibles.</p>
     @else

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ColorCalzado extends Model
 {
     use HasFactory;
-    protected $table = 'color_calzado';
+    protected $table = ['cod_calzado', 'cod_color'];
     
     protected $fillable = [ // Atributos que se pueden llenar masivamente
         'cod_calzado',

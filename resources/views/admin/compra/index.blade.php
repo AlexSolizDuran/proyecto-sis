@@ -3,12 +3,14 @@
 @section('contenido')
     
 <div class="container">
-    <h1>Lista de Nota de compras</h1>
+    <h1>Lista de Lote de Mercaderia</h1>
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+    <a href="{{ route('admin.compra.create') }}" class="btn btn-success mb-3">Registrar Nuevo Lote</a>
 
-    <!-- Enlace para crear un nuevo compra -->
-    <a href="{{ route('admin.compra.create') }}" class="btn btn-success mb-3">Crear Nuevo compra</a>
-
-    <!-- Verificamos si existen compras -->
     @if($compras->isEmpty())
         <p>No hay compras disponibles.</p>
     @else
@@ -30,14 +32,8 @@
                         <td>{{ $compra->marca->nombre }}</td> 
                         
                         <td>
-                            <!-- Botón para ver los detalles de un compra -->
                             <a href="{{ route('admin.compra.show', $compra) }}" class="btn btn-info btn-sm">Ver</a>
-
-                            <!-- Botón para editar un compra -->
-                            <a href="{{ route('admin.compra.edit', $compra) }}" class="btn btn-primary btn-sm">Editar</a>
-
-                            <!-- Botón para eliminar un compra -->
-                            <form action="{{ route('admin.compra.destroy', $compra) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar esta compra?');">
+                            <form action="{{ route('admin.compra.destroy', $compra) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar este Lote?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

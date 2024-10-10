@@ -109,6 +109,9 @@
             </tr>
         </thead>
             <tbody>
+                @php
+                $precioTotal = 0; 
+                @endphp
                 @foreach (session('carrito', []) as $item)
                     <tr>
                     <td>{{ $item['calzado']->cod }}</td>
@@ -117,9 +120,13 @@
                     <td>{{ $item['cantidad'] }}</td>
                     <td>${{ number_format($item['calzado']->precio_unidad * $item['cantidad'], 2) }}</td>
                     </tr>
+                    @php
+                    $precioTotal += $item['calzado']->precio_unidad * $item['cantidad'];
+                    @endphp
                 @endforeach
             </tbody>
         </table>
+        <h4><strong>Precio Total: ${{ number_format($precioTotal, 2) }}</strong></h4>
         @else
             <p>No hay calzados en el carrito.</p>
         @endif

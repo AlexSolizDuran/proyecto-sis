@@ -10,15 +10,13 @@ class Calzado extends Model
     use HasFactory;
     protected $table = 'calzado';
     protected $primaryKey = 'cod';
-    public $incrementing = false;
+    public $incrementing = true;
     public $timestamps = false;
 
     protected $fillable = [ // Atributos que se pueden llenar masivamente
-        'cod',
         'genero',
         'precio_unidad',
         'cantidad_pares',
-        'cod_lote',
         'cod_modelo',
         'cod_talla',
         'cod_material',
@@ -38,10 +36,7 @@ class Calzado extends Model
         }
     }
 
-    public function loteMercaderia()
-    {
-        return $this->belongsTo(LoteMercaderia::class, 'cod_lote', 'cod');
-    }
+   
 
     // Relación con el modelo Modelo
     public function modelo()

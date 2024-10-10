@@ -19,11 +19,6 @@
         @method('PUT') <!-- Indica que es un método PUT para la actualización -->
         
         <div class="mb-3">
-            <label for="cod" class="form-label">Código</label>
-            <input type="number" class="form-control" id="cod" name="cod" value="{{ $calzado->cod }}" required>
-        </div>
-
-        <div class="mb-3">
             <label for="genero" class="form-label">Género</label>
             <select class="form-select" id="genero" name="genero" required>
                 <option value="">Seleccione un género</option>
