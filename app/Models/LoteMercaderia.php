@@ -26,5 +26,9 @@ class LoteMercaderia extends Model
     {
         return $this->belongsTo(Marca::class, 'cod_marca', 'cod');
     }
+    public function registrolote()
+    {
+        return $this->hasMany(RegistroLote::class, 'cod_lote', 'cod');
+    }   
 
 }

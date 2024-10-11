@@ -103,7 +103,11 @@ class CompraController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $compra = LoteMercaderia::findOrFail($id);
+        // Accede directamente a la relación sin load
+        $registros = $compra->registrolote; 
+    
+        return view('admin.compra.show', compact('compra', 'registros'));
     }
 
     /**
