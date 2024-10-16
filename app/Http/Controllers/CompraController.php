@@ -12,6 +12,7 @@ use App\Models\Talla;
 use App\Models\Material;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class CompraController extends Controller
 {

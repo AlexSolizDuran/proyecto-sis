@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\NotaVenta;
 use App\Models\RegistroVenta;
@@ -11,6 +12,7 @@ use App\Models\Modelo;
 use App\Models\Material;
 use App\Models\Talla;
 use App\Models\Persona;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -86,17 +88,15 @@ class VentaController extends Controller
     {
         $cliente = session()->get('ci_persona');
         $carrito = session()->get('carrito', []);
-        $total = 0;
-        $cantidadTotal = 0;
-        $fecha = Carbon::now()->format('Y-m-d');
-        DB::table('nota_venta')->insert([
+
+        $nro_venta = DB::table('nota_venta')->insert([
             'ci_cliente' => $cliente,
             'fecha' => Carbon::now()->format('Y-m-d'), // Formato de fecha
             'monto_total' => 0,
             'cantidad' => 0,
-            'cod_admin' => auth()->user()->cod,
+            'cod_admin' => Auth::user()->cod,
         ]);
-        $nro_venta = DB::getPdo()->lastInsertId();
+        
         $carrito = session()->get('carrito', []);
         foreach ($carrito as $item) {
             DB::table('registro_venta')->insert([

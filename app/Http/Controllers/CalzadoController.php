@@ -8,7 +8,7 @@ use App\Models\Modelo;
 use App\Models\Talla;
 use App\Models\Material;
 use App\Models\LoteMercaderia;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

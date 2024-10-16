@@ -30,7 +30,7 @@
 
     @else
             <h1 class="top-right-link">
-                <a href='{{ route('admin.inicio') }}'> ADMIN -- {{ Auth::user()->name }} -- {{ Auth::user()->cod }} </a>
+                <a href='{{ route('admin.inicio') }}'> ADMIN -- {{ Auth::user()->nombre }} -- {{ Auth::user()->administrador->cod }} </a>
             </h1>
     @endguest
 

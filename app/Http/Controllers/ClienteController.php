@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\Persona;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ClienteController extends Controller
 {
@@ -34,6 +35,7 @@ class ClienteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    
     public function store(Request $request)
     {
         $validacion = $request->validate([

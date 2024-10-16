@@ -5,6 +5,8 @@ use App\Http\Controllers\CalzadoController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\VentaController;
+use Illuminate\Support\Facades\Auth;
+
 
 use App\Http\Controllers\VistaController;
 
@@ -13,9 +15,9 @@ Auth::routes();
 Route::get('/', function(){
     return view('welcome');
 })->name('welcome');
-Route::get('/welcome', function(){
-    return view('welcome');
-})->name('welcome');
+
+
+
 //inicio para el admin
 Route::get('/admin',function(){
     return view ('admin.inicio');
