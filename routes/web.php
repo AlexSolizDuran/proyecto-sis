@@ -21,7 +21,7 @@ Route::get('/', function(){
 //inicio para el admin
 Route::get('/admin',function(){
     return view ('admin.inicio');
-})->middleware('can:admin.home')->name('admin.inicio');
+})->middleware('can:admin.inicio')->name('admin.inicio');
 
 // lista de calzados
 Route::get('/calzados', [VistaController::class, 'index'])->name('cliente.index');

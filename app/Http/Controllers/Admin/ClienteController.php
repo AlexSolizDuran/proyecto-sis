@@ -16,9 +16,7 @@ class ClienteController extends Controller
     {
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     */
+    
     
      public function index()
     {
@@ -26,17 +24,11 @@ class ClienteController extends Controller
         return view ('admin.cliente.index', compact('clientes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('admin.cliente.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     
     public function store(Request $request)
     {
@@ -60,6 +52,7 @@ class ClienteController extends Controller
             'tipo' => 'C',
             'password' => Hash::make($validacion['ci'])
         ])->assignRole('cliente');
+
         Cliente::create([
             'ci_persona' => $validacion['ci'],
             
@@ -68,28 +61,18 @@ class ClienteController extends Controller
         return redirect()-> route('admin.cliente.index')->with('success','cliente creado exitosamentes');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Cliente $cliente)
     {
         $cliente->load('persona');
-        dd($cliente);
         return view ('admin.cliente.show', compact('cliente'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Cliente $cliente)
     {
         $cliente->load('persona');
         return view('admin.cliente.edit',compact('cliente'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Cliente $cliente)
     {
         $validacion = $request->validate([
