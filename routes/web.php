@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CalzadoController;
-use App\Http\Controllers\CompraController;
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\VentaController;
+use App\Http\Controllers\Admin\CalzadoController;
+use App\Http\Controllers\Admin\CompraController;
+use App\Http\Controllers\Admin\ClienteController;
+use App\Http\Controllers\Admin\VentaController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -21,7 +21,7 @@ Route::get('/', function(){
 //inicio para el admin
 Route::get('/admin',function(){
     return view ('admin.inicio');
-})->name('admin.inicio')->middleware('auth');;
+})->middleware('can:admin.home')->name('admin.inicio');
 
 // lista de calzados
 Route::get('/calzados', [VistaController::class, 'index'])->name('cliente.index');

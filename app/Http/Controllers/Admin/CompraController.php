@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 use Carbon\Carbon;
 use App\Models\LoteMercaderia;
 use App\Models\RegistroLote;

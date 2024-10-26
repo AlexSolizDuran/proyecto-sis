@@ -38,8 +38,11 @@ class LoginController extends Controller
 
         // Intentar autenticar al usuario
         if (Auth::attempt($credentials)) {
-            // Autenticación exitosa
-            return redirect()->intended($this->redirectTo); // Redirigir a la ruta definida
+            if ((Auth::user()->tipo) == 'A'){
+                return redirect()->intended($this->redirectTo); // Redirigir a la ruta definida
+            }else{
+                return back(); 
+            }
         }
 
         // Si no se pudo autenticar

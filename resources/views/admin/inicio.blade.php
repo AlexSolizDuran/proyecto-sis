@@ -2,12 +2,7 @@
 
 @section('contenido')
 <div class="container mt-4">
-    <li class="nav-item dropdown" style="position: relative;">
-        <form action="{{ route('logout') }}" method="POST" style="position: absolute; inset-block-start: 10px; inset-inline-start: 10px;">
-            @csrf
-            <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
-    </li>
+    
     <h1 class="text-center mb-5" style="color: #4A90E2;">Administración </h1>
 
     <div class="row">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 use App\Models\Calzado;
 
 use App\Models\Marca;
@@ -60,9 +60,8 @@ class CalzadoController extends Controller
         $modelos = Modelo::all(); // Obtener todos los modelos
         $tallas = Talla::all(); // Obtener todas las tallas
         $materiales = Material::all(); // Obtener todos los materiales
-        $lotes = LoteMercaderia::all();
     
-        return view('admin.calzado.create', compact('marcas', 'modelos', 'tallas', 'materiales','lotes'));
+        return view('admin.calzado.create', compact('marcas', 'modelos', 'tallas', 'materiales',));
     }
     public function store(Request $request)
     {
@@ -132,3 +131,4 @@ class CalzadoController extends Controller
     }
     
 }
+

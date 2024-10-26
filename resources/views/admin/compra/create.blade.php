@@ -11,7 +11,7 @@
             @endforeach
         </ul>
     </div>
-@endif
+    @endif
     <h1 class="text-center">Registrar Lote</h1>
     @if(!session()->has('lote'))
         <form action="{{ route('admin.compra.lote') }}" method="POST" class="mb-4" >

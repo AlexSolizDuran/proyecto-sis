@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Cliente;
 use App\Models\Persona;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+
 
 class ClienteController extends Controller
 {
@@ -44,7 +46,7 @@ class ClienteController extends Controller
             'apellido' => 'required|string',
             'cel' => 'required|integer',
             'direccion' => 'required|string',
-            'gmail' => 'required|string',
+            'email' => 'required|string',
         ]);
         
 
@@ -53,12 +55,14 @@ class ClienteController extends Controller
             'nombre' => $validacion['nombre'],
             'apellido' => $validacion['apellido'],
             'cel' => $validacion['cel'],
-            'tipo' => 'c'
-        ]);
+            'direccion' => $validacion['direccion'],
+            'email' => $validacion['email'],
+            'tipo' => 'C',
+            'password' => Hash::make($validacion['ci'])
+        ])->assignRole('cliente');
         Cliente::create([
             'ci_persona' => $validacion['ci'],
-            'direccion' => $validacion['direccion'],
-            'gmail' => $validacion['gmail'],
+            
         ]);
 
         return redirect()-> route('admin.cliente.index')->with('success','cliente creado exitosamentes');

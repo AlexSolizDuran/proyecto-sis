@@ -14,7 +14,7 @@ class Cliente extends Model
     public $incrementing = false;
     public $timestamps = false;
 
-    protected $fillable = ['ci_persona','direccion','gmail',];
+    protected $fillable = ['ci_persona',];
     
     public function persona()
     {

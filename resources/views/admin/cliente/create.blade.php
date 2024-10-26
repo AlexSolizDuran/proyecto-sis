@@ -1,6 +1,16 @@
 @extends('layout')
 @section('contenido')
+
 <div class="container">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <h1>Crear Cliente</h1>
 
     <form action="{{ route('admin.cliente.store') }}" method="POST" class="formulario">
@@ -33,7 +43,7 @@
 
         <div class="mb-3">
             <label for="gmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="gmail"name="gmail"required>
+            <input type="email" class="form-control" id="email"name="email"required>
         </div>
 
         <button type="submit" class="btn btn-primary">Crear Cliente</button>
