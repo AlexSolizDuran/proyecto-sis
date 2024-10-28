@@ -7,12 +7,12 @@
     <div class="card" >
         
         <div class="card-body">
-            <p class="card-text"><strong>Codigo:</strong> {{ $cliente->persona->ci }}</p>
-            <p class="card-text"><strong>Nombres</strong> {{ $cliente->persona->nombre }}</p>
-            <p class="card-text"><strong>Apellidos </strong> {{ $cliente->persona->apellido}}</p>
-            <p class="card-text"><strong>Telefono</strong> {{ $cliente->telefono}} USD</p>
-            <p class="card-text"><strong>Direccion</strong> {{ $cliente->direccion}}</p>
-            <p class="card-text"><strong>Email</strong> {{ $cliente->gmail }}</p>
+            <p class="card-text"><strong>Codigo: </strong> {{ $cliente->persona->ci }}</p>
+            <p class="card-text"><strong>Nombres: </strong> {{ $cliente->persona->nombre }}</p>
+            <p class="card-text"><strong>Apellidos: </strong> {{ $cliente->persona->apellido}}</p>
+            <p class="card-text"><strong>Telefono: </strong> {{ $cliente->persona->cel}} </p>
+            <p class="card-text"><strong>Direccion: </strong> {{ $cliente->persona->direccion}}</p>
+            <p class="card-text"><strong>Email: </strong> {{ $cliente->persona->email }}</p>
 
         </div>
     </div>

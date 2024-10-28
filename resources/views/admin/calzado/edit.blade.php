@@ -39,14 +39,29 @@
         </div>
 
         <div class="mb-3">
-            <label for="cod_modelo" class="form-label">Modelo</label>
-            <select class="form-select" id="cod_modelo" name="cod_modelo" required>
-                <option value="">Seleccione un modelo</option>
-                @foreach ($modelos as $modelo)
-                    <option value="{{ $modelo->cod }}" {{ $modelo->cod == $calzado->cod_modelo ? 'selected' : '' }}>
-                        {{ $modelo->nombre }}
+            <label for="cod_marca" class="form-label">Marca</label>
+            <select class="form-select" id="cod_marca" name="cod_marca" required>
+                <option value="">Seleccione una marca</option>
+                @foreach ($marcas as $marca)
+                    <option value="{{ $marca->cod }}" 
+                        {{ isset($calzado) && $marca->cod == $calzado->modelo->cod_marca ? 'selected' : '' }}>
+                        {{ $marca->nombre }}
                     </option>
                 @endforeach
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label for="cod_modelo" class="form-label">Modelo</label>
+            <select class="form-select" id="cod_modelo" name="cod_modelo" required {{ isset($calzado) && $calzado->cod_marca ? '' : 'disabled' }}>
+                <option value="">Seleccione un modelo</option>
+                @if (isset($modelos))
+                    @foreach ($modelos as $modelo)
+                        <option value="{{ $modelo->cod }}" {{ isset($calzado) && $modelo->cod == $calzado->cod_modelo ? 'selected' : '' }}>
+                            {{ $modelo->nombre }}
+                        </option>
+                    @endforeach
+                @endif
             </select>
         </div>
 

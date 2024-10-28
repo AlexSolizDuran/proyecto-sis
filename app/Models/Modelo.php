@@ -10,7 +10,7 @@ class Modelo extends Model
     use HasFactory;
     protected $table = 'modelo';
     protected $primaryKey = 'cod';
-
+    public $timestamps = false;
     protected $fillable = ['nombre','cod_marca',];
 
     public function marca(){

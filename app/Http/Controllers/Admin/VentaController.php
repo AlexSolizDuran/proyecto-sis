@@ -27,7 +27,7 @@ class VentaController extends Controller
     public function buscarCliente(Request $request)
     {
         $request->validate([
-            'ci_persona' => 'required|string|min:1',
+            'ci_persona' => 'required|integer',
         ]);
         
         $cliente = Cliente::where('ci_persona', $request->ci_persona)->first();
@@ -88,13 +88,13 @@ class VentaController extends Controller
     {
         $cliente = session()->get('ci_persona');
         $carrito = session()->get('carrito', []);
-
+        
         $nro_venta = DB::table('nota_venta')->insert([
             'ci_cliente' => $cliente,
             'fecha' => Carbon::now()->format('Y-m-d'), // Formato de fecha
             'monto_total' => 0,
             'cantidad' => 0,
-            'cod_admin' => Auth::user()->cod,
+            'cod_admin' => Auth::user()->administrador->cod,
         ]);
         
         $carrito = session()->get('carrito', []);

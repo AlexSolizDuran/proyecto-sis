@@ -81,18 +81,19 @@ class ClienteController extends Controller
             'apellido' => 'required|string',
             'cel' => 'required|integer',
             'direccion' => 'required|string',
-            'gmail' => 'required|string',
+            'email' => 'required|string',
         ]);
         $cliente->persona->ci = $validacion['ci_persona'];
         $cliente->persona->nombre = $validacion['nombre'];
         $cliente->persona->apellido = $validacion['apellido'];
         $cliente->persona->cel = $validacion['cel'];
-
+        $cliente->persona->direccion = $validacion['direccion'];
+        $cliente->persona->email = $validacion['email'];
         $cliente->persona->update();
+
         $cliente->ci_persona = $validacion['ci_persona'];
-        $cliente->direccion = $validacion['direccion'];
-        $cliente->gmail = $validacion['gmail'];
         $cliente->update();
+
         return redirect()->route('admin.cliente.index')->with('success', 'Cliente actualizado con éxito.');
 
     }

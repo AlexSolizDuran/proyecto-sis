@@ -5,18 +5,26 @@ use App\Http\Controllers\Admin\CalzadoController;
 use App\Http\Controllers\Admin\CompraController;
 use App\Http\Controllers\Admin\ClienteController;
 use App\Http\Controllers\Admin\VentaController;
+
+use App\Http\Controllers\Admin\Categoria\ColorController;
+use App\Http\Controllers\Admin\Categoria\MarcaController;
+use App\Http\Controllers\Admin\Categoria\MaterialController;
+use App\Http\Controllers\Admin\Categoria\TallaController;
+use App\Http\Controllers\Admin\Categoria\ModeloController;
+
 use Illuminate\Support\Facades\Auth;
 
 
 use App\Http\Controllers\VistaController;
+use App\Models\Marca;
+use App\Models\Material;
+use App\Models\Talla;
 
 Auth::routes();
 //inicio para todos
 Route::get('/', function(){
     return view('welcome');
 })->name('welcome');
-
-
 
 //inicio para el admin
 Route::get('/admin',function(){
@@ -45,3 +53,11 @@ Route::post('compra/lote',[CompraController::class,'lote'])->name('admin.compra.
 Route::post('compra/addlote',[CompraController::class, 'addlote'])->name('admin.compra.addlote');
 Route::post('compra/cancelar',[CompraController::class, 'cancelar'])->name('admin.compra.cancelar');
 Route::get('/admin/compra/filtrar',[CompraController::class,'filtrar'])->name('admin.compra.filtrar');
+
+Route::get('/api/modelos/{marca}', [ModeloController::class, 'obtenerModelos'])->name('api.modelos');
+
+Route::resource('color',ColorController::class)->names('admin.color');
+Route::resource('marca',MarcaController::class)->names('admin.marca');
+Route::resource('material',MaterialController::class)->names('admin.material');
+Route::resource('modelo',ModeloController::class)->names('admin.modelo');
+Route::resource('talla',TallaController::class)->names('admin.talla');

@@ -20,8 +20,6 @@
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Teléfono</th>
-                    <th>Dirección</th>
-                    <th>Email</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -32,8 +30,7 @@
                     <td>{{ $cliente->persona->nombre }}</td>
                     <td>{{ $cliente->persona->apellido }}</td>
                     <td>{{ $cliente->persona->cel }}</td>
-                    <td>{{ $cliente->direccion }}</td>
-                    <td>{{ $cliente->gmail }}</td>
+
                     <td>
                         <a href="{{ route('admin.venta.create', $cliente) }}" class="btn btn-info btn-sm">Realizar venta</a>
 

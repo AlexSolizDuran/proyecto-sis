@@ -11,12 +11,31 @@
                 <div class="card-header bg-primary text-white">
                     <h4 class="mb-0">Administrar Calzados</h4>
                 </div>
-                <div class="card-body text-center">
-                    <a href="{{ route('admin.calzado.create') }}" class="btn btn-light">Crear Calzado</a>
-                    <a href="{{ route('admin.calzado.index')}}" class="btn btn-warning">Lista de Calzados</a>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ route('admin.calzado.create') }}" class="btn btn-light flex-fill me-1">Crear Calzado</a>
+                        <a href="{{ route('admin.calzado.index')}}" class="btn btn-warning flex-fill me-1">Lista de Calzados</a>
+                        
+                        <!-- Dropdown para las categorías -->
+                        <div class="dropdown flex-fill">
+                            <button class="btn btn-warning dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categorías
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="{{ route('admin.marca.index') }}">Marca</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.modelo.index') }}">Modelo</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.material.index') }}">Material</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.color.index') }}">Color</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.talla.index') }}">Talla</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        
+        
 
         <div class="col-md-6 mb-4">
             <div class="card shadow border-primary">

@@ -11,6 +11,7 @@ class Pais extends Model
     protected $table = 'pais';
     protected $primaryKey = 'cod';
     protected $keyType = 'string';
+    public $timestamps = false;
     
     protected $fillable = ['cod','nombre','horma'];
 

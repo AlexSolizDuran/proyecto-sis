@@ -3,12 +3,17 @@
 @section('contenido')
 
 <div class="container mt-4">
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
     <h1 class="text-center">Realizar Venta</h1>
     @if(!session()->has('ci_persona'))
         <form action="{{ route('admin.venta.buscarCliente') }}" method="POST" class="mb-4">
             @csrf
             <div class="input-group">
-                <input type="text" name="ci_persona" class="form-control" placeholder="Ingrese su carnet" required>
+                <input type="number" name="ci_persona" class="form-control" placeholder="Ingrese su carnet" required>
                 <button type="submit" class="btn btn-primary">Buscar Cliente</button>
             </div>
         </form>

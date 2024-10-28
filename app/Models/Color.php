@@ -10,6 +10,6 @@ class Color extends Model
     use HasFactory;
     protected $table = 'color';
     protected $primaryKey = 'cod';
-    
+    public $timestamps = false;
     protected $fillable = ['nombre','codigo_color',];
 }

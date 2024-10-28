@@ -10,7 +10,7 @@ class Marca extends Model
     use HasFactory;
     protected $table = 'marca';
     protected $primaryKey = 'cod';
-
+    public $timestamps = false;
     protected $fillable = ['nombre',];
 
 }

@@ -9,7 +9,7 @@ class ColorCalzado extends Model
 {
     use HasFactory;
     protected $table = ['cod_calzado', 'cod_color'];
-    
+    public $timestamps = false;
     protected $fillable = [ // Atributos que se pueden llenar masivamente
         'cod_calzado',
         'cod_color',

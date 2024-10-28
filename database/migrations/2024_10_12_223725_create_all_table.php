@@ -131,7 +131,7 @@ return new class extends Migration
             $table->integer('cod_calzado')->unsigned();  // Llave foránea a la tabla 'calzado'
             $table->integer('cod_lote')->unsigned();     // Llave foránea a la tabla 'lote_mercaderia'
             $table->integer('cantidad');                  // Cantidad asociada con el lote
-
+            $table->decimal('precio_compra');
             // Definir la clave primaria compuesta
             $table->primary(['cod_calzado', 'cod_lote']);
 
@@ -172,6 +172,7 @@ return new class extends Migration
             $table->increments('cod');  // Crea un campo auto-incremental 'cod' como clave primaria
             $table->integer('precio_venta');  // Campo 'precio_venta' de tipo INT
             $table->integer('cod_calzado')->unsigned()->nullable();  // Llave foránea a la tabla 'calzado'
+            $table->integer('cantidad');
             $table->integer('nro_venta')->unsigned();    // Llave foránea a la tabla 'nota_venta'
 
             // Definición de las llaves foráneas

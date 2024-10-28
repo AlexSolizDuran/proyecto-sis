@@ -86,12 +86,13 @@ class CalzadoController extends Controller
     }
     public function edit(Calzado $calzado){
 
-        
+        $marcas = Marca::all();
         $modelos = Modelo::all(); // Suponiendo que tienes un modelo Modelo
         $tallas = Talla::all(); // Suponiendo que tienes un modelo Talla
         $materiales = Material::all(); // Suponiendo que tienes un modelo Material
 
-        return view('admin.calzado.edit', compact('calzado', 'modelos', 'tallas', 'materiales'));
+        
+        return view('admin.calzado.edit', compact('marcas','calzado', 'modelos', 'tallas', 'materiales'));
     }
     public function update(Request $request, Calzado $calzado){
 

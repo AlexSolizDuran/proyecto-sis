@@ -40,12 +40,12 @@
 
         <div class="mb-3">
             <label for="direccion" class="form-label">Direccion</label>
-            <input type="text" class="form-control " id="direccion" name="direccion" value="{{ $cliente->direccion}}" required>
+            <input type="text" class="form-control " id="direccion" name="direccion" value="{{ $cliente->persona->direccion}}" required>
         </div>
 
         <div class="mb-3">
             <label for="gmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="gmail"name="gmail" value="{{ $cliente->gmail}}" required>
+            <input type="email" class="form-control" id="email"name="email" value="{{ $cliente->persona->email}}" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Actualizar Cliente</button>

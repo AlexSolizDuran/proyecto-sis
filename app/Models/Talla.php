@@ -11,4 +11,5 @@ class Talla extends Model
     protected $table = 'talla';
     protected $primaryKey = 'cod';
     protected $fillable = ['numero',];
+    public $timestamps = false;
 }
