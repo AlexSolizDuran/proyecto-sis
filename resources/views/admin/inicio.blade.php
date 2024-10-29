@@ -69,6 +69,7 @@
                 <div class="card-body text-center">
                     <a href="{{ route('admin.compra.create')}}" class="btn btn-light">Registrar Compra</a>
                     <a href="{{ route('admin.compra.index')}}" class="btn btn-warning">Lista de Compras</a>
+                    <a href="{{ route('admin.pais.index')}}" class="btn btn-warning">Paises</a>
                 </div>
             </div>
         </div>

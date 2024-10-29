@@ -30,7 +30,19 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|unique:color,nombre',
+            
+        ]);
+
+        // Crear una nueva talla
+        Color::create([
+            'nombre' => $request->nombre,
+        ]);
+
+        // Redireccionar con mensaje de éxito
+        return redirect()->back()->with('success', 'Color creado exitosamente.');
+    
     }
 
     /**
@@ -54,7 +66,18 @@ class ColorController extends Controller
      */
     public function update(Request $request, Color $color)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string'
+        ]);
+
+        // Actualizar la talla
+        $color->update([
+            'nombre' => $request->nombre,
+        ]);
+
+        // Redireccionar con mensaje de éxito
+        return redirect()->back()->with('success', 'Color actualizada exitosamente.');
+   
     }
 
     /**
@@ -62,6 +85,8 @@ class ColorController extends Controller
      */
     public function destroy(Color $color)
     {
-        //
+        $color->delete(); // Elimina la talla
+        return redirect()->back()->with('success', 'Color eliminada correctamente.');
+   
     }
 }

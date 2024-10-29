@@ -120,5 +120,28 @@ document.addEventListener('DOMContentLoaded', function () {
         editNombre.value = nombre;
     });
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const editarMarcaModal = document.getElementById('editarPaisModal');
+    editarMarcaModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget; // Botón que abrió el modal
+        const cod = button.getAttribute('data-cod'); // Código del Marca
+        const nombre = button.getAttribute('data-nombre'); // Nombre del Marca
+        const horma = button.getAttribute('data-horma');
+
+        // Actualizar la acción del formulario con el código del Marca
+        const form = document.getElementById('editarPaisForm');
+        form.action = form.action.replace(':cod', cod);
+
+
+        // Colocar el valor actual en el campo de edición
+        const editNombre = document.getElementById('edit_nombre');
+        const editCod = document.getElementById('edit_cod');
+        const edithorma = document.getElementById('edit_horma');
+
+        editNombre.value = nombre;
+        editCod.value = cod;
+        edithorma.value = horma;
+    });
+});
 
 

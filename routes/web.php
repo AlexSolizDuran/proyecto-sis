@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Categoria\MarcaController;
 use App\Http\Controllers\Admin\Categoria\MaterialController;
 use App\Http\Controllers\Admin\Categoria\TallaController;
 use App\Http\Controllers\Admin\Categoria\ModeloController;
+use App\Http\Controllers\Admin\Categoria\PaisController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -61,3 +62,4 @@ Route::resource('marca',MarcaController::class)->names('admin.marca');
 Route::resource('material',MaterialController::class)->names('admin.material');
 Route::resource('modelo',ModeloController::class)->names('admin.modelo');
 Route::resource('talla',TallaController::class)->names('admin.talla');
+Route::resource('pais',PaisController::class)->names('admin.pais');
