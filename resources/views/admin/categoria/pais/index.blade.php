@@ -3,6 +3,7 @@
 @section('contenido')
 
 <div class="container mt-5">
+    <a href="javascript:history.back()" class="btn btn-secondary mt-3">Volver</a>
     <h1 class="text-center mb-4">Lista de Paises</h1>
         @if(session('success'))
         <div class="alert alert-success">

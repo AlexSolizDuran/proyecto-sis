@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Persona;
-use App\Models\Administrados;
+use App\Models\Cliente;
+use App\Models\Bitacora;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,9 +52,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'cod' => ['required','exists:administrador,cod'],
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'ci' => ['required','integer'],
+            'nombre' => ['required', 'string'],
+            'apellido' => ['required', 'string'],
+            'cel' => ['required','integer'],
+            'direccion' => ['required', 'string'],
+            'email' => ['required', 'string', 'email', 'unique:persona'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -65,11 +70,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Persona::create([
-            'cod' => $data['cod'],
-            'name' => $data['name'],
+        $Persona = Persona::create([
+            'ci' => $data['ci'],
+            'nombre' => $data['nombre'],
+            'apellido'=> $data['apellido'],
+            'cel'=> $data['cel'],
+            'direccion'=> $data['direccion'],
+            'tipo' => 'C',
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+        ])->assignRole('cliente');
+
+        $ci = Cliente::create([
+            'ci_persona' => $data['ci'],
         ]);
+        Bitacora::create([
+            'ci' => $ci->ci_persona,
+            'ip' => request()->ip(),
+            'accion' => 'Se Registro al sistema', // Cambia esto según la acción
+            'fecha' => now()->format('Y-m-d'), // Fecha actual
+            'hora' => now()->format('H:i:s'), // Hora actual
+        ]);
+        
+        return $Persona; 
     }
 }

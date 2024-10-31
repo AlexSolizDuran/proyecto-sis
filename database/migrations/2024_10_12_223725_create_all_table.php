@@ -210,6 +210,21 @@ return new class extends Migration
             // Clave primaria compuesta
             $table->primary(['cod_lote', 'cod_pais']);
         });
+
+        Schema::create('bitacora', function (Blueprint $table) {
+            $table->id();
+            $table->string('ip'); // Dirección IP
+            $table->string('accion'); // Descripción de la acción
+            $table->date('fecha'); // Fecha de la acción
+            $table->time('hora'); // Hora de la acción
+            $table->integer('ci')->nullable();
+
+            $table->foreign('ci')
+                  ->references('ci_persona')
+                  ->on('cliente')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
+        });
     }
 
     /**
@@ -231,5 +246,7 @@ return new class extends Migration
         Schema::dropIfExists('nota_venta');             // Elimina la tabla 'nota_venta'
         Schema::dropIfExists('cliente');                // Elimina la tabla 'cliente'
         Schema::dropIfExists('administrador');          // Elimina la tabla 'administrador'
+        Schema::dropIfExists('bitacora');               // Elimina la tabla 'bitacora'
+
     }
 };

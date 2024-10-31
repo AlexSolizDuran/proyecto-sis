@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CalzadoController;
 use App\Http\Controllers\Admin\CompraController;
 use App\Http\Controllers\Admin\ClienteController;
 use App\Http\Controllers\Admin\VentaController;
+use App\Http\Controllers\Admin\BitacoraController;
 
 use App\Http\Controllers\Admin\Categoria\ColorController;
 use App\Http\Controllers\Admin\Categoria\MarcaController;
@@ -13,13 +14,10 @@ use App\Http\Controllers\Admin\Categoria\TallaController;
 use App\Http\Controllers\Admin\Categoria\ModeloController;
 use App\Http\Controllers\Admin\Categoria\PaisController;
 
+use App\Http\Controllers\Cliente\ZapatoController;
+use App\Http\Controllers\Cliente\CuentaController;
+use App\Models\Bitacora;
 use Illuminate\Support\Facades\Auth;
-
-
-use App\Http\Controllers\VistaController;
-use App\Models\Marca;
-use App\Models\Material;
-use App\Models\Talla;
 
 Auth::routes();
 //inicio para todos
@@ -32,9 +30,12 @@ Route::get('/admin',function(){
     return view ('admin.inicio');
 })->middleware('can:admin.inicio')->name('admin.inicio');
 
-// lista de calzados
-Route::get('/calzados', [VistaController::class, 'index'])->name('cliente.index');
+// vista de clientes
+Route::resource('zapato',ZapatoController::class)->names('cliente.zapato');
+Route::resource('cuenta',CuentaController::class)->names('cliente.cuenta');
 
+//bitacora
+Route::resource('bitacora',BitacoraController::class)->names('admin.bitacora');
 //gestionar calzados
 Route::resource('calzado',CalzadoController::class)->names('admin.calzado');
 //gestionar lote
@@ -63,3 +64,5 @@ Route::resource('material',MaterialController::class)->names('admin.material');
 Route::resource('modelo',ModeloController::class)->names('admin.modelo');
 Route::resource('talla',TallaController::class)->names('admin.talla');
 Route::resource('pais',PaisController::class)->names('admin.pais');
+
+

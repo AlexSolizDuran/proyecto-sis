@@ -23,10 +23,11 @@
 
     @guest
         @if (Route::has('login'))
-            <h1 class="top-right-link">
-                <a href="{{ route('login') }}">{{ __('Login') }}</a>
-            </h1>
-        @endif
+        <div class="top-right-link d-flex justify-content-end align-items-center gap-3">
+            <a href="{{ route('login') }}" >{{ __('Login') }}</a>
+            <a href="{{ route('register') }}" >{{ __('Register') }}</a>
+        </div>
+    @endif
     @else
     <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="adminDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -36,7 +37,15 @@
             <li>
                 @can('admin.inicio')
                 <a class="dropdown-item" href="{{ route('admin.inicio') }}">Ir al Inicio de Admin</a>
+                <a class="dropdown-item" href="{{ route('admin.bitacora.index') }}">Bitacora</a>
+
                 @endcan
+            </li>
+            <li>
+                <form action="{{ route('cliente.cuenta.show', Auth::user()->ci) }}" method="GET" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="dropdown-item">{{ __('Perfil')}} </button>
+                </form>
             </li>
             <li>
                 <form action="{{ route('logout') }}" method="POST" style="display: inline;">

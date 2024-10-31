@@ -3,13 +3,14 @@
 @section('contenido')
     
 <div class="container">
+    <a href="javascript:history.back()" class="btn btn-secondary mt-3">Volver</a>
     <h1>Lista de Calzados</h1>
         @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
         @endif
-
+    
     <a href="{{ route('admin.calzado.create') }}" class="btn btn-success mb-3">Crear Nuevo Calzado</a>
 
     <form action="{{ route('admin.calzado.index') }}" method="GET" class="mb-4">

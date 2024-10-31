@@ -6,7 +6,7 @@
     <h1>Lista de Calzados</h1>
 
     <!-- Formulario de filtrado -->
-    <form action="{{ route('cliente.index') }}" method="GET" class="mb-4">
+    <form action="{{ route('cliente.zapato.index') }}" method="GET" class="mb-4">
         <div class="row">
             <div class="col-md-4">
                 <label for="cod_marca" class="form-label">Marca</label>
@@ -72,6 +72,7 @@
                     <th>Modelo</th>
                     <th>Material</th>
                     <th>Talla</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -84,7 +85,10 @@
                         <td>{{ $calzado->modelo->nombre }}</td> <!-- Asumiendo relación con Modelo -->
                         <td>{{ $calzado->material->nombre }}</td> <!-- Asumiendo relación con Material -->
                         <td>{{ $calzado->talla->numero }}</td> <!-- Asumiendo relación con Talla -->
-                        
+                        <td>
+                            <a href="{{ route('cliente.zapato.show', $calzado->cod) }}" class="btn btn-info btn-sm">Ver</a>
+
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

@@ -1,49 +1,62 @@
-@extends('layouts.app')
+@extends('layout')
 
-@section('content')
-<div class="container">
+@section('contenido')
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+            <div class="card shadow">
+                <div class="card-header text-center bg-primary text-white">
+                    <h3 class="mb-0 fw-bold">{{ __('Registro de Usuario') }}</h3>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-                        <div class="row mb-3">
-                            <label for="cod" class="col-md-4 col-form-label text-md-end">{{ __('codigo admin') }}</label>
-
+                        
+                        <!-- CI -->
+                        <div class="mb-3 row">
+                            <label for="ci" class="col-md-4 col-form-label text-md-end">{{ __('CI') }}</label>
                             <div class="col-md-6">
-                                <input id="cod" type="text" class="form-control @error('cod') is-invalid @enderror" name="cod" value="{{ old('cod') }}" required autocomplete="cod" autofocus>
-
-                                @error('cod')
+                                <input id="ci" type="number" class="form-control @error('ci') is-invalid @enderror" name="ci" value="{{ old('ci') }}" required autocomplete="ci" autofocus>
+                                @error('ci')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
+                        
+                        <!-- Nombre -->
+                        <div class="mb-3 row">
+                            <label for="nombre" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
+                                <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre">
+                                @error('nombre')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="row mb-3">
+                        
+                        <!-- Apellido -->
+                        <div class="mb-3 row">
+                            <label for="apellido" class="col-md-4 col-form-label text-md-end">{{ __('Apellidos') }}</label>
+                            <div class="col-md-6">
+                                <input id="apellido" type="text" class="form-control @error('apellido') is-invalid @enderror" name="apellido" value="{{ old('apellido') }}" required autocomplete="apellido">
+                                @error('apellido')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="mb-3 row">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -51,13 +64,38 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="row mb-3">
+                        
+                        <!-- Dirección -->
+                        <div class="mb-3 row">
+                            <label for="direccion" class="col-md-4 col-form-label text-md-end">{{ __('Dirección') }}</label>
+                            <div class="col-md-6">
+                                <input id="direccion" type="text" class="form-control @error('direccion') is-invalid @enderror" name="direccion" value="{{ old('direccion') }}" required autocomplete="direccion">
+                                @error('direccion')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
+                        <!-- Teléfono -->
+                        <div class="mb-3 row">
+                            <label for="cel" class="col-md-4 col-form-label text-md-end">{{ __('Teléfono') }}</label>
+                            <div class="col-md-6">
+                                <input id="cel" type="tel" class="form-control @error('cel') is-invalid @enderror" name="cel" value="{{ old('cel') }}" required autocomplete="tel">
+                                @error('cel')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
+                        <!-- Password -->
+                        <div class="mb-3 row">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -65,19 +103,20 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="row mb-3">
+                        
+                        <!-- Confirm Password -->
+                        <div class="mb-3 row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-
+                        
+                        <!-- Submit Button -->
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                <button type="submit" class="btn btn-outline-primary w-100">
+                                    {{ __('Enviar Registro') }}
                                 </button>
                             </div>
                         </div>
@@ -87,4 +126,5 @@
         </div>
     </div>
 </div>
+
 @endsection

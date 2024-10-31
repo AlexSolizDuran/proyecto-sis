@@ -43,4 +43,10 @@ class VistaController extends Controller
     
         return view('cliente.index', compact('calzados', 'modelos', 'materiales', 'tallas','marcas'));
     }
+    public function show(Calzado $calzado){
+
+        $calzado->load(['modelo', 'talla', 'material']);
+
+        return view ('admin.calzado.show', compact('calzado'));
+    }
 }
