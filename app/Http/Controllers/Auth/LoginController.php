@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Persona;
+use App\Models\Bitacora;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -38,13 +39,22 @@ class LoginController extends Controller
 
         // Intentar autenticar al usuario
         if (Auth::attempt($credentials)) {
+            
             if ((Auth::user()->tipo) == 'A'){
                 return redirect()->intended($this->redirectTo); // Redirigir a la ruta definida
             }else{
+            
+            Bitacora::create([
+                'ci' => Auth::user()->ci,
+                'ip' => request()->ip(),
+                'accion' => 'Inicio sesion', // Cambia esto según la acción
+                'fecha' => now()->format('Y-m-d'), // Fecha actual
+                'hora' => now()->format('H:i:s'), // Hora actual
+            ]);
                 return back(); 
             }
         }
-
+        
         // Si no se pudo autenticar
         return back()->withErrors(['email' => 'Las credenciales son incorrectas.']);
     }
@@ -56,7 +66,20 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
+        
+        $persona = Auth::user();
+        if (($persona->tipo) == 'C'){
+            Bitacora::create([
+                'ci' => Auth::user()->ci,
+                'ip' => request()->ip(),
+                'accion' => 'Finalizo sesion', // Cambia esto según la acción
+                'fecha' => now()->format('Y-m-d'), // Fecha actual
+                'hora' => now()->format('H:i:s'), // Hora actual
+            ]);
+        };      
         Auth::logout();
+        
+
         return redirect('/'); // Cambia esto a la ruta que desees después de cerrar sesión
     }
 

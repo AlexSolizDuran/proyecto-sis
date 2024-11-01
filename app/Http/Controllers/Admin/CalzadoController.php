@@ -76,8 +76,15 @@ class CalzadoController extends Controller
 
         Calzado::create($request->all());
 
-        return redirect()->route('admin.calzado.index')->with('success', 'Producto creado exitosamente.');
+        if ($request->input('from_modal')) {
+            // Redirigir de vuelta (a la misma página)
+            return redirect()->back()->with('success', 'Producto creado exitosamente.');
+        } else {
+            // Redirigir a la lista de calzados
+            return redirect()->route('admin.calzado.index')->with('success', 'Producto creado exitosamente.');
+        } 
     }
+
     public function show(Calzado $calzado){
 
         $calzado->load(['modelo', 'talla', 'material']);

@@ -213,7 +213,7 @@ return new class extends Migration
 
         Schema::create('bitacora', function (Blueprint $table) {
             $table->id();
-            $table->string('ip'); // Dirección IP
+            $table->String('ip'); // Dirección IP
             $table->string('accion'); // Descripción de la acción
             $table->date('fecha'); // Fecha de la acción
             $table->time('hora'); // Hora de la acción

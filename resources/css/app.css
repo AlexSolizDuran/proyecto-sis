@@ -8,7 +8,8 @@
 
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f8f9fa; /* Color de fondo suave */
+    background-color: #ffffff; /* Color de fondo suave */
+    
 }
 
 nav{
@@ -20,7 +21,7 @@ h1 {
 }
 nav a{
     font-family: sans-serif;
-    color: #ffffffce;
+    color: #d1cbcbce;
     text-decoration: none;
 }
 .boton {
@@ -94,10 +95,8 @@ nav a{
 
 
 .header-image {
-    inline-size: 100%; /* Ocupa todo el ancho del nav */
-    block-size: 300px; /* Ajusta la altura de la imagen (puedes cambiar este valor según lo necesites) */
-    object-fit: cover; /* Ajusta la imagen sin distorsión */
-    
+    width: 100%; /* Ajusta la imagen al ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
 }
 
 /* El nav ocupa el 100% del ancho de la página */
@@ -126,10 +125,11 @@ nav a{
     inset-block-start: 50%; /* Centra verticalmente */
     inset-inline-start: 50%; /* Centra horizontalmente */
     transform: translate(-50%, -50%); /* Ajusta el centro del título */
-    color: white; /* Cambia el color del texto según sea necesario */
-    font-size: 100px; /* Ajusta el tamaño de la fuente */
     text-align: center; /* Centra el texto */
+    font-size: 6vw; /* Ajusta el tamaño de la fuente en función del ancho de la ventana */
     text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.7); /* Sombra para mejorar la legibilidad */
+    white-space: nowrap; /* Evita que el texto se divida en múltiples líneas */
+
 }
 
 .top-right-link {
@@ -171,3 +171,4 @@ nav a{
 .btn:hover {
     opacity: 0.9; /* Efecto hover */
 }
+

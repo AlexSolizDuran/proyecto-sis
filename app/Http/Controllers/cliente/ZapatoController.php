@@ -73,15 +73,21 @@ class ZapatoController extends Controller
     public function show($cod)
     {
         $calzado = Calzado::find($cod);
-        $ci= Auth::check() ? Auth::user()->persona->ci : null;
+        
+        $ci = Auth::check() ? Auth::user()->ci : null;
 
-        Bitacora::create([
-            'ci' => $ci,
-            'ip' => request()->ip(),
-            'accion' => 'Accedio al detalle del calzado con codigo : '. $cod, // Cambia esto según la acción
-            'fecha' => now()->format('Y-m-d'), // Fecha actual
-            'hora' => now()->format('H:i:s'), // Hora actual
-        ]);
+        // Verifica si el usuario está autenticado y su rol
+        if (!Auth::check() || Auth::user()->tipo == 'C') {
+            Bitacora::create([
+                'ci' => $ci,
+                'ip' => request()->ip(),
+                'accion' => 'Accedió al detalle del calzado con código: ' . $cod,
+                'fecha' => now()->format('Y-m-d'), // Fecha actual
+                'hora' => now()->format('H:i:s'), // Hora actual
+            ]);
+        }
+    
+        
         
         return view ('cliente.zapato.show', compact('calzado'));
     }

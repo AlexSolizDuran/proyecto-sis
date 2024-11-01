@@ -2,6 +2,8 @@
 @section('contenido')
 
 <div class="container">
+    <a href="{{ route('admin.calzado.index')}}" class="btn btn-warning flex-fill me-1">Lista de Calzados</a>
+
     <h1>Crear Calzado</h1>
 
     <form action="{{ route('admin.calzado.store') }}" method="POST" class="formulario">

@@ -41,25 +41,29 @@ class CompraController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        $paises = Pais::all();
-        $marcas = Marca::all();
-        $calzados = Calzado::all();
-        $modelos = Modelo::all();
-        $materiales = Material::all();
-        $tallas = Talla::all();
+{
+    $paises = Pais::all();
+    $marcas = Marca::all();
+    $materiales = Material::all();
+    $tallas = Talla::all();
 
-        $marcaCod = session()->get('lote.marca.cod');
+    // Obtener el código de la marca desde la sesión
+    $marcaCod = session()->get('lote')['marca']['cod'] ?? null;
 
-    // Consultar los calzados filtrados por marca, si hay una marca seleccionada
-        $calzados = Calzado::when($marcaCod, function ($query, $marcaCod) {
+    // Filtrar modelos según la marca
+    $modelos = Modelo::when($marcaCod, function ($query) use ($marcaCod) {
+        return $query->where('cod_marca', $marcaCod);
+    })->get();
+
+    // Consultar los calzados filtrados por marca
+    $calzados = Calzado::when($marcaCod, function ($query) use ($marcaCod) {
         return $query->whereHas('modelo', function ($q) use ($marcaCod) {
             $q->where('cod_marca', $marcaCod);
         });
-        })->get();
+    })->get();
 
-        return view('admin.compra.create', compact('tallas','materiales','modelos','marcas','paises','calzados'));
-    }
+    return view('admin.compra.create', compact('tallas', 'materiales', 'modelos', 'marcas', 'paises', 'calzados'));
+}
 
     /**
      * Store a newly created resource in storage.
@@ -172,12 +176,12 @@ class CompraController extends Controller
     }
     public function filtrar(Request $request)
     {
-        $modelos = Modelo::all();
+        
         $materiales = Material::all();
         $tallas = Talla::all();
         $query = Calzado::query();
-        $marca = session()->get('lote')->marca;
-
+        $marca = session()->get('lote')['marca']; // Obtener la marca de la sesión
+        $modelos = Modelo::all();
 
         if ($request->filled('cod_modelo')) {
             $query->where('cod_modelo', $request->cod_modelo);
@@ -195,9 +199,9 @@ class CompraController extends Controller
         }
     
         $calzados = $query->get();
-        
+        $marcas= Marca::all();
        
-        return view('admin.compra.create', compact('calzados', 'modelos', 'materiales', 'tallas'));
+        return view('admin.compra.create', compact('calzados', 'modelos', 'materiales', 'tallas','marcas'));
     
     }
     public function addlote(Request $request)

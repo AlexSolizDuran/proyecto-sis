@@ -15,6 +15,7 @@
             <th>Codigo de venta</th>
             <th>Codigo de Producto</th>
             <th>Precio</th>
+            <th>Cantidad</th>
         </tr>
         </thead>
     <tbody>
@@ -23,6 +24,7 @@
                 <td>{{ $registro->cod }}</td>
                 <td>{{ $registro->cod_calzado }}</td>
                 <td>{{ $registro->precio_venta }}</td>
+                <td>{{ $registro->cantidad }}</td>
             </tr>
         @endforeach
             <td>Monto total: {{ $venta->monto_total }}</td>

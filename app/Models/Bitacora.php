@@ -9,7 +9,7 @@ class Bitacora extends Model
 {
     use HasFactory;
     protected $table = 'bitacora';
-    protected $primaryKey = 'ip';
+    protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
         'ip',

@@ -18,6 +18,8 @@
     </div>
     <a href="javascript:history.back()" class="btn btn-secondary ">Volver</a>
     <a href="{{ route('cliente.cuenta.edit', $persona->ci) }}" class="btn btn-primary ">Editar</a>
+    <a href="{{ route('password.change.form',) }}" class="btn btn-primary ">Cambiar Contraseña</a>
+    @if ($persona->cliente && $persona->cliente->notaVentas && !$persona->cliente->notaVentas->isEmpty())
 
     <table class="table">
         <thead>
@@ -28,7 +30,6 @@
         </tr>
         </thead>
     <tbody>
-        @if ($persona->cliente && $persona->cliente->notaVentas && !$persona->cliente->notaVentas->isEmpty())
             @foreach ($persona->cliente->notaVentas as $venta)
         <tr>
             <td>{{ $venta->nro }}</td>
@@ -36,11 +37,9 @@
             <td>{{ $venta->monto_total }}</td>
         </tr>
             @endforeach
-        @else
-       
-        @endif
     </tbody>
-</table>
+    </table>
+    @endif
 
 
 </div>

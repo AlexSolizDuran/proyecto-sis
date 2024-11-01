@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card shadow">
                 <div class="card-header text-center bg-primary text-white">
-                    <h3 class="mb-0 fw-bold">{{ __('Registro de Usuario') }}</h3>
+                    <h3 class="mb-0 fw-bold">{{ __('Crear Cuenta') }}</h3>
                 </div>
 
                 <div class="card-body">
@@ -17,7 +17,9 @@
                         <div class="mb-3 row">
                             <label for="ci" class="col-md-4 col-form-label text-md-end">{{ __('CI') }}</label>
                             <div class="col-md-6">
-                                <input id="ci" type="number" class="form-control @error('ci') is-invalid @enderror" name="ci" value="{{ old('ci') }}" required autocomplete="ci" autofocus>
+                                <input id="ci" type="number" 
+                                 oninput="if(this.value.length > 9) this.value = this.value.slice(0, 9);"  
+                                 class="form-control @error('ci') is-invalid @enderror" name="ci" value="{{ old('ci') }}" required autocomplete="ci" autofocus>
                                 @error('ci')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -30,7 +32,7 @@
                         <div class="mb-3 row">
                             <label for="nombre" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
                             <div class="col-md-6">
-                                <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre">
+                                <input id="nombre" type="text" pattern="[A-Za-z]+" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre">
                                 @error('nombre')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -116,7 +118,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-outline-primary w-100">
-                                    {{ __('Enviar Registro') }}
+                                    {{ __('Crear') }}
                                 </button>
                             </div>
                         </div>

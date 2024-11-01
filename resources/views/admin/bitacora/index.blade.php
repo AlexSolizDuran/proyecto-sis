@@ -20,6 +20,7 @@
             </thead>
             <tbody>
                 @foreach ($bitacoras as $bitacora)
+                
                 <tr>
                     <td>{{ $bitacora->id }}</td>
                     <td>{{ $bitacora->ci ?? 'No Registrado'  }}</td>

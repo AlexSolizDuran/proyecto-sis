@@ -104,6 +104,8 @@
                     <button type="submit" class="btn btn-primary">Filtrar</button>
                 </div>
             </form>
+            <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#crearCalzadoModal">Crear Nueva Calzado</button>
+
 
     @if($calzados->isEmpty())
     <p>No hay calzados disponibles.</p>
@@ -145,7 +147,7 @@
     </table>
     @endif
 
-        <h3>Calzados en el Carrito:</h3>
+        <h3>Registro de Compra:</h3>
        @if(session()->has('compra') && count(session('compra', [])) > 0)
        <table class="table table-striped table-bordered mb-4">
         <thead>
@@ -187,5 +189,86 @@
         </div>
     @endif
 </div>
+
+<div class="modal fade" id="crearCalzadoModal" tabindex="-1" aria-labelledby="crearCalzadoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg"> <!-- Modal más grande para mejor visualización -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearCalzadoModalLabel">Crear Nuevo Calzado</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('admin.calzado.store') }}" method="POST" class="formulario">
+                @csrf
+                <input type="hidden" name="from_modal" value="1"> <!-- Indica que es desde el modal -->
+                
+                <div class="modal-body"> <!-- Sección del cuerpo del modal -->
+                    <div class="mb-3">
+                        <label for="genero" class="form-label">Género</label>
+                        <select class="form-select" id="genero" name="genero" required>
+                            <option value="">Seleccione un género</option>
+                            <option value="m">Masculino</option>
+                            <option value="f">Femenino</option>
+                            <option value="u">Unisex</option>
+                        </select>
+                    </div>
+            
+                    <div class="mb-3">
+                        <label for="precio_unidad" class="form-label">Precio Unidad</label>
+                        <input type="number" step="0.01" class="form-control" id="precio_unidad" name="precio_unidad" required>
+                    </div>
+            
+                    <div class="mb-3">
+                        <label for="cantidad_pares" class="form-label">Cantidad de Pares</label>
+                        <input type="number" class="form-control" id="cantidad_pares" name="cantidad_pares" required>
+                    </div>
+                    @if(session()->has('lote'))
+                    <div class="mb-3">
+                        <label for="cod_marca" class="form-label">Marca</label>
+                        
+                        <input type="text" class="form-control" id="cod_marca" name="cod_marca" value="{{ session()->get('lote')['marca']['nombre'] }}" readonly>
+                        
+                        <input type="hidden" name="marca_cod" value="{{ session()->get('lote')['marca']['cod'] }}">
+                    </div>
+                    @endif
+                    <div class="mb-3">
+                        <label for="cod_modelo" class="form-label">Modelo</label>
+                        <select class="form-select" id="cod_modelo" name="cod_modelo" required >
+                            <option value="">Seleccione un modelo</option>
+                            @foreach ($modelos as $modelo)
+                                <option value="{{ $modelo->cod }}">{{ $modelo->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+            
+            
+                    <div class="mb-3">
+                        <label for="cod_talla" class="form-label">Talla</label>
+                        <select class="form-select" id="cod_talla" name="cod_talla" required>
+                            <option value="">Seleccione una talla</option>
+                            @foreach ($tallas as $talla)
+                                <option value="{{ $talla->cod }}">{{ $talla->numero }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+            
+                    <div class="mb-3">
+                        <label for="cod_material" class="form-label">Material</label>
+                        <select class="form-select" id="cod_material" name="cod_material" required>
+                            <option value="">Seleccione un material</option>
+                            @foreach ($materiales as $material)
+                                <option value="{{ $material->cod }}">{{ $material->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Crear Calzado</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 @endsection

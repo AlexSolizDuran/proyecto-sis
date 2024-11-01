@@ -23,7 +23,7 @@ Auth::routes();
 //inicio para todos
 Route::get('/', function(){
     return view('welcome');
-})->name('welcome');
+})->name('inicio');
 
 //inicio para el admin
 Route::get('/admin',function(){
@@ -65,4 +65,6 @@ Route::resource('modelo',ModeloController::class)->names('admin.modelo');
 Route::resource('talla',TallaController::class)->names('admin.talla');
 Route::resource('pais',PaisController::class)->names('admin.pais');
 
+Route::get('/change-password', [CuentaController::class, 'showChangePasswordForm'])->name('password.change.form');
+Route::post('/change-password', [CuentaController::class, 'changePassword'])->name('password.change');
 
