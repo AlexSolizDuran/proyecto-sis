@@ -5,7 +5,15 @@
     <a href="{{ route('admin.calzado.index')}}" class="btn btn-warning flex-fill me-1">Lista de Calzados</a>
 
     <h1>Crear Calzado</h1>
-
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <form action="{{ route('admin.calzado.store') }}" method="POST" class="formulario">
         @csrf
         
@@ -17,16 +25,6 @@
                 <option value="f">Femenino</option>
                 <option value="u">Unisex</option>
             </select>
-        </div>
-
-        <div class="mb-3">
-            <label for="precio_unidad" class="form-label">Precio Unidad</label>
-            <input type="number" step="0.01" class="form-control" id="precio_unidad" name="precio_unidad" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="cantidad_pares" class="form-label">Cantidad de Pares</label>
-            <input type="number" class="form-control" id="cantidad_pares" name="cantidad_pares" required>
         </div>
 
         <div class="mb-3">
@@ -65,7 +63,7 @@
                 @endforeach
             </select>
         </div>
-
+        
         <button type="submit" class="btn btn-primary">Crear Calzado</button>
     </form>
 </div>

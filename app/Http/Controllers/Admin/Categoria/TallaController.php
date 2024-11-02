@@ -8,31 +8,23 @@ use Illuminate\Http\Request;
 
 class TallaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $tallas = Talla::all();
         return view('admin.categoria.talla.index',compact('tallas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
             'numero' => 'required|numeric|unique:talla,numero',
-            
+        ],[
+            'numero.required' => 'El Numero es obligario',
+            'numero.unique' => 'Ya existe ese numero de Talla'
         ]);
 
         // Crear una nueva talla
@@ -45,29 +37,13 @@ class TallaController extends Controller
     
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Talla $talla)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Talla $talla)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Talla $talla)
     {
         $request->validate([
-            'numero' => 'required|numeric'
+            'numero' => "required|numeric|unique:talla,numero,{$talla->cod},cod"
+        ],[
+            'numero.required' => 'El Numero es obligario',
+            'numero.unique' => 'Ya existe ese numero de Talla'
         ]);
 
         // Actualizar la talla
@@ -80,9 +56,6 @@ class TallaController extends Controller
    
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Talla $talla)
     {
         $talla->delete(); // Elimina la talla

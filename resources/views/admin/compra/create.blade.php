@@ -67,6 +67,7 @@
             <form action="{{ route('admin.compra.filtrar') }}" method="GET" class="mb-4">
                 <div class="row">
                     <div class="col-md-4">
+                        <input type="hidden" name="cod_marca" value="{{ session('lote.marca') }}">
                         <label for="cod_modelo" class="form-label">Modelo</label>
                             <select class="form-select" id="cod_modelo" name="cod_modelo">
                                 <option value="">Seleccione un modelo</option>
@@ -210,16 +211,6 @@
                             <option value="f">Femenino</option>
                             <option value="u">Unisex</option>
                         </select>
-                    </div>
-            
-                    <div class="mb-3">
-                        <label for="precio_unidad" class="form-label">Precio Unidad</label>
-                        <input type="number" step="0.01" class="form-control" id="precio_unidad" name="precio_unidad" required>
-                    </div>
-            
-                    <div class="mb-3">
-                        <label for="cantidad_pares" class="form-label">Cantidad de Pares</label>
-                        <input type="number" class="form-control" id="cantidad_pares" name="cantidad_pares" required>
                     </div>
                     @if(session()->has('lote'))
                     <div class="mb-3">

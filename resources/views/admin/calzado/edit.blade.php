@@ -50,18 +50,11 @@
                 @endforeach
             </select>
         </div>
-        
+
         <div class="mb-3">
             <label for="cod_modelo" class="form-label">Modelo</label>
-            <select class="form-select" id="cod_modelo" name="cod_modelo" required {{ isset($calzado) && $calzado->cod_marca ? '' : 'disabled' }}>
-                <option value="">Seleccione un modelo</option>
-                @if (isset($modelos))
-                    @foreach ($modelos as $modelo)
-                        <option value="{{ $modelo->cod }}" {{ isset($calzado) && $modelo->cod == $calzado->cod_modelo ? 'selected' : '' }}>
-                            {{ $modelo->nombre }}
-                        </option>
-                    @endforeach
-                @endif
+            <select class="form-select" id="cod_modelo" name="cod_modelo" required {{ isset($calzado) && $calzado->cod_marca  }}>
+            <option value="{{ $calzado->cod_modelo }}">{{$calzado->modelo->nombre}}</option>
             </select>
         </div>
 

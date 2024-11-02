@@ -35,7 +35,7 @@ Route::resource('zapato',ZapatoController::class)->names('cliente.zapato');
 Route::resource('cuenta',CuentaController::class)->names('cliente.cuenta');
 
 //bitacora
-Route::resource('bitacora',BitacoraController::class)->names('admin.bitacora');
+Route::resource('bitacora',BitacoraController::class)->only(['index','destroy'])->names('admin.bitacora');
 //gestionar calzados
 Route::resource('calzado',CalzadoController::class)->names('admin.calzado');
 //gestionar lote
@@ -58,12 +58,12 @@ Route::get('/admin/compra/filtrar',[CompraController::class,'filtrar'])->name('a
 
 Route::get('/api/modelos/{marca}', [ModeloController::class, 'obtenerModelos'])->name('api.modelos');
 
-Route::resource('color',ColorController::class)->names('admin.color');
-Route::resource('marca',MarcaController::class)->names('admin.marca');
-Route::resource('material',MaterialController::class)->names('admin.material');
-Route::resource('modelo',ModeloController::class)->names('admin.modelo');
-Route::resource('talla',TallaController::class)->names('admin.talla');
-Route::resource('pais',PaisController::class)->names('admin.pais');
+Route::resource('color',ColorController::class)->except(['create', 'edit', 'show'])->names('admin.color');
+Route::resource('marca',MarcaController::class)->except(['create', 'edit', 'show'])->names('admin.marca');
+Route::resource('material',MaterialController::class)->except(['create', 'edit', 'show'])->names('admin.material');
+Route::resource('modelo',ModeloController::class)->except(['create', 'edit', 'show'])->names('admin.modelo');
+Route::resource('talla',TallaController::class)->except(['create', 'edit', 'show'])->names('admin.talla');
+Route::resource('pais',PaisController::class)->except(['create', 'edit', 'show'])->names('admin.pais');
 
 Route::get('/change-password', [CuentaController::class, 'showChangePasswordForm'])->name('password.change.form');
 Route::post('/change-password', [CuentaController::class, 'changePassword'])->name('password.change');

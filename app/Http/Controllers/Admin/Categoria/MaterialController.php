@@ -8,31 +8,25 @@ use Illuminate\Http\Request;
 
 class MaterialController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $materiales = Material::all();
         return view('admin.categoria.material.index',compact('materiales'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
             'nombre' => 'required|string|unique:material,nombre',
             
+        ],[
+            'nombre.required' => 'El nombre es obligatorio',
+            'nombre.unique' => 'Ese Material ya existe'
         ]);
 
         // Crear una nueva talla
@@ -45,29 +39,14 @@ class MaterialController extends Controller
     
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Material $material)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Material $material)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Material $material)
     {
         $request->validate([
-            'nombre' => 'required|string'
+            'nombre' => "required|string|unique:material,nombre,{$material->cod},cod"
+        ],[
+            'nombre.required' => 'El nombre es obligatorio',
+            'nombre.unique' => 'Ese Material ya existe'
         ]);
 
         // Actualizar la talla
@@ -80,9 +59,6 @@ class MaterialController extends Controller
    
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Material $material)
     {
         $material->delete(); // Elimina la talla

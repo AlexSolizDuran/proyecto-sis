@@ -180,8 +180,12 @@ class CompraController extends Controller
         $materiales = Material::all();
         $tallas = Talla::all();
         $query = Calzado::query();
-        $marca = session()->get('lote')['marca']; // Obtener la marca de la sesión
-        $modelos = Modelo::all();
+        $modelos = Modelo::where('cod_marca', session('lote.marca.cod'))->get(); // Obtener solo los modelos de la marca en la sesión
+
+        if (session('lote.marca.cod')) {
+            $query->whereHas('modelo', function ($q) {
+                $q->where('cod_marca', session('lote.marca.cod'));
+            });        }
 
         if ($request->filled('cod_modelo')) {
             $query->where('cod_modelo', $request->cod_modelo);
@@ -192,16 +196,12 @@ class CompraController extends Controller
         if ($request->filled('cod_talla')) {
             $query->where('cod_talla', $request->cod_talla);
         }
-        if ($marca) {
-            $query->whereHas('modelo', function($q) use ($marca) {
-                $q->where('cod', $marca);
-            });
-        }
+        
+       
     
         $calzados = $query->get();
-        $marcas= Marca::all();
        
-        return view('admin.compra.create', compact('calzados', 'modelos', 'materiales', 'tallas','marcas'));
+        return view('admin.compra.create', compact('calzados', 'modelos', 'materiales', 'tallas',));
     
     }
     public function addlote(Request $request)

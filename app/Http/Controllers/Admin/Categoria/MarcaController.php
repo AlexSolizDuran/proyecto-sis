@@ -8,31 +8,25 @@ use Illuminate\Http\Request;
 
 class MarcaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $marcas = Marca::all();
         return view('admin.categoria.marca.index',compact('marcas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|string|unique:material,nombre',
-            
+            'nombre' => 'required|string|unique:material,nombre', 
+        ],[
+            'nombre.required' => 'El Nombre es obligatorio',
+            'nombre.unique' => 'Esa Marca ya existe'
         ]);
 
         // Crear una nueva talla
@@ -45,29 +39,13 @@ class MarcaController extends Controller
     
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Marca $marca)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Marca $marca)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Marca $marca)
     {
         $request->validate([
-            'nombre' => 'required|string'
+            'nombre' => "required|string|unique:marca,nombre,{$marca->cod},cod"
+        ],[
+            'nombre.required' => 'El nombre es obligatorio',
+            'nombre.unique' => 'Esa Marca ya existe'
         ]);
 
         // Actualizar la talla
@@ -80,9 +58,6 @@ class MarcaController extends Controller
    
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Marca $marca)
     {
         $marca->delete(); // Elimina la talla

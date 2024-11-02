@@ -18,7 +18,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Numero de venta</th>
+                    <th>Codigo de venta</th>
                     <th>fecha</th>
                     <th>Monto Total</th>
                     <th>Cantidad </th>

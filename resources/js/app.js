@@ -5,29 +5,43 @@ document.addEventListener('DOMContentLoaded', function () {
     const marcaSelect = document.getElementById('cod_marca');
     const modeloSelect = document.getElementById('cod_modelo');
 
-    marcaSelect.addEventListener('change', function () {
-        const marcaId = this.value;
-
+    // Función para cargar modelos basada en el ID de la marca
+    function loadModelos(marcaId, selectedModeloId) {
         if (marcaId) {
             fetch(`/api/modelos/${marcaId}`)
                 .then(response => response.json())
                 .then(data => {
                     modeloSelect.innerHTML = '<option value="">Seleccione un modelo</option>';
+                    
+                    // Cargar las opciones de modelo
                     data.forEach(modelo => {
                         const option = document.createElement('option');
                         option.value = modelo.cod;
                         option.textContent = modelo.nombre;
                         modeloSelect.appendChild(option);
+                        
                     });
+
                     modeloSelect.disabled = false;
+                    
+                    
                 })
                 .catch(error => console.error('Error:', error));
         } else {
             modeloSelect.innerHTML = '<option value="">Seleccione un modelo</option>';
             modeloSelect.disabled = true;
         }
+    }
+
+    // Cargar los modelos al cambiar la marca
+    marcaSelect.addEventListener('change', function () {
+        const marcaId = this.value;
+        loadModelos(marcaId, null); // Cargar modelos sin un modelo seleccionado
     });
 });
+
+
+
 //editar talla
 document.addEventListener('DOMContentLoaded', function () {
     const editarTallaModal = document.getElementById('editarTallaModal');
@@ -143,5 +157,6 @@ document.addEventListener('DOMContentLoaded', function () {
         edithorma.value = horma;
     });
 });
+
 
 

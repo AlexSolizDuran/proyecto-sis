@@ -96,7 +96,7 @@ class VentaController extends Controller
             'cantidad' => 0,
             'cod_admin' => Auth::user()->administrador->cod,
         ]);
-        
+        $nro_venta = DB::getPdo()->lastInsertId();
         $carrito = session()->get('carrito', []);
         foreach ($carrito as $item) {
             DB::table('registro_venta')->insert([

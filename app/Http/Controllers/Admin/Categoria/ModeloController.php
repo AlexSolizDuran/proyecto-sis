@@ -10,9 +10,10 @@ use Illuminate\Http\Request;
 
 class ModeloController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function obtenerModelos($marcaId)
     {
         $modelos = Modelo::where('cod_marca', $marcaId)->get();
@@ -25,22 +26,14 @@ class ModeloController extends Controller
         return view('admin.categoria.modelo.index',compact('modelos','marcas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
             'nombre' => 'required|string|unique:modelo,nombre',
-            
+            'cod_marca' => 'required'
+        ],[
+            'nombre.required'=>'El Nombre es obligatorio',
+            'nombre.unique' => 'Ese Modelo ya existe'
         ]);
 
         // Crear una nueva talla
@@ -53,29 +46,14 @@ class ModeloController extends Controller
         return redirect()->back()->with('success', 'Modelo creada exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Modelo $modelo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Modelo $modelo)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Modelo $modelo)
     {
         $request->validate([
-            'nombre' => 'required|string'
+            'nombre' => "required|string|unique:modelo,nombre,{$modelo->cod},cod",
+            'cod_marca' => 'required'
+        ],[
+            'nombre.required'=>'El Nombre es obligatorio',
+            'nombre.unique' => 'Ese Modelo ya existe'
         ]);
 
         // Actualizar la talla
@@ -90,9 +68,6 @@ class ModeloController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Modelo $modelo)
     {
         //

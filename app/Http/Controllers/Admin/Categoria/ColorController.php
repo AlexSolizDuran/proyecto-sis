@@ -8,66 +8,41 @@ use Illuminate\Http\Request;
 
 class ColorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $colores = Color::all();
         return view('admin.categoria.color.index',compact('colores'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
             'nombre' => 'required|string|unique:color,nombre',
             
+        ],[
+            'nombre.required' => 'El Nombre es obligatorio',
+            'nombre.unique' => 'Ese color ya existe'
         ]);
 
-        // Crear una nueva talla
         Color::create([
             'nombre' => $request->nombre,
         ]);
 
-        // Redireccionar con mensaje de éxito
         return redirect()->back()->with('success', 'Color creado exitosamente.');
     
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Color $color)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Color $color)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Color $color)
     {
         $request->validate([
-            'nombre' => 'required|string'
+            'nombre' => "required|string|unique:color,nombre,{$color->cod},cod"
+        ],[
+            'nombre.unique'=>'Ese color ya existe'
         ]);
 
         // Actualizar la talla
@@ -80,9 +55,6 @@ class ColorController extends Controller
    
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Color $color)
     {
         $color->delete(); // Elimina la talla

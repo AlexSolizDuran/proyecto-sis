@@ -8,7 +8,7 @@
     <!-- Formulario de filtrado -->
     <form action="{{ route('cliente.zapato.index') }}" method="GET" class="mb-4">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="cod_marca" class="form-label">Marca</label>
                 <select class="form-select" id="cod_marca" name="cod_marca">
                     <option value="">Seleccione una Marca</option>
@@ -19,7 +19,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="cod_modelo" class="form-label">Modelo</label>
                 <select class="form-select" id="cod_modelo" name="cod_modelo">
                     <option value="">Seleccione un modelo</option>
@@ -30,7 +30,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="cod_material" class="form-label">Material</label>
                 <select class="form-select" id="cod_material" name="cod_material">
                     <option value="">Seleccione un material</option>
@@ -41,7 +41,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="cod_talla" class="form-label">Talla</label>
                 <select class="form-select" id="cod_talla" name="cod_talla">
                     <option value="">Seleccione una talla</option>
@@ -57,6 +57,7 @@
             <button type="submit" class="btn btn-primary">Filtrar</button>
         </div>
     </form>
+    
 
     <!-- Verificamos si existen calzados -->
     @if($calzados->isEmpty())

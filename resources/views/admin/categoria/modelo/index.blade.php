@@ -5,11 +5,8 @@
 <div class="container mt-5">
     <a href="javascript:history.back()" class="btn btn-secondary mt-3">Volver</a>
     <h1 class="text-center mb-4">Lista de Modelos</h1>
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+    {{-- Este componente muestra las alertas para mensajes de éxito y de error --}}    
+    <x-alert />
 
     <!-- Botón para abrir el modal de creación -->
     <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#crearModeloModal">Crear Nueva Modelo</button>

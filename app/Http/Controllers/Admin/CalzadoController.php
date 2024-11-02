@@ -7,6 +7,8 @@ use App\Models\Marca;
 use App\Models\Modelo;
 use App\Models\Talla;
 use App\Models\Material;
+use App\Models\Color;
+
 use App\Models\LoteMercaderia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
@@ -21,7 +23,6 @@ class CalzadoController extends Controller
     
     public function index(Request $request)
     {
-        // Obtener todos los calzados
         $modelos = Modelo::all();
         $materiales = Material::all();
         $tallas = Talla::all();
@@ -60,34 +61,35 @@ class CalzadoController extends Controller
         $modelos = Modelo::all(); // Obtener todos los modelos
         $tallas = Talla::all(); // Obtener todas las tallas
         $materiales = Material::all(); // Obtener todos los materiales
-    
-        return view('admin.calzado.create', compact('marcas', 'modelos', 'tallas', 'materiales',));
+        $colores = Color::all();
+        return view('admin.calzado.create', compact('marcas', 'modelos', 'tallas', 'materiales','colores'));
     }
     public function store(Request $request)
     {
+          
         $request->validate([
         'genero' => 'required|string',
-        'precio_unidad' => 'required|numeric',
-        'cantidad_pares' => 'required|integer',
         'cod_modelo' => 'required|integer',
         'cod_talla' => 'required|integer',
         'cod_material' => 'required|integer',
         ]);
 
-        Calzado::create($request->all());
+        Calzado::create(array_merge(
+            $request->all(),
+            [
+                'cantidad_pares' => 0,
+                'precio_unidad' => 0,
+            ]
+        ));
 
         if ($request->input('from_modal')) {
-            // Redirigir de vuelta (a la misma página)
             return redirect()->back()->with('success', 'Producto creado exitosamente.');
         } else {
-            // Redirigir a la lista de calzados
             return redirect()->route('admin.calzado.index')->with('success', 'Producto creado exitosamente.');
         } 
     }
 
     public function show(Calzado $calzado){
-
-        $calzado->load(['modelo', 'talla', 'material']);
 
         return view ('admin.calzado.show', compact('calzado'));
     }
@@ -107,9 +109,9 @@ class CalzadoController extends Controller
             'genero' => 'required|string',
             'precio_unidad' => 'required|numeric',
             'cantidad_pares' => 'required|numeric',
-            'cod_modelo' => 'required|exists:modelo,cod',
-            'cod_talla' => 'required|exists:talla,cod',
-            'cod_material' => 'required|exists:material,cod',
+            'cod_modelo' => 'required',
+            'cod_talla' => 'required',
+            'cod_material' => 'required',
         ]);
 
         $calzado->genero = $validatedData['genero']; // Almacenará como 'M', 'F' o 'U' automáticamente
@@ -128,15 +130,6 @@ class CalzadoController extends Controller
         return redirect()->route('admin.calzado.index')->with('success','Calzado eliminado con exito');
     }
      
-    
-
-
-    public function lista(){
-        $calzados = Calzado::with(['modelo', 'material', 'talla'])->get();
-
-        // Pasar los calzados a la vista
-        return view('cliente.index', compact('calzados'));
-    }
     
 }
 
