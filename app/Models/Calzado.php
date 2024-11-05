@@ -55,10 +55,16 @@ class Calzado extends Model
     {
         return $this->belongsTo(Material::class, 'cod_material', 'cod');
     }
-
-    public function registrolote()
-    {
-        return $this->hasMany(RegistroLote::class, 'cod_calzado', 'cod');
-    }
     
+    public function colorCalzados()
+    {
+        return $this->hasMany(ColorCalzado::class, 'cod_calzado', 'cod');
+    }
+
+    // Relación con Color a través de ColorCalzado
+    public function colores()
+    {
+        return $this->belongsToMany(Color::class, 'color_calzado', 'cod_calzado', 'cod_color');
+    }
+
 }

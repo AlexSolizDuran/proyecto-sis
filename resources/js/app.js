@@ -38,9 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const marcaId = this.value;
         loadModelos(marcaId, null); // Cargar modelos sin un modelo seleccionado
     });
+
 });
-
-
 
 //editar talla
 document.addEventListener('DOMContentLoaded', function () {
@@ -106,16 +105,20 @@ document.addEventListener('DOMContentLoaded', function () {
         const button = event.relatedTarget; // Botón que abrió el modal
         const cod = button.getAttribute('data-cod'); // Código del color
         const nombre = button.getAttribute('data-nombre'); // Nombre del color
+        const codigoColorHex = button.getAttribute('data-codigo_color'); // Código hexadecimal del color
 
         // Actualizar la acción del formulario con el código del color
         const form = document.getElementById('editarColorForm');
         form.action = form.action.replace(':cod', cod);
 
-
         // Colocar el valor actual en el campo de edición
         const editNombre = document.getElementById('edit_nombre');
         editNombre.value = nombre;
-    });
+
+        // Colocar el valor del color en el input de tipo color
+        const editColor = document.getElementById('codigo_color');
+        editColor.value = '#80080'; // Prueba con un valor estático
+    }); 
 });
 document.addEventListener('DOMContentLoaded', function () {
     const editarMarcaModal = document.getElementById('editarMarcaModal');
@@ -158,5 +161,85 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+
+document.addEventListener('DOMContentLoaded', function () {
+    const selectDisplay = document.getElementById('select-display');
+    const options = document.getElementById('options');
+    const selectedColorsContainer = document.getElementById('selected-colors');
+    const hiddenInput = document.getElementById('selected_colors'); // Campo oculto
+    let selectedColors = hiddenInput.value ? hiddenInput.value.split(',') : []; // Inicializar con los valores existentes
+
+    // Función para crear un cuadro de color visual en el contenedor
+    function addColorSquare(colorCode, colorName, colorHex) {
+        const colorSquare = document.createElement('div');
+        colorSquare.classList.add('color-square');
+        colorSquare.dataset.colorCode = colorCode;
+
+        const colorBox = document.createElement('div');
+        colorBox.classList.add('color-box');
+        colorBox.style.backgroundColor = colorHex;
+
+        const colorNameText = document.createElement('span');
+        colorNameText.classList.add('color-name');
+        colorNameText.textContent = colorName;
+
+        // Añadir elementos a colorSquare
+        colorSquare.appendChild(colorBox);
+        colorSquare.appendChild(colorNameText);
+
+        // Añadir el color seleccionado al contenedor
+        selectedColorsContainer.appendChild(colorSquare);
+
+        // Evento para eliminar color seleccionado
+        colorSquare.addEventListener('click', function () {
+            selectedColors = selectedColors.filter(c => c !== colorCode);
+            selectedColorsContainer.removeChild(colorSquare);
+            // Actualizar el campo oculto después de eliminar
+            hiddenInput.value = selectedColors.join(',');
+        });
+    }
+
+    // Cargar colores seleccionados previamente
+    selectedColors.forEach(colorCode => {
+        const option = document.querySelector(`.option[data-value="${colorCode}"]`);
+        if (option) {
+            const colorName = option.textContent.trim();
+            const colorHex = option.getAttribute('data-hex');
+            addColorSquare(colorCode, colorName, colorHex);
+        }
+    });
+
+    // Abrir/cerrar opciones al hacer clic en el display
+    selectDisplay.addEventListener('click', function () {
+        options.style.display = options.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Seleccionar una opción de color
+    options.addEventListener('click', function (event) {
+        if (event.target.classList.contains('option')) {
+            const colorCode = event.target.getAttribute('data-value');
+            const colorName = event.target.textContent.trim();
+            const colorHex = event.target.getAttribute('data-hex');
+
+            if (!selectedColors.includes(colorCode)) {
+                // Añadir color a la lista de seleccionados
+                selectedColors.push(colorCode);
+                addColorSquare(colorCode, colorName, colorHex);
+
+                // Actualizar el campo oculto con los colores seleccionados
+                hiddenInput.value = selectedColors.join(',');
+            }
+        }
+        // Cerrar las opciones después de seleccionar
+        options.style.display = 'none';
+    });
+
+    // Cerrar el menú de opciones si se hace clic fuera del select
+    document.addEventListener('click', function (event) {
+        if (!selectDisplay.contains(event.target) && !options.contains(event.target)) {
+            options.style.display = 'none';
+        }
+    });
+});
 
 

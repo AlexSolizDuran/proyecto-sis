@@ -251,6 +251,24 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="cod_color" class="form-label">Color</label>
+                        <div id="custom-select" class="custom-select">
+                            <div id="select-display" class="select-display">Seleccione un color</div>
+                            <div id="options" class="options">
+                                @foreach ($colores as $color)
+                                    <div class="option" data-value="{{ $color->cod }}" data-hex="{{ $color->codigo_color }}">
+                                        {{ $color->nombre }}
+                                        <span class="color-box" style="background-color: {{ $color->codigo_color }};"></span>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div id="selected-colors" class="selected-colors">
+                                <!-- Aquí aparecerán los colores seleccionados -->
+                            </div>
+                            <input type="hidden" name="selected_colors" id="selected_colors" value="">
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

@@ -13,6 +13,7 @@ use App\Models\LoteMercaderia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CalzadoController extends Controller
 {
@@ -66,7 +67,7 @@ class CalzadoController extends Controller
     }
     public function store(Request $request)
     {
-          
+        
         $request->validate([
         'genero' => 'required|string',
         'cod_modelo' => 'required|integer',
@@ -81,7 +82,22 @@ class CalzadoController extends Controller
                 'precio_unidad' => 0,
             ]
         ));
-
+        $colores = $request->selected_colors;
+        $cod_calzado = DB::getPdo()->lastInsertId();
+        if (!empty($colores)) {
+            // Dividir los colores en un array
+            $coloresArray = explode(',', $colores);
+    
+            // Hacer un foreach para guardar cada color relacionado con el calzado
+            foreach ($coloresArray as $color) {
+                // Guardar la relación en la tabla pivot
+                DB::table('color_calzado')->insert([
+                    'cod_calzado' => $cod_calzado, // Asumiendo que esta es la columna en la tabla pivot
+                    'cod_color' => $color, // Suponiendo que 'color_id' es la columna en la tabla pivot
+                ]);
+            }
+        }
+        
         if ($request->input('from_modal')) {
             return redirect()->back()->with('success', 'Producto creado exitosamente.');
         } else {
@@ -99,9 +115,11 @@ class CalzadoController extends Controller
         $modelos = Modelo::all(); // Suponiendo que tienes un modelo Modelo
         $tallas = Talla::all(); // Suponiendo que tienes un modelo Talla
         $materiales = Material::all(); // Suponiendo que tienes un modelo Material
+        $colores = Color::all();
+        $selected_colors = $calzado->colores->pluck('cod')->toArray(); // array de códigos de color seleccionados
 
         
-        return view('admin.calzado.edit', compact('marcas','calzado', 'modelos', 'tallas', 'materiales'));
+        return view('admin.calzado.edit', compact('marcas','calzado', 'modelos', 'tallas', 'materiales','colores','selected_colors'));
     }
     public function update(Request $request, Calzado $calzado){
 
@@ -113,6 +131,9 @@ class CalzadoController extends Controller
             'cod_talla' => 'required',
             'cod_material' => 'required',
         ]);
+        $selectedColors = explode(',', $request->input('selected_colors'));
+        $selectedColors = array_filter($selectedColors); // Esto elimina elementos vacíos
+
 
         $calzado->genero = $validatedData['genero']; // Almacenará como 'M', 'F' o 'U' automáticamente
         $calzado->precio_unidad = $validatedData['precio_unidad'];
@@ -120,6 +141,13 @@ class CalzadoController extends Controller
         $calzado->cod_modelo = $validatedData['cod_modelo'];
         $calzado->cod_talla = $validatedData['cod_talla'];
         $calzado->cod_material = $validatedData['cod_material'];
+        if (empty($selectedColors)) {
+            // Si no hay colores seleccionados, simplemente elimina las relaciones
+            $calzado->colores()->detach(); // Esto eliminará todas las relaciones.
+        } else {
+            // Si hay colores seleccionados, sincroniza
+            $calzado->colores()->sync($selectedColors);
+        }
         $calzado->save();
 
         return redirect()->route('admin.calzado.index')->with('success', 'Calzado actualizado con éxito.');

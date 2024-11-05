@@ -31,6 +31,7 @@ class ColorController extends Controller
 
         Color::create([
             'nombre' => $request->nombre,
+            'codigo_color' => $request->codigo_color,
         ]);
 
         return redirect()->back()->with('success', 'Color creado exitosamente.');
@@ -48,6 +49,7 @@ class ColorController extends Controller
         // Actualizar la talla
         $color->update([
             'nombre' => $request->nombre,
+            'codigo_color' => $request->codigo_color
         ]);
 
         // Redireccionar con mensaje de éxito

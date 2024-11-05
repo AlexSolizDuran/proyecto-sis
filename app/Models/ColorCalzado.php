@@ -8,20 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class ColorCalzado extends Model
 {
     use HasFactory;
-    protected $table = ['cod_calzado', 'cod_color'];
-    public $timestamps = false;
-    protected $fillable = [ // Atributos que se pueden llenar masivamente
+
+    protected $table = 'color_calzado'; // Nombre de la tabla
+    public $timestamps = false; // No usar timestamps
+
+    protected $primaryKey = ['cod_calzado', 'cod_color']; // Llave primaria compuesta
+    public $incrementing = false; // Indica que no es auto-incrementable
+    protected $keyType = 'array'; // Tipo de clave es array
+
+    protected $fillable = [
         'cod_calzado',
         'cod_color',
     ];
 
-    // Relación con el modelo Calzado
+    // Relación con Calzado
     public function calzado()
     {
         return $this->belongsTo(Calzado::class, 'cod_calzado', 'cod');
     }
 
-    // Relación con el modelo Color
+    // Relación con Color
     public function color()
     {
         return $this->belongsTo(Color::class, 'cod_color', 'cod');

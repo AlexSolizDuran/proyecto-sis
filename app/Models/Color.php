@@ -12,4 +12,9 @@ class Color extends Model
     protected $primaryKey = 'cod';
     public $timestamps = false;
     protected $fillable = ['nombre','codigo_color',];
+
+    public function colorCalzados()
+    {
+        return $this->hasMany(ColorCalzado::class, 'cod_color', 'cod');
+    }
 }

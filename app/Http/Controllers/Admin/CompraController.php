@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use App\Models\LoteMercaderia;
 use App\Models\RegistroLote;
 use App\Models\Marca;
+use App\Models\Color;
 use App\Models\Pais;
 use App\Models\Calzado;
 use App\Models\Modelo;
@@ -46,6 +47,7 @@ class CompraController extends Controller
     $marcas = Marca::all();
     $materiales = Material::all();
     $tallas = Talla::all();
+    $colores = Color::all();
 
     // Obtener el código de la marca desde la sesión
     $marcaCod = session()->get('lote')['marca']['cod'] ?? null;
@@ -62,7 +64,7 @@ class CompraController extends Controller
         });
     })->get();
 
-    return view('admin.compra.create', compact('tallas', 'materiales', 'modelos', 'marcas', 'paises', 'calzados'));
+    return view('admin.compra.create', compact('tallas', 'materiales', 'modelos', 'marcas', 'paises', 'calzados','colores'));
 }
 
     /**
@@ -176,7 +178,7 @@ class CompraController extends Controller
     }
     public function filtrar(Request $request)
     {
-        
+        $colores = Color::all();
         $materiales = Material::all();
         $tallas = Talla::all();
         $query = Calzado::query();
@@ -201,7 +203,7 @@ class CompraController extends Controller
     
         $calzados = $query->get();
        
-        return view('admin.compra.create', compact('calzados', 'modelos', 'materiales', 'tallas',));
+        return view('admin.compra.create', compact('calzados', 'modelos', 'materiales', 'tallas','colores'));
     
     }
     public function addlote(Request $request)

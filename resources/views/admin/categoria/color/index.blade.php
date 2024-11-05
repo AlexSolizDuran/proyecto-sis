@@ -16,6 +16,7 @@
                 <tr>
                     <th>Codigo</th>
                     <th>Nombre</th>
+                    <th>Color</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -24,10 +25,16 @@
                 <tr>
                     <td>{{ $color->cod}}</td>
                     <td>{{ $color->nombre }}</td>
-
                     <td>
-                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarColorModal" data-cod="{{ $color->cod }}" data-nombre="{{ $color->nombre }}">Editar</button>
-                        <form action="{{ route('admin.color.destroy', $color) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar este cliente?');">
+                        <div style="inline-size: 30px; block-size: 30px; background-color: {{ $color->codigo_color }}; display: inline-block; border: 1px solid #000;"></div>
+                        <!-- Aquí se muestra el cuadrado de color -->
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editarColorModal" 
+                                data-cod="{{ $color->cod }}" 
+                                data-nombre="{{ $color->nombre }}"
+                                data-codigo_color="{{ $color->codigo_color }}">Editar</button>
+                                <form action="{{ route('admin.color.destroy', $color) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar este cliente?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
@@ -55,6 +62,10 @@
                         <label for="nombre" class="form-label">Nombre de Color</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="codigo_color" class="form-label">Seleccione un Color</label>
+                        <input type="color" class="form-control" id="codigo_color" name="codigo_color" required>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -81,6 +92,10 @@
                         <label for="edit_nombre" class="form-label">Nombre de Color</label>
                         <input type="text" class="form-control" id="edit_nombre" name="nombre" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="codigo_color" class="form-label">Seleccione un Color</label>
+                        <input type="color" id="codigo_color" name="codigo_color" required>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -90,4 +105,5 @@
         </div>
     </div>
 </div>
+
 @endsection

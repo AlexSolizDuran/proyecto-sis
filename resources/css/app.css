@@ -95,8 +95,8 @@ nav a{
 
 
 .header-image {
-    width: 100%; /* Ajusta la imagen al ancho del contenedor */
-    height: auto; /* Mantiene la proporción de la imagen */
+    inline-size: 100%; /* Ajusta la imagen al ancho del contenedor */
+    block-size: auto; /* Mantiene la proporción de la imagen */
 }
 
 /* El nav ocupa el 100% del ancho de la página */
@@ -172,3 +172,92 @@ nav a{
     opacity: 0.9; /* Efecto hover */
 }
 
+.custom-select {
+    position: relative;
+    inline-size: 100%;
+    cursor: pointer;
+}
+
+.select-display {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.options {
+    display: none;
+    position: absolute;
+    inset-block-end: 100%; /* Posiciona el menú hacia arriba del select */
+    inline-size: 100%;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    z-index: 1000;
+    max-block-size: 200px;
+    overflow-y: auto;
+    border-radius: 5px;
+    margin-block-end: 5px; /* Espacio entre el menú y el select */
+}
+
+.option {
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.option:hover {
+    background-color: #f0f0f0;
+}
+
+/* Cuadro pequeño de color al lado derecho */
+.color-box {
+    inline-size: 16px;
+    block-size: 16px;
+    border-radius: 3px;
+    margin-inline-start: 8px;
+    border: 1px solid #ccc;
+}
+
+/* Contenedor de colores seleccionados */
+.selected-colors {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-block-start: 10px;
+}
+
+.color-square {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.color-square .color-box {
+    inline-size: 20px;
+    block-size: 20px;
+    border-radius: 3px;
+}
+
+.color-square .color-name {
+    font-size: 14px;
+    color: #333;
+}
+
+input[type="color"] {
+    border: none; /* Quitar el borde predeterminado */
+    padding: 0px 0; /* Quitar el padding */
+    inline-size: 200px; /* Ajustar el ancho */
+    block-size: 20px; /* Ajustar la altura */
+    cursor: pointer; /* Cambiar el cursor al pasar por encima */
+}
