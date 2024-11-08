@@ -49,7 +49,7 @@ class ColorController extends Controller
         // Actualizar la talla
         $color->update([
             'nombre' => $request->nombre,
-            'codigo_color' => $request->codigo_color
+            'codigo_color' => $request->codigo_c
         ]);
 
         // Redireccionar con mensaje de éxito
