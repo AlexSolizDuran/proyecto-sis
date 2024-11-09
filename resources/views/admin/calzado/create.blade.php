@@ -14,7 +14,7 @@
         </ul>
     </div>
     @endif
-    <form action="{{ route('admin.calzado.store') }}" method="POST" class="formulario">
+    <form action="{{ route('admin.calzado.store') }}" method="POST" enctype="multipart/form-data" class="formulario">
         @csrf
         
         <div class="mb-3">
@@ -79,6 +79,11 @@
                     <!-- Aquí aparecerán los colores seleccionados -->
                 </div>
                 <input type="hidden" name="selected_colors" id="selected_colors" value="">
+
+                <div class="form-group">
+                    <label for="imagen">Imagen del Calzado</label>
+                    <input type="file" class="form-control" id="imagen" name="imagen">
+                </div>
             </div>
         </div>
         

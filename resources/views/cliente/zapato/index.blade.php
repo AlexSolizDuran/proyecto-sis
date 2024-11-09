@@ -63,37 +63,25 @@
     @if($calzados->isEmpty())
         <p>No hay calzados disponibles.</p>
     @else
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Marca</th>
-                    <th>Género</th>
-                    <th>Precio Unidad</th>
-                    <th>Cantidad Pares</th>
-                    <th>Modelo</th>
-                    <th>Material</th>
-                    <th>Talla</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($calzados as $calzado)
-                    <tr>
-                        <td>{{ $calzado->modelo->marca->nombre }}</td>
-                        <td>{{ $calzado->genero_completo }}</td>
-                        <td>{{ $calzado->precio_unidad }}</td>
-                        <td>{{ $calzado->cantidad_pares }}</td>
-                        <td>{{ $calzado->modelo->nombre }}</td> <!-- Asumiendo relación con Modelo -->
-                        <td>{{ $calzado->material->nombre }}</td> <!-- Asumiendo relación con Material -->
-                        <td>{{ $calzado->talla->numero }}</td> <!-- Asumiendo relación con Talla -->
-                        <td>
-                            <a href="{{ route('cliente.zapato.show', $calzado->cod) }}" class="btn btn-info btn-sm">Ver</a>
-
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="container">
+        <div class="row">
+            @foreach ($calzados as $calzado)
+                <div class="col-md-4 mb-4">
+                    <a href="{{ route('cliente.zapato.show', $calzado->cod) }}" class="calzado-link"> <!-- Enlace al show -->
+                        <div class="card calzado-card">
+                            <img src="{{ $calzado->imagen_url }}" class="card-img-top" alt="{{ $calzado->modelo->nombre }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $calzado->modelo->marca->nombre }}  {{ $calzado->modelo->nombre }}</h5>
+                                <p class="card-text">
+                                    <strong>Precio:</strong> ${{ $calzado->precio_unidad }} <br>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
     @endif
 </div>
 

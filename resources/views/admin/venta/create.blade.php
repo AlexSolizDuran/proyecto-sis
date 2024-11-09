@@ -81,7 +81,7 @@
             @foreach ($calzados as $calzado)
                 <tr>
                     <td>{{ $calzado->cod }}</td>
-                    <td>{{ $calzado->genero_completo }}</td>
+                    <td>{{ $calzado->getGeneroCompleto() }}</td>
                     <td>{{ $calzado->precio_unidad }}</td>
                     <td>{{ $calzado->cantidad_pares }}</td>
                     <td>{{ $calzado->modelo->nombre }}</td> <!-- Asumiendo relación con Modelo -->
@@ -124,6 +124,15 @@
                     <td>${{ number_format($item['calzado']->precio_unidad, 2) }}</td>
                     <td>{{ $item['cantidad'] }}</td>
                     <td>${{ number_format($item['calzado']->precio_unidad * $item['cantidad'], 2) }}</td>
+                    <td>
+                  
+                        <!-- Botón de eliminar -->
+                        <form action="{{ route('admin.venta.delCalzado', $item['calzado']->cod) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
                     </tr>
                     @php
                     $precioTotal += $item['calzado']->precio_unidad * $item['cantidad'];

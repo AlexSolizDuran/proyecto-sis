@@ -10,6 +10,8 @@ use App\Models\Talla;
 use App\Models\Material;
 use App\Models\Calzado;
 use App\Models\Bitacora;
+use App\Models\NotaVenta;
+use App\Models\RegistroVenta;
 use Illuminate\Http\Request;
 
 class ZapatoController extends Controller
@@ -17,6 +19,16 @@ class ZapatoController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function inicio(Request $request)
+    {
+        $calzados = Calzado::all();
+        
+        return view('welcome',compact('calzados'));
+    }
+    public function pedido()
+    {
+        return view('cliente.zapato.carro');
+    }
     public function index(Request $request)
     {
         $modelos = Modelo::all();
@@ -86,9 +98,6 @@ class ZapatoController extends Controller
                 'hora' => now()->format('H:i:s'), // Hora actual
             ]);
         }
-    
-        
-        
         return view ('cliente.zapato.show', compact('calzado'));
     }
 
@@ -114,5 +123,40 @@ class ZapatoController extends Controller
     public function destroy(Calzado $calzado)
     {
         //
+    }
+    public function añadir(Request $request)
+    {
+        $calzadoId = $request->cod;
+        $cantidad = $request->cantidad;
+        $calzado = Calzado::where('cod', $request->cod)->first();
+        $carro = session()->get('carro', []);
+        $carro[$calzadoId] = [
+            'calzado'=> $calzado,
+            'cantidad' => $cantidad,
+        ];
+        session()->put('carro', $carro);  
+        return redirect()->back()->with('success', 'Calzado agregado correctamente.');
+    }
+    public function quitar($calzadoCod)
+    {
+    // Recuperar el carro de la sesión
+        $carrito = session()->get('carro', []);
+        
+        // Eliminar el calzado específico del carrito
+        if (isset($carrito[$calzadoCod])) {
+            unset($carrito[$calzadoCod]);
+        }
+
+        // Volver a guardar el carro actualizado en la sesión
+        session()->put('carro', $carrito);
+
+        // Redirigir a la misma página con un mensaje
+        return redirect()->back()->with('success', 'El calzado ha sido eliminado del carrito.');
+    }
+    
+    public function cancelar(){
+        // Eliminar el carrito de la sesión
+        session()->forget('carro');
+        return redirect()->back()->with('success', 'Carrito cancelado correctamente.');
     }
 }

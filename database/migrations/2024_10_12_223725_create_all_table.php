@@ -33,6 +33,7 @@ return new class extends Migration
             $table->date('fecha');  // Campo 'fecha' de tipo DATE
             $table->integer('monto_total');  // Campo 'monto_total' de tipo INT
             $table->integer('cantidad');  // Campo 'cantidad' de tipo INT
+            $table->tinyInteger('estado')->default(1);// Estado de la venta 1 cancelado, 2 por cancelar
             $table->integer('ci_cliente');  // Llave foránea a la tabla 'cliente'
             $table->string('cod_admin', 5);  // Llave foránea a la tabla 'administrador'
 
@@ -104,6 +105,7 @@ return new class extends Migration
             $table->char('genero');  // Campo 'genero' de tipo CHAR
             $table->decimal('precio_unidad', 5, 2)->nullable();  // Campo 'precio_unidad' de tipo DECIMAL
             $table->integer('cantidad_pares');  // Campo 'cantidad_pares' de tipo INT
+            $table->string('imagen')->nullable();  // Añadimos el campo para la imagen
             $table->integer('cod_modelo')->unsigned()->nullable();  // Llave foránea a la tabla 'modelo'
             $table->integer('cod_talla')->unsigned()->nullable();  // Llave foránea a la tabla 'talla'
             $table->integer('cod_material')->unsigned()->nullable();  // Llave foránea a la tabla 'material'

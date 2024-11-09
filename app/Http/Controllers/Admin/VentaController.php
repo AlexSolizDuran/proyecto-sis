@@ -50,8 +50,23 @@ class VentaController extends Controller
             'cantidad' => $cantidad,
         ];
         session()->put('carrito', $carrito);  
-        $calzados = Calzado::all();
-        return redirect()->route('admin.venta.create')->with('success', 'Calzado agregado correctamente.');
+        return redirect()->back()->with('success', 'Calzado agregado correctamente.');
+    }
+    public function delCalzado($calzadoCod)
+    {
+    // Recuperar el carro de la sesión
+        $carrito = session()->get('carrito', []);
+        
+        // Eliminar el calzado específico del carrito
+        if (isset($carrito[$calzadoCod])) {
+            unset($carrito[$calzadoCod]);
+        }
+
+        // Volver a guardar el carro actualizado en la sesión
+        session()->put('carrito', $carrito);
+
+        // Redirigir a la misma página con un mensaje
+        return redirect()->back()->with('success', 'El calzado ha sido eliminado del carrito.');
     }
     public function cancelarcarrito(){
         // Eliminar el carrito de la sesión
@@ -71,19 +86,13 @@ class VentaController extends Controller
      */
     public function create(Request $request)
     {
-    $carrito = session()->get('carrito', []);
-    $calzados = Calzado::all();
-    $modelos = Modelo::all();
-    $materiales = Material::all();
-    $tallas = Talla::all();
-    return view('admin.venta.create', [
-        'carrito' => $carrito,
-        'calzados' => $calzados,
-        'modelos' => $modelos,
-        'materiales' => $materiales,
-        'tallas' => $tallas
-    ]);
+        $calzados = Calzado::all();
+        $modelos = Modelo::all();
+        $materiales = Material::all();
+        $tallas = Talla::all();
+        return view('admin.venta.create', compact('calzados','modelos','materiales','tallas'));
     }
+
     public function store(Request $request)
     {
         $cliente = session()->get('ci_persona');
@@ -94,6 +103,7 @@ class VentaController extends Controller
             'fecha' => Carbon::now()->format('Y-m-d'), // Formato de fecha
             'monto_total' => 0,
             'cantidad' => 0,
+            'estado' => 0, // sin cancelar
             'cod_admin' => Auth::user()->administrador->cod,
         ]);
         $nro_venta = DB::getPdo()->lastInsertId();
@@ -109,7 +119,7 @@ class VentaController extends Controller
         session()->forget('ci_persona');
         session()->forget('carrito');
         session()->forget('persona');
-    return redirect()->route('admin.venta.index')->with('success', 'Venta realizada correctamente.');
+    return redirect()->route('admin.venta.show',$nro_venta)->with('success', 'Venta realizada correctamente.');
     }
 
     public function filtrar(Request $request)
@@ -140,6 +150,12 @@ class VentaController extends Controller
         $venta->load('registroventa');
 
         return view('admin.venta.show', compact('venta'));
+    }
+    public function pagado(string $id){
+        $nota_venta= NotaVenta::find($id);
+        $nota_venta->estado = '1';
+        $nota_venta->save();
+        return redirect()->back();
     }
 
     public function edit(string $id)

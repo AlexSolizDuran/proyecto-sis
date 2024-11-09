@@ -67,17 +67,24 @@ class CalzadoController extends Controller
     }
     public function store(Request $request)
     {
-        
         $request->validate([
         'genero' => 'required|string',
         'cod_modelo' => 'required|integer',
         'cod_talla' => 'required|integer',
         'cod_material' => 'required|integer',
         ]);
-
+        $path = null;
+        if ($request->hasFile('imagen')) {
+            // Guardar la imagen en el almacenamiento público
+            $path = $request->file('imagen')->store('images/calzados', 'public');
+            // Se agrega la ruta al request
+        }
+        
+        
         Calzado::create(array_merge(
             $request->all(),
             [
+                'imagen'=> $path,
                 'cantidad_pares' => 0,
                 'precio_unidad' => 0,
             ]
@@ -97,6 +104,7 @@ class CalzadoController extends Controller
                 ]);
             }
         }
+        
         
         if ($request->input('from_modal')) {
             return redirect()->back()->with('success', 'Producto creado exitosamente.');
@@ -127,6 +135,7 @@ class CalzadoController extends Controller
             'genero' => 'required|string',
             'precio_unidad' => 'required|numeric',
             'cantidad_pares' => 'required|numeric',
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'cod_modelo' => 'required',
             'cod_talla' => 'required',
             'cod_material' => 'required',

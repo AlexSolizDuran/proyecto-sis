@@ -13,7 +13,25 @@ class NotaVenta extends Model
     protected $primaryKey = 'nro';
     public $timestamps = false;
 
-    protected $fillable = ['fecha','monto_total','cantidad','ci_cliente','cod_admin',];
+    protected $fillable = [
+        'fecha',
+        'monto_total',
+        'cantidad',
+        'estado',
+        'ci_cliente',
+        'cod_admin'
+    ];
+    public function getEstado()
+    {
+        switch ($this->estado) {
+            case '1':
+                return 'CANCELADO';
+            case '0':
+                return 'PENDIENTE';
+            default:
+                return 'No definido';
+        }
+    }
 
     public function cliente (){
         return $this->belongsTo(Cliente::class, 'ci_cliente','ci_persona');
@@ -25,4 +43,5 @@ class NotaVenta extends Model
     {
         return $this->hasMany(RegistroVenta::class, 'nro_venta', 'nro');
     }
+
 }

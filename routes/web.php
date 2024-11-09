@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 //inicio para todos
-Route::get('/', function(){
-    return view('welcome');
-})->name('inicio');
+Route::get('/', [ZapatoController::class, 'inicio'])->name('inicio');
+
+
 
 //inicio para el admin
 Route::get('/admin',function(){
@@ -31,8 +31,15 @@ Route::get('/admin',function(){
 })->middleware('can:admin.inicio')->name('admin.inicio');
 
 // vista de clientes
+Route::post('zapato/añadir-zapato', [ZapatoController::class, 'añadir'])->name('cliente.zapato.add');
+Route::delete('zapato/quitar-zapato/{calzadoCod}', [ZapatoController::class, 'quitar'])->name('cliente.zapato.quitar');
+Route::get('zapato/pedido',[ZapatoController::class,'pedido'])->name('zapato.pedido');
+Route::post('zapato/cancelar', [ZapatoController::class, 'cancelar'])->name('cliente.zapato.cancelar');
+
 Route::resource('zapato',ZapatoController::class)->names('cliente.zapato');
+
 Route::resource('cuenta',CuentaController::class)->names('cliente.cuenta');
+
 
 //bitacora
 Route::resource('bitacora',BitacoraController::class)->only(['index','destroy'])->names('admin.bitacora');
@@ -44,10 +51,13 @@ Route::resource('compra',CompraController::class)->names('admin.compra');
 Route::resource('cliente',ClienteController::class)->names('admin.cliente');
 //gestionar venta
 Route::resource('venta',VentaController::class)->names('admin.venta');
+Route::get('venta/sin-cancelar/{nro}', [VentaController::class, 'pagado'])->name('venta.sinCancelar');
+
 
 //realizacion de venta
 Route::post('venta/buscar-cliente', [VentaController::class, 'buscarCliente'])->name('admin.venta.buscarCliente');
 Route::post('venta/agregar-calzado', [VentaController::class, 'addCalzado'])->name('admin.venta.addCalzado');
+Route::delete('venta/quitar-calzado/{calzadoCod}', [VentaController::class, 'delCalzado'])->name('admin.venta.delCalzado');
 Route::post('venta/cancelar-carrito', [VentaController::class, 'cancelarCarrito'])->name('admin.venta.cancelar');
 Route::get('/admin/venta/filtrar', [VentaController::class, 'filtrar'])->name('admin.venta.filtrar');
 //realizacion de lote

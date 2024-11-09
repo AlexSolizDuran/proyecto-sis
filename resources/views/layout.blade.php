@@ -21,17 +21,22 @@
 
         @guest
         @if (Route::has('login'))
-            <div class="top-right-link d-flex justify-content-end align-items-center gap-2">
-            <a href="{{ route('login') }}" class="btn btn-outline-primary btn-sm px-4 rounded-pill">
-                {{ __('Login') }}
-                </a>
-                <a href="{{ route('register') }}" class="btn btn-primary btn-sm px-4 rounded-pill">
-                {{ __('Register') }}
-                </a>
+        <div class="d-flex flex-column" style="position: absolute; top: 10px; right: 10px;">
+            <div class="dropdown mb-2">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
+                    Cuenta
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
+                    <li><a class="dropdown-item" href="{{ route('login') }}">Iniciar seccion</a><li>
+                    <li><a class="dropdown-item" href="{{ route('register') }}">Registrarse</a></li>
+                </ul>
             </div>
+        </div>    
+       
         @endif
 
         @else
+        
         @if(Auth::user()->can('admin.inicio')) <!-- Verificación del permiso -->
             <!-- Contenedor para los botones desplegables en fila -->
             <div class="d-flex flex-column" style="position: absolute; top: 10px; left: 10px;">
@@ -93,6 +98,7 @@
         @endif
 
             <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
+                
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="adminDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ Auth::user()->nombre }} {{ Auth::user()->apellido }}
                 </button>
@@ -120,10 +126,9 @@
         @endguest
     </nav>
 
-    <div class="content" style="margin-top: 50px;"> <!-- Ajusta el margen superior según sea necesario -->
+    <div class="content" style="margin-top: 100px; padding-bottom: 50px;">
         @yield('contenido')
     </div>
-
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

@@ -1,27 +1,15 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-*{
-    margin: 0;
-    padding: 0;
-}
-
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #ffffff; /* Color de fondo suave */
+    background-color: #f5f2f270; /* Color de fondo suave */
     
-}
-
-nav{
-    padding: 30px;
-    text-align: center;
 }
 h1 {
     text-align: center;
 }
 nav a{
     font-family: sans-serif;
-    color: #d1cbcbce;
     text-decoration: none;
 }
 .boton {
@@ -56,14 +44,7 @@ nav a{
 .centrar{
     text-align: center;
 }
-.formulario {
-    max-inline-size: 600px; /* Ancho máximo del formulario */
-    margin: 20px auto; /* Centrar el formulario */
-    padding: 20px; /* Espaciado interno */
-    border: 1px solid #dddddd; /* Borde ligero */
-    border-radius: 5px; /* Bordes redondeados */
-    background-color: #f9f9f9; /* Color de fondo */
-}
+
 
 .formulario label {
     display: block; /* Cada etiqueta en una nueva línea */
@@ -80,7 +61,7 @@ nav a{
 }
 
 .formulario button {
-    background-color: #007bff; /* Color de fondo del botón */
+    background-color: #0270e6; /* Color de fondo del botón */
     color: white; /* Color del texto */
     border: none; /* Sin borde */
     padding: 10px 15px; /* Espaciado interno */
@@ -110,14 +91,7 @@ nav a{
 }
 
 /* El enlace se ajusta al tamaño del nav */
-.full-header-nav a {
-    display: block; /* Asegura que el enlace sea un bloque completo */
-    inline-size: 100%;
-    block-size: 100%;
-    
-}
 
-/* La imagen ocupa todo el espacio disponible en el nav */
 
 
 .header-title {
@@ -127,7 +101,7 @@ nav a{
     transform: translate(-50%, -50%); /* Ajusta el centro del título */
     text-align: center; /* Centra el texto */
     font-size: 6vw; /* Ajusta el tamaño de la fuente en función del ancho de la ventana */
-    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.7); /* Sombra para mejorar la legibilidad */
+    text-shadow: 2px 2px 1px rgb(0, 0, 0); /* Sombra para mejorar la legibilidad */
     white-space: nowrap; /* Evita que el texto se divida en múltiples líneas */
 
 }
@@ -260,4 +234,97 @@ input[type="color"] {
     inline-size: 200px; /* Ajustar el ancho */
     block-size: 20px; /* Ajustar la altura */
     cursor: pointer; /* Cambiar el cursor al pasar por encima */
+}
+
+/* Estilos para la tarjeta */
+.calzado-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.calzado-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo de imagen para adaptarse a la tarjeta */
+.calzado-card img {
+    block-size: 250px;
+    object-fit: cover;
+}
+
+/* Botón personalizado */
+.ver-boton {
+    background-color: #17a2b8;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.ver-boton:hover {
+    background-color: #138496;
+    color: white;
+}
+
+.calzado-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.calzado-link:hover .calzado-card {
+    transform: translateY(-10px); /* Mantiene la animación de hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajusta el tamaño de la imagen y añade bordes */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Espacio entre los íconos y el texto */
+.card-text i {
+    margin-right: 8px;
+}
+
+/* Ajusta el ancho del campo de cantidad */
+#cantidad {
+    width: 70px;
+    text-align: center;
+}
+
+/* Añade efectos de hover en el botón de compra */
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+/* Contenedor para mantener los calzados en fila */
+.calzado-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 15px;
+}
+
+/* Estilo para cada tarjeta de calzado */
+.calzado-item {
+    min-width: 250px;
+    flex: 0 0 auto; /* Evita que se reduzca en tamaño */
+}
+
+/* Opcional: personalización de la barra de desplazamiento */
+.calzado-slider::-webkit-scrollbar {
+    height: 8px;
+}
+.calzado-slider::-webkit-scrollbar-thumb {
+    background-color: #007bff;
+    border-radius: 4px;
+}
+.calzado-slider::-webkit-scrollbar-track {
+    background: #f1f1f1;
 }

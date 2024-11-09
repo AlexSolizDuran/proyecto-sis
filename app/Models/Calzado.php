@@ -17,12 +17,13 @@ class Calzado extends Model
         'genero',
         'precio_unidad',
         'cantidad_pares',
+        'imagen',
         'cod_modelo',
         'cod_talla',
         'cod_material',
     ];
 
-    public function getGeneroCompletoAttribute()
+    public function getGeneroCompleto()
     {
         switch ($this->genero) {
             case 'm':
