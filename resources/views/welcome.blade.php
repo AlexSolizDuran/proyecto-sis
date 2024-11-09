@@ -8,7 +8,7 @@
             <div class="calzado-item d-inline-block" style="flex-shrink: 0; width: 220px;">
                 <a href="{{ route('cliente.zapato.show', $calzado->cod) }}" class="calzado-link">
                     <div class="card calzado-card" style="width: 100%; height: 320px;">
-                        <div class="card-img-container" style="height: 200px; overflow: hidden;">
+                        <div class="card-img-container" style="height: 100%; overflow: hidden;">
                             <img src="{{ asset('storage/' . $calzado->imagen) }}" alt="Imagen del Calzado" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;">
                         </div>
                         <div class="card-body p-4" style="height: calc(100% - 200px); padding: 10px 12px;">

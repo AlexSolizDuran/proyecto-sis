@@ -66,14 +66,18 @@
     <div class="container">
         <div class="row">
             @foreach ($calzados as $calzado)
-                <div class="col-md-4 mb-4">
-                    <a href="{{ route('cliente.zapato.show', $calzado->cod) }}" class="calzado-link"> <!-- Enlace al show -->
-                        <div class="card calzado-card">
-                            <img src="{{ $calzado->imagen_url }}" class="card-img-top" alt="{{ $calzado->modelo->nombre }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $calzado->modelo->marca->nombre }}  {{ $calzado->modelo->nombre }}</h5>
-                                <p class="card-text">
-                                    <strong>Precio:</strong> ${{ $calzado->precio_unidad }} <br>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"> <!-- Ajuste automático de columnas -->
+                    <a href="{{ route('cliente.zapato.show', $calzado->cod) }}" class="calzado-link">
+                        <div class="card calzado-card" style="height: 100%;">
+                            <div class="card-img-container" style="height: 200px; overflow: hidden;">
+                                <img src="{{ asset('storage/' . $calzado->imagen) }}" alt="Imagen del Calzado" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;">
+                            </div>
+                            <div class="card-body" style="padding: 10px;">
+                                <h5 class="card-title" style="font-size: 1rem; font-weight: bold; margin-bottom: 5px;">
+                                    {{ $calzado->modelo->marca->nombre }} {{ $calzado->modelo->nombre }}
+                                </h5>
+                                <p class="card-text" style="font-size: 0.9rem; margin-bottom: 0;">
+                                    <strong>Precio:</strong> ${{ $calzado->precio_unidad }}
                                 </p>
                             </div>
                         </div>

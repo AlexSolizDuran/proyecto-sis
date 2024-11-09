@@ -280,20 +280,20 @@ input[type="color"] {
 
 /* Ajusta el tamaño de la imagen y añade bordes */
 .img-fluid {
-    max-width: 100%;
-    height: auto;
+    max-inline-size: 100%;
+    block-size: auto;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Espacio entre los íconos y el texto */
 .card-text i {
-    margin-right: 8px;
+    margin-inline-end: 8px;
 }
 
 /* Ajusta el ancho del campo de cantidad */
 #cantidad {
-    width: 70px;
+    inline-size: 70px;
     text-align: center;
 }
 
@@ -308,18 +308,18 @@ input[type="color"] {
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
-    padding-bottom: 15px;
+    padding-block-end: 15px;
 }
 
 /* Estilo para cada tarjeta de calzado */
 .calzado-item {
-    min-width: 250px;
+    min-inline-size: 250px;
     flex: 0 0 auto; /* Evita que se reduzca en tamaño */
 }
 
 /* Opcional: personalización de la barra de desplazamiento */
 .calzado-slider::-webkit-scrollbar {
-    height: 8px;
+    block-size: 8px;
 }
 .calzado-slider::-webkit-scrollbar-thumb {
     background-color: #007bff;
@@ -328,3 +328,10 @@ input[type="color"] {
 .calzado-slider::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
+.calzado-slider {
+    gap: 15px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Ajuste de ancho en pantallas pequeñas */

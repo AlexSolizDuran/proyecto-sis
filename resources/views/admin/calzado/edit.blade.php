@@ -14,7 +14,7 @@
 <div class="container">
     <h1>Editar Calzado</h1>
 
-    <form action="{{ route('admin.calzado.update', $calzado) }}" method="POST" class="formulario">
+    <form action="{{ route('admin.calzado.update', $calzado) }}" method="POST" enctype="multipart/form-data" class="formulario">
         @csrf
         @method('PUT') <!-- Indica que es un método PUT para la actualización -->
         
@@ -98,6 +98,12 @@
                 <input type="hidden" name="selected_colors" id="selected_colors" value="{{ implode(',', $selected_colors) }}">
                 
             </div>
+        </div>
+        <div class="form-group">
+            <label for="imagen">Imagen Actual</label><br>
+            <img src="{{ asset('storage/' . $calzado->imagen) }}" alt="Imagen del Calzado" style="max-width: 150px;"><br>
+            <label for="imagen">Nueva Imagen</label>
+            <input type="file" name="imagen" id="imagen" class="form-control">
         </div>
 
         <button type="submit" class="btn btn-primary">Actualizar Calzado</button>

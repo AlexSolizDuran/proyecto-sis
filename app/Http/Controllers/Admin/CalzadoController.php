@@ -8,6 +8,7 @@ use App\Models\Modelo;
 use App\Models\Talla;
 use App\Models\Material;
 use App\Models\Color;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\LoteMercaderia;
 use App\Http\Controllers\Controller;
@@ -135,7 +136,6 @@ class CalzadoController extends Controller
             'genero' => 'required|string',
             'precio_unidad' => 'required|numeric',
             'cantidad_pares' => 'required|numeric',
-            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'cod_modelo' => 'required',
             'cod_talla' => 'required',
             'cod_material' => 'required',
@@ -143,6 +143,16 @@ class CalzadoController extends Controller
         $selectedColors = explode(',', $request->input('selected_colors'));
         $selectedColors = array_filter($selectedColors); // Esto elimina elementos vacíos
 
+        if ($request->hasFile('imagen')) {
+            // Eliminar la imagen antigua si existe
+            if ($calzado->imagen && Storage::exists($calzado->imagen)) {
+                Storage::delete($calzado->imagen);
+            }
+    
+            // Guardar la nueva imagen
+            $path = $request->file('imagen')->store('images/calzados', 'public');
+            $calzado->imagen = $path;
+        }
 
         $calzado->genero = $validatedData['genero']; // Almacenará como 'M', 'F' o 'U' automáticamente
         $calzado->precio_unidad = $validatedData['precio_unidad'];
@@ -162,6 +172,7 @@ class CalzadoController extends Controller
         return redirect()->route('admin.calzado.index')->with('success', 'Calzado actualizado con éxito.');
 
     }
+
     public function destroy(Calzado $calzado){
         $calzado->delete();
         return redirect()->route('admin.calzado.index')->with('success','Calzado eliminado con exito');
