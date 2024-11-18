@@ -29,8 +29,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="precio_unidad" class="form-label">Precio Unidad</label>
-            <input type="number" step="0.01" class="form-control" id="precio_unidad" name="precio_unidad" value="{{ $calzado->precio_unidad }}" required>
+            <label for="precio_venta" class="form-label">Precio Venta</label>
+            <input type="number" step="0.01" class="form-control" id="precio_venta" name="precio_venta" value="{{ $calzado->precio_venta }}" required>
         </div>
 
         <div class="mb-3">

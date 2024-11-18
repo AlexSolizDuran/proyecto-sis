@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cliente;
+namespace App\Http\Controllers\Admin\Venta;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -14,7 +14,7 @@ use App\Models\NotaVenta;
 use App\Models\RegistroVenta;
 use Illuminate\Http\Request;
 
-class ZapatoController extends Controller
+class CarritoController extends Controller
 {
     /**
      * Display a listing of the resource.

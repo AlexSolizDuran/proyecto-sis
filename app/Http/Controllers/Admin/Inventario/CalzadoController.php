@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Inventario;
 use App\Models\Calzado;
 
 use App\Models\Marca;
@@ -87,7 +87,8 @@ class CalzadoController extends Controller
             [
                 'imagen'=> $path,
                 'cantidad_pares' => 0,
-                'precio_unidad' => 0,
+                'precio_venta' => 0,
+                'costoPP' => 0,
             ]
         ));
         $colores = $request->selected_colors;
@@ -134,7 +135,7 @@ class CalzadoController extends Controller
 
         $validatedData = $request->validate([
             'genero' => 'required|string',
-            'precio_unidad' => 'required|numeric',
+            'precio_venta' => 'required|numeric',
             'cantidad_pares' => 'required|numeric',
             'cod_modelo' => 'required',
             'cod_talla' => 'required',
@@ -155,7 +156,7 @@ class CalzadoController extends Controller
         }
 
         $calzado->genero = $validatedData['genero']; // Almacenará como 'M', 'F' o 'U' automáticamente
-        $calzado->precio_unidad = $validatedData['precio_unidad'];
+        $calzado->precio_venta = $validatedData['precio_venta'];
         $calzado->cantidad_pares = $validatedData['cantidad_pares'];
         $calzado->cod_modelo = $validatedData['cod_modelo'];
         $calzado->cod_talla = $validatedData['cod_talla'];

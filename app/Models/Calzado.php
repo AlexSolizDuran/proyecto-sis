@@ -15,8 +15,9 @@ class Calzado extends Model
 
     protected $fillable = [ // Atributos que se pueden llenar masivamente
         'genero',
-        'precio_unidad',
+        'precio_venta',
         'cantidad_pares',
+        'costoPP',
         'imagen',
         'cod_modelo',
         'cod_talla',

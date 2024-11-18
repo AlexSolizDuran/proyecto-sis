@@ -87,8 +87,8 @@
                 @foreach ($calzados as $calzado)
                     <tr>
                         <td>{{ $calzado->modelo->marca->nombre }}</td>
-                        <td>{{ $calzado->genero_completo }}</td>
-                        <td>{{ $calzado->precio_unidad }} Bs</td>
+                        <td>{{ $calzado->getGeneroCompleto() }}</td>
+                        <td>{{ $calzado->precio_venta }} Bs</td>
                         <td>{{ $calzado->cantidad_pares }}</td>
                         <td>{{ $calzado->modelo->nombre }}</td> <!-- Asumiendo relación con Modelo -->
                         <td>{{ $calzado->material->nombre }}</td> <!-- Asumiendo relación con Material -->

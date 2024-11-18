@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Cliente;
 
 use App\Models\Cliente;
 use App\Models\Persona;

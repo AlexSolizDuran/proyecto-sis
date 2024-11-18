@@ -13,7 +13,7 @@ class RegistroLote extends Model
 
     protected $primaryKey = ['cod_calzado', 'cod_lote'];
     public $incrementing = false; 
-    protected $fillable = ['cod_calzado', 'cod_lote', 'cantidad', 'precio_compra'];
+    protected $fillable = ['cod_calzado', 'cod_lote', 'cantidad', 'costo_unitario'];
     public $timestamps = false;
 
     // Sobrescribe este método para que trabaje con clave compuesta

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Compra;
 use Carbon\Carbon;
 use App\Models\LoteMercaderia;
 use App\Models\RegistroLote;
@@ -77,8 +77,8 @@ class CompraController extends Controller
         DB::table('lote_mercaderia')->insert([
             'cantidad_total_pares' => $lote['cantidad_total'],
             'impuestos' => $lote['impuestos'],
-            'precio_compra' => $lote['precio_compra'],
-            'precio_logistica' => $lote['precio_logistica'],
+            'costo_compra' => $lote['costo_compra'],
+            'costo_logistica' => $lote['costo_logistica'],
             'fecha_compra'=> Carbon::now()->format('Y-m-d'),
             'cod_marca'=> $lote['marca']->cod,
         ]);
@@ -95,7 +95,7 @@ class CompraController extends Controller
                 'cod_calzado' => $item['calzado']->cod, // Usando el id de la nota de venta
                 'cod_lote' => $nro_lote,
                 'cantidad' => $item['cantidad'],
-                'precio_compra' => 0,
+                'costo_unitario' => 0,
             ]);
         }
         session()->forget('lote');
@@ -152,8 +152,8 @@ class CompraController extends Controller
             'proveedor' =>'required',
             'cantidad_total' => 'required',
             'impuestos' => 'required',
-            'precio_compra'=> 'required',
-            'precio_logistica'=> 'required',
+            'costo_compra'=> 'required',
+            'costo_logistica'=> 'required',
         ]);
 
         $pais = Pais::where('cod', $request->pais)->first();
@@ -166,8 +166,8 @@ class CompraController extends Controller
             'proveedor' => $request->proveedor,
             'cantidad_total' => $request->cantidad_total,
             'impuestos' => $request->impuestos,
-            'precio_compra' => $request->precio_compra,
-            'precio_logistica' => $request->precio_logistica,
+            'costo_compra' => $request->costo_compra,
+            'costo_logistica' => $request->costo_logistica,
         ];
         
         // Almacenar el arreglo en la sesión bajo la clave 'lote'

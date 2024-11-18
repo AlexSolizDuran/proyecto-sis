@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\CalzadoController;
-use App\Http\Controllers\Admin\CompraController;
-use App\Http\Controllers\Admin\ClienteController;
-use App\Http\Controllers\Admin\VentaController;
+use App\Http\Controllers\Admin\Inventario\CalzadoController;
+use App\Http\Controllers\Admin\Compra\CompraController;
+use App\Http\Controllers\Admin\Cliente\ClienteController;
+use App\Http\Controllers\Admin\Venta\VentaController;
 use App\Http\Controllers\Admin\BitacoraController;
 
 use App\Http\Controllers\Admin\Categoria\ColorController;
@@ -12,16 +12,18 @@ use App\Http\Controllers\Admin\Categoria\MarcaController;
 use App\Http\Controllers\Admin\Categoria\MaterialController;
 use App\Http\Controllers\Admin\Categoria\TallaController;
 use App\Http\Controllers\Admin\Categoria\ModeloController;
-use App\Http\Controllers\Admin\Categoria\PaisController;
+use App\Http\Controllers\Admin\Compra\PaisController;
 
-use App\Http\Controllers\Cliente\ZapatoController;
-use App\Http\Controllers\Cliente\CuentaController;
-use App\Models\Bitacora;
+use App\Http\Controllers\Admin\Venta\CarritoController;
+use App\Http\Controllers\CuentaController;
+
+use App\Http\Controllers\PayPalController;
+
 use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 //inicio para todos
-Route::get('/', [ZapatoController::class, 'inicio'])->name('inicio');
+Route::get('/', [CarritoController::class, 'inicio'])->name('inicio');
 
 
 
@@ -31,12 +33,12 @@ Route::get('/admin',function(){
 })->middleware('can:admin.inicio')->name('admin.inicio');
 
 // vista de clientes
-Route::post('zapato/añadir-zapato', [ZapatoController::class, 'añadir'])->name('cliente.zapato.add');
-Route::delete('zapato/quitar-zapato/{calzadoCod}', [ZapatoController::class, 'quitar'])->name('cliente.zapato.quitar');
-Route::get('zapato/pedido',[ZapatoController::class,'pedido'])->name('zapato.pedido');
-Route::post('zapato/cancelar', [ZapatoController::class, 'cancelar'])->name('cliente.zapato.cancelar');
+Route::post('zapato/añadir-zapato', [CarritoController::class, 'añadir'])->name('cliente.zapato.add');
+Route::delete('zapato/quitar-zapato/{calzadoCod}', [CarritoController::class, 'quitar'])->name('cliente.zapato.quitar');
+Route::get('zapato/pedido',[CarritoController::class,'pedido'])->name('zapato.pedido');
+Route::post('zapato/cancelar', [CarritoController::class, 'cancelar'])->name('cliente.zapato.cancelar');
 
-Route::resource('zapato',ZapatoController::class)->names('cliente.zapato');
+Route::resource('zapato',CarritoController::class)->names('cliente.zapato');
 
 Route::resource('cuenta',CuentaController::class)->names('cliente.cuenta');
 
@@ -78,3 +80,8 @@ Route::resource('pais',PaisController::class)->except(['create', 'edit', 'show']
 Route::get('/change-password', [CuentaController::class, 'showChangePasswordForm'])->name('password.change.form');
 Route::post('/change-password', [CuentaController::class, 'changePassword'])->name('password.change');
 
+//paypal
+//Route::post('/paypal/order', [PayPalController::class, 'createOrder'])->name('paypal.create');
+
+Route::get('/pay-with-paypal', [PayPalController::class, 'payWithPayPal'])->name('paypal.pay');
+Route::get('/paypal/success', [PayPalController::class, 'success'])->name('paypal.success');

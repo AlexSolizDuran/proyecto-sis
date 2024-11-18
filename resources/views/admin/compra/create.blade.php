@@ -51,12 +51,12 @@
                 <input type="number" step="0.01" class="form-control" id="impuestos" name="impuestos" required>
             </div>
             <div class="mb-3">
-                <label for="precio_compra" class="form-label">Precio de Compra</label>
-                <input type="number" class="form-control" id="precio_compra" name="precio_compra" required>
+                <label for="costo_compra" class="form-label">Costo de Compra</label>
+                <input type="number" class="form-control" id="costo_compra" name="costo_compra" required>
             </div>
             <div class="mb-3">
-                <label for="precio_logistica" class="form-label">Precio de logistica</label>
-                <input type="number" class="form-control" id="precio_logistica" name="precio_logistica" required>
+                <label for="costo_logistica" class="form-label">costo de logistica</label>
+                <input type="number" class="form-control" id="costo_logistica" name="costo_logistica" required>
 
             </div>
             <button type="submit" class="btn btn-primary">Siguiente</button>
@@ -128,7 +128,7 @@
             @foreach ($calzados as $calzado)
                 <tr>
                     <td>{{ $calzado->cod }}</td>
-                    <td>{{ $calzado->genero_completo }}</td>
+                    <td>{{ $calzado->getGeneroCompleto() }}</td>
                     <td>{{ $calzado->modelo->marca->nombre}}</td>
                     <td>{{ $calzado->cantidad_pares }}</td>
                     <td>{{ $calzado->modelo->nombre }}</td> <!-- Asumiendo relación con Modelo -->

@@ -11,8 +11,8 @@
             <!-- Aseguramos que en pantallas pequeñas ocupe toda la fila (col-12) y en pantallas medianas y mayores ocupe 6 columnas (col-md-6) -->
             <div class="col-12 col-md-6 col-lg-6 mb-4">
                 <div class="card shadow-sm h-100">
-                    <div class="card-img-container" style="width: 100%; height: 250px; overflow: hidden;">
-                        <img src="{{ asset('storage/'.$item['calzado']->imagen) }}" alt="Imagen del calzado" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;">
+                    <div class="card-img-container" style="inline-size: 100%; block-sizet: 250px; overflow: hidden;">
+                        <img src="{{ asset('storage/'.$item['calzado']->imagen) }}" alt="Imagen del calzado" class="img-fluid" style="object-fit: cover; inline-size: 100%: 100%; block-size: 100%;">
                     </div>
                     <div class="card-body p-4">
                         <h5 class="card-title mb-3" style="font-size: 1.2rem; font-weight: bold;">
@@ -48,10 +48,7 @@
             @csrf
             <button type="submit" class="btn btn-danger btn-lg px-4 py-2">Cancelar carro</button>
         </form>
-        <form action="" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-success btn-lg px-4 py-2">Enviar carro</button>
-        </form>
+        <a href="{{ route('paypal.pay') }}" class="btn btn-primary">Pagar con PayPal</a>
     </div>
 </div>
 

@@ -74,10 +74,10 @@ return new class extends Migration
         Schema::create('lote_mercaderia', function (Blueprint $table) {
             $table->increments('cod');  // Campo 'cod' como clave primaria
             $table->integer('cantidad_total_pares');  // Cantidad total de pares
-            $table->double('impuestos');  // Campo 'impuestos' de tipo REAL
-            $table->double('precio_compra');  // Precio de compra
+            $table->double('impuestos'); // Campo 'impuestos' de tipo REAL
+            $table->double('costo_compra');  // Precio de compra
             $table->date('fecha_compra');  // Fecha de compra
-            $table->double('precio_logistica');  // Precio de logística
+            $table->double('costo_logistica');  // Precio de logística
             $table->integer('cod_marca')->unsigned();  // Llave foránea a la tabla 'marca'
 
             // Definimos la llave foránea con restricciones en cascada
@@ -103,8 +103,9 @@ return new class extends Migration
         Schema::create('calzado', function (Blueprint $table) {
             $table->increments('cod');  // Clave primaria auto-incremental
             $table->char('genero');  // Campo 'genero' de tipo CHAR
-            $table->decimal('precio_unidad', 5, 2)->nullable();  // Campo 'precio_unidad' de tipo DECIMAL
+            $table->decimal('precio_venta', 5, 2)->nullable();  // Campo 'precio_unidad' de tipo DECIMAL
             $table->integer('cantidad_pares');  // Campo 'cantidad_pares' de tipo INT
+            $table->decimal('costoPP'); // costo promedio ponderado
             $table->string('imagen')->nullable();  // Añadimos el campo para la imagen
             $table->integer('cod_modelo')->unsigned()->nullable();  // Llave foránea a la tabla 'modelo'
             $table->integer('cod_talla')->unsigned()->nullable();  // Llave foránea a la tabla 'talla'
@@ -133,7 +134,7 @@ return new class extends Migration
             $table->integer('cod_calzado')->unsigned();  // Llave foránea a la tabla 'calzado'
             $table->integer('cod_lote')->unsigned();     // Llave foránea a la tabla 'lote_mercaderia'
             $table->integer('cantidad');                  // Cantidad asociada con el lote
-            $table->decimal('precio_compra');
+            $table->decimal('costo_unitario');
             // Definir la clave primaria compuesta
             $table->primary(['cod_calzado', 'cod_lote']);
 

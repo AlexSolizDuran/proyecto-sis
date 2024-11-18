@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Categoria;
+namespace App\Http\Controllers\Admin\Compra;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pais;

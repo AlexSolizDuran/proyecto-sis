@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Venta;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 

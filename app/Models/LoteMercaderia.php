@@ -16,9 +16,9 @@ class LoteMercaderia extends Model
         'cod',
         'cantidad_total_pares',
         'impuestos',
-        'precio_compra',
+        'costo_compra',
         'fecha_compra',
-        'precio_logistica',
+        'costo_logistica',
         'cod_marca',
     ];
 

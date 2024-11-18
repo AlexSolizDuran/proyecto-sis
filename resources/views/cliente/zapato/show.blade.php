@@ -23,7 +23,7 @@
                             <p class="card-text"><i class="bi bi-gender-ambiguous"></i> <strong>Género:</strong> {{ $calzado->getGeneroCompleto() }}</p>
                         </div>
                         <div class="col-md-6 mb-4 fs-5">
-                            <p class="card-text"><i class="bi bi-cash"></i> <strong>Precio:</strong> ${{ $calzado->precio_unidad }} USD</p>
+                            <p class="card-text"><i class="bi bi-cash"></i> <strong>Precio:</strong> {{ $calzado->precio_venta }} Bs</p>
                         </div>
                         <div class="col-md-6 mb-4 fs-5">
                             <p class="card-text"><i class="bi bi-rulers"></i> <strong>Talla:</strong> {{ $calzado->talla->numero }}</p>

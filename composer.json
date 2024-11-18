@@ -9,6 +9,8 @@
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",
+        "paypal/paypal-checkout-sdk": "^1.0",
+        "paypal/rest-api-sdk-php": "^1.6",
         "spatie/laravel-permission": "^6.9"
     },
     "require-dev": {

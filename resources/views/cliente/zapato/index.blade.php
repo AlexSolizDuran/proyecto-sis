@@ -77,7 +77,7 @@
                                     {{ $calzado->modelo->marca->nombre }} {{ $calzado->modelo->nombre }}
                                 </h5>
                                 <p class="card-text" style="font-size: 0.9rem; margin-bottom: 0;">
-                                    <strong>Precio:</strong> ${{ $calzado->precio_unidad }}
+                                    <strong>Precio:</strong> ${{ $calzado->precio_venta }}
                                 </p>
                             </div>
                         </div>

@@ -18,7 +18,7 @@ return new class extends Migration
             on lote_mercaderia
             for each row
             BEGIN
-	            set New.impuestos = New.precio_compra * (New.impuestos/100);
+	            set New.impuestos = New.costo_compra * (New.impuestos/100);
             END
         ");
 
@@ -80,14 +80,44 @@ return new class extends Migration
         begin
 	    declare cant int;
         declare imp, prec, precl real;
-        select cantidad_total_pares, impuestos, precio_compra, precio_logistica into
+        select cantidad_total_pares, impuestos, costo_compra, costo_logistica into
         cant, imp, prec, precl
         from lote_mercaderia
         where cod = new.cod_lote;
     
-	        set new.precio_compra = (imp + prec + precl) / cant;
+	        set new.costo_unitario = (imp + prec + precl) / cant;
         end
         ");
+
+        DB::statement("
+        create TRIGGER actualizar_monto_y_cantidad 
+        AFTER INSERT
+        ON registro_venta
+        FOR EACH ROW
+        BEGIN
+            -- Actualizar el monto_total sumando el precio de venta del registro
+            declare sumaT, cant int;
+            set sumaT = New.cantidad * New.precio_venta;
+            set cant = (select sum(cantidad) from registro_venta where nro_venta = New.nro_venta);
+            
+            UPDATE nota_venta
+            SET monto_total = monto_total + sumaT, cantidad = cant
+            WHERE nro = NEW.nro_venta;
+            
+        END");
+
+        DB::statement("
+        create trigger DescontarAlVender
+        after insert
+        on registro_venta
+        for each row
+        begin
+            declare cant int;
+            set cant = New.cantidad;
+            update calzado
+            set cantidad_pares = (select cantidad_pares from calzado where cod = New.cod_calzado) - cant
+            where cod = New.cod_calzado;
+        end");
     }
 
     /**
@@ -99,5 +129,10 @@ return new class extends Migration
         DB::statement("DROP TRIGGER IF EXISTS SumarCalzadosCantidad");
         DB::statement("DROP TRIGGER IF EXISTS RestarCalzadosCantidad");
         DB::statement("DROP TRIGGER IF EXISTS precio");
+        DB::statement("DROP TRIGGER IF EXISTS actualizar_monto_y_cantidad");
+        DB::statement("DROP TRIGGER IF EXISTS DescontarAlVender");
+
+
+
     }
 };
