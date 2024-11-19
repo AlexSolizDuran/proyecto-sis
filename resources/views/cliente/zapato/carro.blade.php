@@ -48,12 +48,103 @@
             @csrf
             <button type="submit" class="btn btn-danger btn-lg px-4 py-2">Cancelar carro</button>
         </form>
-        <a href="{{ route('paypal.pay') }}" class="btn btn-primary">Pagar con PayPal</a>
+        <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#crearclienteModal">Pagar</button>
     </div>
 </div>
 
 @else
     <p class="text-center">No hay calzados en el carro.</p>
 @endif
+    
+<div class="modal fade" id="crearclienteModal" tabindex="-1" aria-labelledby="crearclienteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearclienteModalLabel">Pago</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="crearclienteForm" method="POST" action="{{ route('cliente.zapato.store') }}">
+                @csrf
+                <div class="modal-body">
+                    <!-- Campo CI -->
+                    <div class="mb-3">
+                        <label for="crear_cliente_ci" class="form-label">CI</label>
+                        <input 
+                            type="number" 
+                            class="form-control" 
+                            id="crear_cliente_ci" 
+                            name="ci" 
+                            value="{{ auth()->check() ? auth()->user()->ci : '' }}" 
+                            required>
+                    </div>
+            
+                    <!-- Campo Nombre -->
+                    <div class="mb-3">
+                        <label for="crear_cliente_nombre" class="form-label">Nombre</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="crear_cliente_nombre" 
+                            name="nombre" 
+                            value="{{ auth()->check() ? auth()->user()->nombre : '' }}" 
+                            required>
+                    </div>
+            
+                    <!-- Campo Apellido -->
+                    <div class="mb-3">
+                        <label for="crear_cliente_apellido" class="form-label">Apellido</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="crear_cliente_apellido" 
+                            name="apellido" 
+                            value="{{ auth()->check() ? auth()->user()->apellido : '' }}" 
+                            required>
+                    </div>
+            
+                    <!-- Campo Email -->
+                    <div class="mb-3">
+                        <label for="crear_cliente_email" class="form-label">Email</label>
+                        <input 
+                            type="email" 
+                            class="form-control" 
+                            id="crear_cliente_email" 
+                            name="email" 
+                            value="{{ auth()->check() ? auth()->user()->email : '' }}" 
+                            required>
+                    </div>
+            
+                    <!-- Campo Dirección -->
+                    <div class="mb-3">
+                        <label for="crear_cliente_direccion" class="form-label">Dirección</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="crear_cliente_direccion" 
+                            name="direccion" 
+                            value="{{ auth()->check() ? auth()->user()->direccion : '' }}" 
+                            required>
+                    </div>
+            
+                    <!-- Campo Celular -->
+                    <div class="mb-3">
+                        <label for="crear_cliente_cel" class="form-label">Celular</label>
+                        <input 
+                            type="number" 
+                            class="form-control" 
+                            id="crear_cliente_cel" 
+                            name="cel" 
+                            value="{{ auth()->check() ? auth()->user()->cel : '' }}" 
+                            required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">paypal</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
     
 @endsection

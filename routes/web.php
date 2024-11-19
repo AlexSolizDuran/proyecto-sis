@@ -26,7 +26,6 @@ Auth::routes();
 Route::get('/', [CarritoController::class, 'inicio'])->name('inicio');
 
 
-
 //inicio para el admin
 Route::get('/admin',function(){
     return view ('admin.inicio');
@@ -36,6 +35,7 @@ Route::get('/admin',function(){
 Route::post('zapato/añadir-zapato', [CarritoController::class, 'añadir'])->name('cliente.zapato.add');
 Route::delete('zapato/quitar-zapato/{calzadoCod}', [CarritoController::class, 'quitar'])->name('cliente.zapato.quitar');
 Route::get('zapato/pedido',[CarritoController::class,'pedido'])->name('zapato.pedido');
+
 Route::post('zapato/cancelar', [CarritoController::class, 'cancelar'])->name('cliente.zapato.cancelar');
 
 Route::resource('zapato',CarritoController::class)->names('cliente.zapato');
@@ -53,6 +53,7 @@ Route::resource('compra',CompraController::class)->names('admin.compra');
 Route::resource('cliente',ClienteController::class)->names('admin.cliente');
 //gestionar venta
 Route::resource('venta',VentaController::class)->names('admin.venta');
+
 Route::get('venta/sin-cancelar/{nro}', [VentaController::class, 'pagado'])->name('venta.sinCancelar');
 
 
@@ -81,7 +82,7 @@ Route::get('/change-password', [CuentaController::class, 'showChangePasswordForm
 Route::post('/change-password', [CuentaController::class, 'changePassword'])->name('password.change');
 
 //paypal
-//Route::post('/paypal/order', [PayPalController::class, 'createOrder'])->name('paypal.create');
+
 
 Route::get('/pay-with-paypal', [PayPalController::class, 'payWithPayPal'])->name('paypal.pay');
 Route::get('/paypal/success', [PayPalController::class, 'success'])->name('paypal.success');

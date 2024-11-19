@@ -68,7 +68,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
                         <li><a class="dropdown-item" href="{{ route('admin.venta.create') }}">Agregar Nota Venta</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.venta.index') }}">Lista Nota Venta</a></li>
-                        <li><a class="dropdown-item" href="#">Gestionar Descuento</a></li>
+                        <li><a class="dropdown-item" href="{{ route ('zapato.pedido')}}">Gestionar Carrito</a></li>
                     </ul>
                 </div>
             

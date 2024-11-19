@@ -118,5 +118,140 @@ class TablaSeeder extends Seeder
         foreach ($paises as $pais) {
             DB::table('pais')->insert($pais);
         }
+
+        $lote_mercaderia = [
+            ['cantidad_total_pares' => 120, 'impuestos' => 30, 'costo_compra' => 7692, 'fecha_compra' => '2024-01-21' , 'costo_logistica' => 600, 'cod_marca' => 1],
+            ['cantidad_total_pares' => 120, 'impuestos' => 30, 'costo_compra' => 11064, 'fecha_compra' => '2024-03-13' , 'costo_logistica' => 700, 'cod_marca' => 5],
+            ['cantidad_total_pares' => 60, 'impuestos' => 30, 'costo_compra' => 7735, 'fecha_compra' => '2024-04-01' , 'costo_logistica' => 400, 'cod_marca' => 2],
+        ];
+        
+        foreach ($lote_mercaderia as $inventario){
+            DB::table('lote_mercaderia')->insert($inventario);
+        }
+
+        //compra prov
+        $compraPrv = [
+            ['cod_lote' => 1,'cod_pais' => 'P0Pu','NIT' => 6947187013,'nombre' => 'F. R. import'],
+            ['cod_lote' => 2,'cod_pais' => 'P0Br','NIT' => 4985780017,'nombre' => 'JS_ABYSH'],
+            ['cod_lote' => 3,'cod_pais' => 'P0Ch','NIT' => 3455323187,'nombre' => 'CH - import']
+        ];
+
+        foreach ($compraPrv as $comPv){
+            DB::table('compra_prov')->insert($comPv);
+        }
+
+        //calzado
+        $calzados = [
+            ['genero' => 'm','precio_venta' => 150 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 3,'cod_talla' =>16,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 150 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 3,'cod_talla' =>17,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 150 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 3,'cod_talla' =>18,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 150 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 3,'cod_talla' =>19,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 150 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 3,'cod_talla' =>20,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 150 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 3,'cod_talla' =>21,'cod_material' =>222],
+            ['genero' => 'f','precio_venta' => 150 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 3,'cod_talla' =>16,'cod_material' =>222],
+            ['genero' => 'f','precio_venta' => 150 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 3,'cod_talla' =>17,'cod_material' =>222],
+            ['genero' => 'f','precio_venta' => 150 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 3,'cod_talla' =>18,'cod_material' =>222],
+            ['genero' => 'f','precio_venta' => 150 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 3,'cod_talla' =>19,'cod_material' =>222],
+            ['genero' => 'f','precio_venta' => 150 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 3,'cod_talla' =>20,'cod_material' =>222],
+            ['genero' => 'f','precio_venta' => 150 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 3,'cod_talla' =>21,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 170 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 1,'cod_talla' =>22,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 170 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 1,'cod_talla' =>23,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 170 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 1,'cod_talla' =>24,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 170 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 1,'cod_talla' =>25,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 170 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 1,'cod_talla' =>26,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 170 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 1,'cod_talla' =>27,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 170 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 1,'cod_talla' =>27,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 170 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 1,'cod_talla' =>22,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 170 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 1,'cod_talla' =>23,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 170 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 1,'cod_talla' =>24,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 170 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 1,'cod_talla' =>25,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 170 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 1,'cod_talla' =>26,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 170 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 1,'cod_talla' =>27,'cod_material' =>222],
+            ['genero' => 'm','precio_venta' => 200 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 13,'cod_talla' =>21,'cod_material' =>444],
+            ['genero' => 'm','precio_venta' => 200 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 13,'cod_talla' =>22,'cod_material' =>444],
+            ['genero' => 'm','precio_venta' => 200 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 13,'cod_talla' =>23,'cod_material' =>444],
+            ['genero' => 'm','precio_venta' => 200 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 13,'cod_talla' =>24,'cod_material' =>444],
+            ['genero' => 'm','precio_venta' => 200 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 13,'cod_talla' =>25,'cod_material' =>444],
+            ['genero' => 'm','precio_venta' => 200 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 13,'cod_talla' =>26,'cod_material' =>444],
+            ['genero' => 'u','precio_venta' => 250 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 5,'cod_talla' =>15,'cod_material' =>222],
+            ['genero' => 'u','precio_venta' => 250 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 5,'cod_talla' =>16,'cod_material' =>222],
+            ['genero' => 'u','precio_venta' => 250 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 5,'cod_talla' =>17,'cod_material' =>222],
+            ['genero' => 'u','precio_venta' => 250 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 5,'cod_talla' =>18,'cod_material' =>222],
+            ['genero' => 'u','precio_venta' => 250 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 5,'cod_talla' =>19,'cod_material' =>222],
+            ['genero' => 'u','precio_venta' => 250 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 5,'cod_talla' =>20,'cod_material' =>222],
+            ['genero' => 'u','precio_venta' => 250 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 4,'cod_talla' =>15,'cod_material' =>222],
+            ['genero' => 'u','precio_venta' => 250 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 4,'cod_talla' =>16,'cod_material' =>222],
+            ['genero' => 'u','precio_venta' => 250 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 4,'cod_talla' =>17,'cod_material' =>222],
+            ['genero' => 'u','precio_venta' => 250 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 4,'cod_talla' =>18,'cod_material' =>222],
+            ['genero' => 'u','precio_venta' => 250 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 4,'cod_talla' =>19,'cod_material' =>222],
+            ['genero' => 'u','precio_venta' => 250 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 4,'cod_talla' =>20,'cod_material' =>222],
+            ['genero' => 'u','precio_venta' => 260 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 6,'cod_talla' =>21,'cod_material' =>444],
+            ['genero' => 'u','precio_venta' => 260 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 6,'cod_talla' =>22,'cod_material' =>444],
+            ['genero' => 'u','precio_venta' => 260 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 6,'cod_talla' =>23,'cod_material' =>444],
+            ['genero' => 'u','precio_venta' => 260 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 6,'cod_talla' =>24,'cod_material' =>444],
+            ['genero' => 'u','precio_venta' => 260 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 6,'cod_talla' =>25,'cod_material' =>444],
+            ['genero' => 'u','precio_venta' => 260 ,'cantidad_pares' => 0,'costoPP' => 0,'imagen' => null,'cod_modelo' => 6,'cod_talla' =>26,'cod_material' =>444],
+        ];
+
+        foreach ($calzados as $calzado){
+            DB::table('calzado')->insert($calzado);
+        }
+
+        //registro_lote
+        $registro_lote = [
+            ['cod_calzado' => 1,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 2,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 3,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 4,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 5,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 6,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 7,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 8,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 9,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 10,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 11,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 12,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 13,'cod_lote' => 1,'cantidad' => 8,'costo_unitario' => 0],
+            ['cod_calzado' => 14,'cod_lote' => 1,'cantidad' => 8,'costo_unitario' => 0],
+            ['cod_calzado' => 15,'cod_lote' => 1,'cantidad' => 8,'costo_unitario' => 0],
+            ['cod_calzado' => 16,'cod_lote' => 1,'cantidad' => 8,'costo_unitario' => 0],
+            ['cod_calzado' => 17,'cod_lote' => 1,'cantidad' => 8,'costo_unitario' => 0],
+            ['cod_calzado' => 18,'cod_lote' => 1,'cantidad' => 8,'costo_unitario' => 0],
+            ['cod_calzado' => 19,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 20,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 21,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 22,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 23,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 24,'cod_lote' => 1,'cantidad' => 4,'costo_unitario' => 0],
+            ['cod_calzado' => 25,'cod_lote' => 2,'cantidad' => 20,'costo_unitario' => 0],
+            ['cod_calzado' => 26,'cod_lote' => 2,'cantidad' => 20,'costo_unitario' => 0],
+            ['cod_calzado' => 27,'cod_lote' => 2,'cantidad' => 20,'costo_unitario' => 0],
+            ['cod_calzado' => 28,'cod_lote' => 2,'cantidad' => 20,'costo_unitario' => 0],
+            ['cod_calzado' => 29,'cod_lote' => 2,'cantidad' => 20,'costo_unitario' => 0],
+            ['cod_calzado' => 30,'cod_lote' => 2,'cantidad' => 20,'costo_unitario' => 0],
+            ['cod_calzado' => 31,'cod_lote' => 3,'cantidad' => 2,'costo_unitario' => 0],
+            ['cod_calzado' => 32,'cod_lote' => 3,'cantidad' => 2,'costo_unitario' => 0],
+            ['cod_calzado' => 33,'cod_lote' => 3,'cantidad' => 2,'costo_unitario' => 0],
+            ['cod_calzado' => 34,'cod_lote' => 3,'cantidad' => 2,'costo_unitario' => 0],
+            ['cod_calzado' => 35,'cod_lote' => 3,'cantidad' => 2,'costo_unitario' => 0],
+            ['cod_calzado' => 36,'cod_lote' => 3,'cantidad' => 2,'costo_unitario' => 0],
+            ['cod_calzado' => 37,'cod_lote' => 3,'cantidad' => 2,'costo_unitario' => 0],
+            ['cod_calzado' => 38,'cod_lote' => 3,'cantidad' => 2,'costo_unitario' => 0],
+            ['cod_calzado' => 39,'cod_lote' => 3,'cantidad' => 2,'costo_unitario' => 0],
+            ['cod_calzado' => 40,'cod_lote' => 3,'cantidad' => 2,'costo_unitario' => 0],
+            ['cod_calzado' => 41,'cod_lote' => 3,'cantidad' => 2,'costo_unitario' => 0],
+            ['cod_calzado' => 42,'cod_lote' => 3,'cantidad' => 2,'costo_unitario' => 0],
+            ['cod_calzado' => 43,'cod_lote' => 3,'cantidad' => 6,'costo_unitario' => 0],
+            ['cod_calzado' => 44,'cod_lote' => 3,'cantidad' => 6,'costo_unitario' => 0],
+            ['cod_calzado' => 45,'cod_lote' => 3,'cantidad' => 6,'costo_unitario' => 0],
+            ['cod_calzado' => 46,'cod_lote' => 3,'cantidad' => 6,'costo_unitario' => 0],
+            ['cod_calzado' => 47,'cod_lote' => 3,'cantidad' => 6,'costo_unitario' => 0],
+            ['cod_calzado' => 48,'cod_lote' => 3,'cantidad' => 6,'costo_unitario' => 0],
+        ];
+
+        foreach ($registro_lote as $registro){
+            DB::table('registro_lote')->insert($registro);
+        }
+
     }
 }

@@ -11,6 +11,11 @@
 
         <div class="card-body p-5">
             <div class="row">
+                <!-- Imagen del calzado -->
+                <div class="col-md-6 mb-4 text-center">
+                    <img src="{{ asset('storage/'.$calzado->imagen) }}" alt="Imagen del Calzado" class="img-fluid rounded-3 shadow-lg">
+                </div>
+
                 <div class="col-md-6 mb-4 fs-5">
                     <p class="card-text"><i class="bi bi-upc-scan"></i> <strong>Código:</strong> {{ $calzado->cod }}</p>
                     <hr>
@@ -52,4 +57,5 @@
         <a href="{{ route('admin.calzado.index') }}" class="btn btn-outline-primary btn-lg px-4 py-2 rounded-pill">Volver a la lista</a>
     </div>
 </div>
+
 @endsection

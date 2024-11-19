@@ -4,15 +4,21 @@ namespace App\Http\Controllers\Admin\Venta;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+
 use App\Models\Marca;
 use App\Models\Modelo;
 use App\Models\Talla;
 use App\Models\Material;
 use App\Models\Calzado;
 use App\Models\Bitacora;
+use App\Models\Cliente;
+use App\Models\Persona;
+use App\Models\Administrador;
 use App\Models\NotaVenta;
 use App\Models\RegistroVenta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CarritoController extends Controller
 {
@@ -21,7 +27,7 @@ class CarritoController extends Controller
      */
     public function inicio(Request $request)
     {
-        $calzados = Calzado::all();
+        $calzados = Calzado::inRandomOrder()->take(10)->get();
         
         return view('welcome',compact('calzados'));
     }
@@ -76,7 +82,76 @@ class CarritoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'ci' => 'required|integer',
+            'nombre' => 'required|string|max:30',
+            'apellido' => 'required|string|max:30',
+            'email' => 'required|email|max:255',
+            'direccion' => 'required|string|max:60',
+            'cel' => 'required|integer',
+        ]);
+    
+        // Verificar si el cliente ya existe por su CI
+        $cliente = Cliente::where('ci_persona', $validated['ci'])->first();
+    
+        if (!$cliente) {
+            // Si no existe, crear un nuevo cliente
+            $cliente = Persona::create([
+                'ci' => $validated['ci'],
+                'nombre' => $validated['nombre'],
+                'apellido' => $validated['apellido'],
+                'email' => $validated['email'],
+                'direccion' => $validated['direccion'],
+                'cel' => $validated['cel'],
+            ]);
+            Cliente::create([
+                'ci_persona'=> $validated['ci']
+            ]);
+        }
+
+        $carro = session()->get('carro', []);
+        $nro_venta = DB::table('nota_venta')->insert([
+            'ci_cliente' => $request->ci,
+            'fecha' => Carbon::now()->format('Y-m-d'), // Formato de fecha
+            'monto_total' => 0,
+            'cantidad' => 0,
+            'estado' => 0, // sin cancelar
+            'cod_admin' => 'AD-1',
+        ]);
+        foreach ($carro as $item) {
+            DB::table('registro_venta')->insert([
+                'nro_venta' => $nro_venta, // Usando el id de la nota de venta
+                'cod_calzado' => $item['calzado']->cod,
+                'cantidad' => $item['cantidad'],
+                'precio_venta' => $item['calzado']->precio_venta,
+            ]);
+        }
+        
+        
+
+        $montoTotal = 0;
+
+        foreach ($carro as $item) {
+            $montoTotal += $item['calzado']->precio_venta * $item['cantidad'];
+        }
+        session()->put('montoTotal',$montoTotal);
+
+
+        session()->forget('carro');
+
+
+        $ci = Auth::check() ? Auth::user()->ci : null;
+        if (!Auth::check() || Auth::user()->tipo == 'C') {
+            Bitacora::create([
+                'ci' => $ci,
+                'ip' => request()->ip(),
+                'accion' => 'Realizo una compra con CI :' . $request->ci,
+                'fecha' => now()->format('Y-m-d'), // Fecha actual
+                'hora' => now()->format('H:i:s'), // Hora actual
+            ]);
+        }
+        return redirect()->route('paypal.pay');
+
     }
 
     /**
@@ -135,6 +210,17 @@ class CarritoController extends Controller
             'cantidad' => $cantidad,
         ];
         session()->put('carro', $carro);  
+
+        $ci = Auth::check() ? Auth::user()->ci : null;
+        if (!Auth::check() || Auth::user()->tipo == 'C') {
+            Bitacora::create([
+                'ci' => $ci,
+                'ip' => request()->ip(),
+                'accion' => 'Añadio a su carrito el calzado con código: ' . $calzadoId,
+                'fecha' => now()->format('Y-m-d'), // Fecha actual
+                'hora' => now()->format('H:i:s'), // Hora actual
+            ]);
+        }
         return redirect()->back()->with('success', 'Calzado agregado correctamente.');
     }
     public function quitar($calzadoCod)
@@ -149,6 +235,16 @@ class CarritoController extends Controller
 
         // Volver a guardar el carro actualizado en la sesión
         session()->put('carro', $carrito);
+        $ci = Auth::check() ? Auth::user()->ci : null;
+        if (!Auth::check() || Auth::user()->tipo == 'C') {
+            Bitacora::create([
+                'ci' => $ci,
+                'ip' => request()->ip(),
+                'accion' => 'Elemino de su carrito el calzado con código: ' . $calzadoCod,
+                'fecha' => now()->format('Y-m-d'), // Fecha actual
+                'hora' => now()->format('H:i:s'), // Hora actual
+            ]);
+        }
 
         // Redirigir a la misma página con un mensaje
         return redirect()->back()->with('success', 'El calzado ha sido eliminado del carrito.');

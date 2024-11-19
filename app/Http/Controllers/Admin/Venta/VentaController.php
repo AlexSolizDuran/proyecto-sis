@@ -113,7 +113,7 @@ class VentaController extends Controller
                 'nro_venta' => $nro_venta, // Usando el id de la nota de venta
                 'cod_calzado' => $item['calzado']->cod,
                 'cantidad' => $item['cantidad'],
-                'precio_venta' => $item['calzado']->precio_unidad,
+                'precio_venta' => $item['calzado']->precio_venta,
             ]);
         }
         session()->forget('ci_persona');
