@@ -69,7 +69,7 @@
             <tr>
                 <th>Código</th>
                 <th>Género</th>
-                <th>Precio Unidad</th>
+                <th>Precio venta</th>
                 <th>Cantidad Pares</th>
                 <th>Modelo</th>
                 <th>Material</th>
@@ -82,7 +82,7 @@
                 <tr>
                     <td>{{ $calzado->cod }}</td>
                     <td>{{ $calzado->getGeneroCompleto() }}</td>
-                    <td>{{ $calzado->precio_unidad }}</td>
+                    <td>{{ $calzado->precio_venta }}</td>
                     <td>{{ $calzado->cantidad_pares }}</td>
                     <td>{{ $calzado->modelo->nombre }}</td> <!-- Asumiendo relación con Modelo -->
                     <td>{{ $calzado->material->nombre }}</td> <!-- Asumiendo relación con Material -->
@@ -121,9 +121,9 @@
                     <tr>
                     <td>{{ $item['calzado']->cod }}</td>
                     <td>{{ $item['calzado']->modelo->marca->nombre }}</td>
-                    <td>${{ number_format($item['calzado']->precio_unidad, 2) }}</td>
+                    <td>${{ number_format($item['calzado']->precio_venta, 2) }}</td>
                     <td>{{ $item['cantidad'] }}</td>
-                    <td>${{ number_format($item['calzado']->precio_unidad * $item['cantidad'], 2) }}</td>
+                    <td>${{ number_format($item['calzado']->precio_venta * $item['cantidad'], 2) }}</td>
                     <td>
                   
                         <!-- Botón de eliminar -->
@@ -135,7 +135,7 @@
                     </td>
                     </tr>
                     @php
-                    $precioTotal += $item['calzado']->precio_unidad * $item['cantidad'];
+                    $precioTotal += $item['calzado']->precio_venta * $item['cantidad'];
                     @endphp
                 @endforeach
             </tbody>
