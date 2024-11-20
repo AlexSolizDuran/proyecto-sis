@@ -27,7 +27,11 @@
                     <hr>
                 </div>
                 <div class="col-md-6 mb-4 fs-5">
-                    <p class="card-text"><i class="bi bi-circle-fill"></i> <strong>Monto Total:</strong> ${{ $venta->monto_total }}</p>
+                    <p class="card-text"><i class="bi bi-circle-fill"></i> <strong>Monto Total:</strong> {{ $venta->monto_total }} Bs</p>
+                    <hr>
+                </div>
+                <div class="col-md-6 mb-4 fs-5">
+                    <p class="card-text"><i class="bi bi-circle-fill"></i> <strong>Cantidad:</strong> {{ $venta->cantidad }}</p>
                     <hr>
                 </div>
                 <div class="col-md-6 mb-4 fs-5">
@@ -52,7 +56,6 @@
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th>Código de Venta</th>
                     <th>Código de Producto</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
@@ -61,7 +64,6 @@
             <tbody>
                 @foreach ($venta->registroventa as $registro)
                     <tr>
-                        <td>{{ $registro->cod }}</td>
                         <td>{{ $registro->cod_calzado }}</td>
                         <td>{{ $registro->precio_venta }}</td>
                         <td>{{ $registro->cantidad }}</td>

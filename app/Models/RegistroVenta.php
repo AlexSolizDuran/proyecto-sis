@@ -15,6 +15,7 @@ class RegistroVenta extends Model
     protected $fillable = [ // Atributos que se pueden llenar masivamente
         'precio_venta',
         'cod_calzado',
+        'cantidad',
         'nro_venta',
     ];
 
