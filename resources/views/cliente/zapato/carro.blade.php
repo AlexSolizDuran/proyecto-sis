@@ -20,9 +20,9 @@
                         </h5>
                         <p class="card-text mb-2"><strong>Código:</strong> {{ $item['calzado']->cod }}</p>
                         <p class="card-text mb-2"><strong>Talla:</strong> {{ $item['calzado']->talla->numero }}</p>
-                        <p class="card-text mb-2"><strong>Precio Unidad:</strong> ${{ number_format($item['calzado']->precio_unidad, 2) }}</p>
+                        <p class="card-text mb-2"><strong>Precio Unidad:</strong> ${{ number_format($item['calzado']->precio_venta, 2) }}</p>
                         <p class="card-text mb-2"><strong>Cantidad:</strong> {{ $item['cantidad'] }}</p>
-                        <p class="card-text"><strong>Total:</strong> ${{ number_format($item['calzado']->precio_unidad * $item['cantidad'], 2) }}</p>
+                        <p class="card-text"><strong>Total:</strong> ${{ number_format($item['calzado']->precio_venta * $item['cantidad'], 2) }}</p>
                         <div class="d-flex justify-content-end mt-3">
                             <form action="{{ route('cliente.zapato.quitar', $item['calzado']->cod) }}" method="POST" class="me-2">
                                 @csrf

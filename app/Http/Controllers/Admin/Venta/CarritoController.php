@@ -130,13 +130,17 @@ class CarritoController extends Controller
             'estado' => 0, // sin cancelar
             'cod_admin' => 'AD-1',
         ]);
+
+        $nro_venta = DB::getPdo()->lastInsertId();
         foreach ($carro as $item) {
+            
             DB::table('registro_venta')->insert([
                 'nro_venta' => $nro_venta, // Usando el id de la nota de venta
                 'cod_calzado' => $item['calzado']->cod,
                 'cantidad' => $item['cantidad'],
                 'precio_venta' => $item['calzado']->precio_venta,
             ]);
+
         }
         
         
