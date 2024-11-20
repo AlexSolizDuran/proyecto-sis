@@ -27,9 +27,21 @@ class CarritoController extends Controller
      */
     public function inicio(Request $request)
     {
+        $fechaActual = Carbon::now();
+
+        // Calculamos la fecha de hace 10 meses
+        $fechaLimite = $fechaActual->subMonths(9)->toDateString();
+    
+        // Filtramos los calzados cuyo lote tiene una fecha de compra más antigua que 10 meses
+        $ofertas = Calzado::whereHas('lotes', function ($query) use ($fechaLimite) {
+            $query->where('lote_mercaderia.fecha_compra', '<', $fechaLimite);  // Accedemos a la tabla lote_mercaderia
+        })->get();
+
+        
+
         $calzados = Calzado::inRandomOrder()->take(10)->get();
         
-        return view('welcome',compact('calzados'));
+        return view('welcome',compact('calzados','ofertas'));
     }
     public function pedido()
     {

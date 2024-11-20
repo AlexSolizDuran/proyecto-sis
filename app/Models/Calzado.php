@@ -69,4 +69,9 @@ class Calzado extends Model
         return $this->belongsToMany(Color::class, 'color_calzado', 'cod_calzado', 'cod_color');
     }
 
+    public function lotes()
+    {
+        return $this->belongsToMany(LoteMercaderia::class, 'registro_lote', 'cod_calzado', 'cod_lote')
+                    ->withPivot('cantidad', 'costo_unitario');
+    }
 }

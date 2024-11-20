@@ -25,11 +25,11 @@
                     <hr>
                 </div>
                 <div class="col-md-6 mb-4 fs-5">
-                    <p class="card-text"><i class="bi bi-cash"></i> <strong>Precio:</strong> ${{ $calzado->precio_venta}} USD</p>
+                    <p class="card-text"><i class="bi bi-cash"></i> <strong>Precio:</strong>{{ $calzado->precio_venta}} Bs</p>
                     <hr>
                 </div>
                 <div class="col-md-6 mb-4 fs-5">
-                    <p class="card-text"><i class="bi bi-cash"></i> <strong>Costo PP:</strong> ${{ $calzado->costoPP }} USD</p>
+                    <p class="card-text"><i class="bi bi-cash"></i> <strong>Costo PP:</strong> {{ $calzado->costoPP }} Bs</p>
                     <hr>
                 </div>
                 <div class="col-md-6 mb-4 fs-5">

@@ -119,6 +119,28 @@ return new class extends Migration
             set cantidad_pares = a - cant
             where cod = New.cod_calzado;
         end");
+
+        DB::statement("
+        CREATE TRIGGER actualizar_costoPP_after_insert
+        AFTER INSERT ON registro_lote
+        FOR EACH ROW
+        BEGIN
+            DECLARE total_costo DECIMAL(10,2);
+            DECLARE total_cantidad INT;
+            
+            -- Calcular la suma total del costo ponderado y la cantidad total
+            SELECT SUM(r.cantidad * r.costo_unitario), SUM(r.cantidad)
+            INTO total_costo, total_cantidad
+            FROM registro_lote r
+            WHERE r.cod_calzado = NEW.cod_calzado;
+
+            -- Calcular el costoPP (Precio Promedio Ponderado)
+            IF total_cantidad > 0 THEN
+                UPDATE calzado
+                SET costoPP = total_costo / total_cantidad
+                WHERE cod = NEW.cod_calzado;
+            END IF;
+        END");
     }
 
     /**
@@ -132,8 +154,6 @@ return new class extends Migration
         DB::statement("DROP TRIGGER IF EXISTS precio");
         DB::statement("DROP TRIGGER IF EXISTS actualizar_monto_y_cantidad");
         DB::statement("DROP TRIGGER IF EXISTS DescontarAlVender");
-
-
-
+        DB::statement("DROP TRIGGER IF EXISTS actualizar_costoPP_after_insert");
     }
 };
