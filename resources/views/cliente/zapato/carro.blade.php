@@ -34,7 +34,7 @@
                 </div>
             </div>
             @php
-                $precioTotal += $item['calzado']->precio_unidad * $item['cantidad'];
+                $precioTotal += $item['calzado']->precio_venta * $item['cantidad'];
             @endphp
         @endforeach
     </div>

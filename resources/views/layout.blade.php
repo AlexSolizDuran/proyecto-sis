@@ -27,7 +27,7 @@
                     Cuenta
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                    <li><a class="dropdown-item" href="{{ route('login') }}">Iniciar seccion</a><li>
+                    <li><a class="dropdown-item" href="{{ route('login') }}">Iniciar sesión</a><li>
                     <li><a class="dropdown-item" href="{{ route('register') }}">Registrarse</a></li>
                 </ul>
             </div>
