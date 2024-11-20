@@ -80,7 +80,6 @@ class VentaSeeder extends Seeder
             ['precio_venta' => 160, 'cod_calzado' => 11, 'nro_venta' => 17, 'cantidad' => 1],
             ['precio_venta' => 155, 'cod_calzado' => 32, 'nro_venta' => 17, 'cantidad' => 1],
             ['precio_venta' => 160, 'cod_calzado' => 23, 'nro_venta' => 17, 'cantidad' => 1],
-            ['precio_venta' => 150, 'cod_calzado' => 34, 'nro_venta' => 18, 'cantidad' => 1],
             ['precio_venta' => 120, 'cod_calzado' => 35, 'nro_venta' => 18, 'cantidad' => 1],
             ['precio_venta' => 135, 'cod_calzado' => 36, 'nro_venta' => 18, 'cantidad' => 1],
             ['precio_venta' => 140, 'cod_calzado' => 17, 'nro_venta' => 19, 'cantidad' => 1],
