@@ -106,18 +106,18 @@ return new class extends Migration
             
         END");
 
-        DB::statement("
-        create trigger DescontarAlVender
-        after insert
-        on registro_venta
-        for each row
-        begin
-            declare cant int;
-            set cant = New.cantidad;
-            update calzado
-            set cantidad_pares = (select cantidad_pares from calzado where cod = New.cod_calzado) - cant
-            where cod = New.cod_calzado;
-        end");
+        // DB::statement("
+        // create trigger DescontarAlVender
+        // after insert
+        // on registro_venta
+        // for each row
+        // begin
+        //     declare cant int;
+        //     set cant = New.cantidad;
+        //     update calzado
+        //     set cantidad_pares = (select cantidad_pares from calzado where cod = New.cod_calzado) - cant
+        //     where cod = New.cod_calzado;
+        // end");
     }
 
     /**
@@ -130,7 +130,7 @@ return new class extends Migration
         DB::statement("DROP TRIGGER IF EXISTS RestarCalzadosCantidad");
         DB::statement("DROP TRIGGER IF EXISTS precio");
         DB::statement("DROP TRIGGER IF EXISTS actualizar_monto_y_cantidad");
-        DB::statement("DROP TRIGGER IF EXISTS DescontarAlVender");
+        //DB::statement("DROP TRIGGER IF EXISTS DescontarAlVender");
 
 
 
