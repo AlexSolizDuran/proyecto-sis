@@ -91,9 +91,16 @@
                         <form action="{{ route('admin.venta.addCalzado') }}" method="POST" class="mb-4">
                             @csrf
                             <input type="hidden" name="cod" value="{{ $calzado->cod }}">
-                            <input type="number" name="cantidad" min="1" max="{{ $calzado->cantidad_pares }}" value="1" style="inline-size: 60px;" required onkeypress="return false;"> <!-- Prevents typing -->
-                            <button type="submit" class="btn btn-primary">Agregar Calzado</button>
-                        </form> 
+                            <input type="number" name="cantidad" 
+                                   min="1" max="{{ $calzado->cantidad_pares }}" 
+                                   value="1" style="inline-size: 60px;" 
+                                   required onkeypress="return false;"> <!-- Prevents typing -->
+                            <button type="submit" class="btn btn-primary" 
+                                    {{ $calzado->cantidad_pares == 0 ? 'disabled' : '' }}>
+                                Agregar Calzado
+                            </button>
+                        </form>
+                        
                     </td>
                 </tr>
             @endforeach

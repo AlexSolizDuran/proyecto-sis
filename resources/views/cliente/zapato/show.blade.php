@@ -41,7 +41,10 @@
                             @csrf
                             <input type="hidden" name="cod" value="{{ $calzado->cod }}">
                             <label for="cantidad" class="me-2">Cantidad:</label>
-                            <input type="number" name="cantidad" id="cantidad" min="1" max="{{ $calzado->cantidad_pares }}" value="1" style="width: 60px;" required>
+                            <input type="number" name="cantidad" 
+                            min="1" max="{{ $calzado->cantidad_pares }}" 
+                            value="1" style="inline-size: 60px;" 
+                            required onkeypress="return false;"> <!-- Prevents typing -->
                             <button type="submit" class="btn btn-primary ms-2">Comprar</button>
                         </form>
                     @else

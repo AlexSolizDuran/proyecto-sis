@@ -19,6 +19,29 @@
 
     {{-- Botón para volver a la lista de calzados --}}
     <a href="{{ route('admin.cliente.index') }}" class="btn btn-secondary mt-3">Volver a la lista</a>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Codigo de venta</th>
+            <th>Fecha</th>
+            <th>Monto Total</th>
+            <th>Ver</th>
+        </tr>
+        </thead>
+    <tbody>
+            @foreach ($cliente->notaVentas as $venta)
+        <tr>
+            <td>{{ $venta->nro }}</td>
+            <td>{{ $venta->fecha }}</td>
+            <td>{{ $venta->monto_total }}</td>
+            <td><a href="{{ route('admin.venta.show', $venta) }}" class="btn btn-info btn-sm">Ver</a></td>
+        </tr>
+            @endforeach
+    </tbody>
+    </table>
 </div>
+
     
 @endsection
