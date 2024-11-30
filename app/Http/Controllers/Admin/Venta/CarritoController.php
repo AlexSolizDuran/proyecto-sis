@@ -45,7 +45,8 @@ class CarritoController extends Controller
     }
     public function pedido()
     {
-        return view('cliente.zapato.carro');
+        $stripeKey = env('STRIPE_KEY');
+        return view('cliente.zapato.carro', compact('stripeKey'));
     }
     public function index(Request $request)
     {
@@ -142,9 +143,6 @@ class CarritoController extends Controller
             ]);
 
         }
-        
-        
-
         $montoTotal = 0;
 
         foreach ($carro as $item) {

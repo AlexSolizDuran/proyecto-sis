@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\Venta\CarritoController;
 use App\Http\Controllers\CuentaController;
 
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\StripeController;
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -86,3 +88,6 @@ Route::post('/change-password', [CuentaController::class, 'changePassword'])->na
 
 Route::get('/pay-with-paypal', [PayPalController::class, 'payWithPayPal'])->name('paypal.pay');
 Route::get('/paypal/success', [PayPalController::class, 'success'])->name('paypal.success');
+
+Route::get('/payment-form', [StripeController::class, 'showPaymentForm'])->name('stripe.paymentForm');
+Route::post('/process-payment', [StripeController::class, 'processPayment'])->name('stripe.processPayment');

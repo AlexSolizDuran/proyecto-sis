@@ -258,6 +258,90 @@ class TablaSeeder extends Seeder
         foreach ($registro_lote as $registro){
             DB::table('registro_lote')->insert($registro);
         }
+        $color_calzado = [
+            ['cod_calzado' => 1, 'cod_color' => 7],
+            ['cod_calzado' => 1, 'cod_color' => 8],
+            ['cod_calzado' => 2, 'cod_color' => 7],
+            ['cod_calzado' => 2, 'cod_color' => 9],
+            ['cod_calzado' => 3, 'cod_color' => 9],
+            ['cod_calzado' => 3, 'cod_color' => 8],
+            ['cod_calzado' => 4, 'cod_color' => 7],
+            ['cod_calzado' => 5, 'cod_color' => 9],
+            ['cod_calzado' => 6, 'cod_color' => 8],
 
+            ['cod_calzado' => 7, 'cod_color' => 7],
+            ['cod_calzado' => 7, 'cod_color' => 8],
+            ['cod_calzado' => 8, 'cod_color' => 7],
+            ['cod_calzado' => 8, 'cod_color' => 9],
+            ['cod_calzado' => 9, 'cod_color' => 9],
+            ['cod_calzado' => 9, 'cod_color' => 8],
+            ['cod_calzado' => 10, 'cod_color' => 7],
+            ['cod_calzado' => 11, 'cod_color' => 9],
+            ['cod_calzado' => 12, 'cod_color' => 8],
+
+            ['cod_calzado' => 13, 'cod_color' => 7],
+            ['cod_calzado' => 13, 'cod_color' => 8],
+            ['cod_calzado' => 14, 'cod_color' => 7],
+            ['cod_calzado' => 14, 'cod_color' => 9],
+            ['cod_calzado' => 15, 'cod_color' => 9],
+            ['cod_calzado' => 15, 'cod_color' => 8],
+            ['cod_calzado' => 16, 'cod_color' => 7],
+            ['cod_calzado' => 17, 'cod_color' => 9],
+            ['cod_calzado' => 18, 'cod_color' => 8],
+
+            ['cod_calzado' => 19, 'cod_color' => 7],
+            ['cod_calzado' => 19, 'cod_color' => 8],
+            ['cod_calzado' => 20, 'cod_color' => 7],
+            ['cod_calzado' => 20, 'cod_color' => 9],
+            ['cod_calzado' => 21, 'cod_color' => 9],
+            ['cod_calzado' => 21, 'cod_color' => 8],
+            ['cod_calzado' => 22, 'cod_color' => 7],
+            ['cod_calzado' => 23, 'cod_color' => 9],
+            ['cod_calzado' => 24, 'cod_color' => 8],
+
+            ['cod_calzado' => 25, 'cod_color' => 7],
+            ['cod_calzado' => 25, 'cod_color' => 8],
+            ['cod_calzado' => 26, 'cod_color' => 7],
+            ['cod_calzado' => 26, 'cod_color' => 9],
+            ['cod_calzado' => 27, 'cod_color' => 9],
+            ['cod_calzado' => 27, 'cod_color' => 8],
+            ['cod_calzado' => 28, 'cod_color' => 7],
+            ['cod_calzado' => 29, 'cod_color' => 9],
+            ['cod_calzado' => 30, 'cod_color' => 8],
+
+            ['cod_calzado' => 31, 'cod_color' => 7],
+            ['cod_calzado' => 31, 'cod_color' => 8],
+            ['cod_calzado' => 32, 'cod_color' => 7],
+            ['cod_calzado' => 32, 'cod_color' => 9],
+            ['cod_calzado' => 33, 'cod_color' => 9],
+            ['cod_calzado' => 33, 'cod_color' => 8],
+            ['cod_calzado' => 34, 'cod_color' => 7],
+            ['cod_calzado' => 35, 'cod_color' => 9],
+            ['cod_calzado' => 36, 'cod_color' => 8],
+            
+            ['cod_calzado' => 37, 'cod_color' => 7],
+            ['cod_calzado' => 37, 'cod_color' => 8],
+            ['cod_calzado' => 38, 'cod_color' => 7],
+            ['cod_calzado' => 38, 'cod_color' => 9],
+            ['cod_calzado' => 39, 'cod_color' => 9],
+            ['cod_calzado' => 39, 'cod_color' => 8],
+            ['cod_calzado' => 40, 'cod_color' => 7],
+            ['cod_calzado' => 41, 'cod_color' => 9],
+            ['cod_calzado' => 42, 'cod_color' => 8],
+
+            ['cod_calzado' => 43, 'cod_color' => 7],
+            ['cod_calzado' => 43, 'cod_color' => 8],
+            ['cod_calzado' => 44, 'cod_color' => 7],
+            ['cod_calzado' => 44, 'cod_color' => 9],
+            ['cod_calzado' => 45, 'cod_color' => 9],
+            ['cod_calzado' => 45, 'cod_color' => 8],
+            ['cod_calzado' => 46, 'cod_color' => 7],
+            ['cod_calzado' => 47, 'cod_color' => 9],
+            ['cod_calzado' => 48, 'cod_color' => 8],
+        ];
+        foreach ($color_calzado as $coCal){
+            DB::table('color_calzado')->insert($coCal);
+        }
+        
     }
 }

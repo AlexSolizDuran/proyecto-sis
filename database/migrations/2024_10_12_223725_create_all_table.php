@@ -33,7 +33,8 @@ return new class extends Migration
             $table->date('fecha');  // Campo 'fecha' de tipo DATE
             $table->integer('monto_total');  // Campo 'monto_total' de tipo INT
             $table->integer('cantidad');  // Campo 'cantidad' de tipo INT
-            $table->tinyInteger('estado')->default(1);// Estado de la venta 1 cancelado, 2 por cancelar
+            $table->tinyInteger('estado')->default(1);
+            $table->integer('descuento_total')->default(0);// Estado de la venta 1 cancelado, 2 por cancelar
             $table->integer('ci_cliente');  // Llave foránea a la tabla 'cliente'
             $table->string('cod_admin', 5);  // Llave foránea a la tabla 'administrador'
 
@@ -105,7 +106,8 @@ return new class extends Migration
             $table->char('genero');  // Campo 'genero' de tipo CHAR
             $table->decimal('precio_venta', 5, 2)->nullable();  // Campo 'precio_unidad' de tipo DECIMAL
             $table->integer('cantidad_pares');  // Campo 'cantidad_pares' de tipo INT
-            $table->decimal('costoPP'); // costo promedio ponderado
+            $table->decimal('costoPP');// costo promedio ponderado
+            $table->decimal('costo_unitario')->default(0); 
             $table->string('imagen')->nullable();  // Añadimos el campo para la imagen
             $table->integer('cod_modelo')->unsigned()->nullable();  // Llave foránea a la tabla 'modelo'
             $table->integer('cod_talla')->unsigned()->nullable();  // Llave foránea a la tabla 'talla'
@@ -176,6 +178,7 @@ return new class extends Migration
             $table->integer('precio_venta');  // Campo 'precio_venta' de tipo INT
             $table->integer('cod_calzado')->unsigned()->nullable();  // Llave foránea a la tabla 'calzado'
             $table->integer('cantidad');
+            $table->integer('descuento')->default(0);
             $table->integer('nro_venta')->unsigned();    // Llave foránea a la tabla 'nota_venta'
 
             // Definición de las llaves foráneas

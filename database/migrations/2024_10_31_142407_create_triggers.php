@@ -84,8 +84,11 @@ return new class extends Migration
         cant, imp, prec, precl
         from lote_mercaderia
         where cod = new.cod_lote;
-    
 	        set new.costo_unitario = (imp + prec + precl) / cant;
+
+        UPDATE calzado
+        SET costo_unitario = NEW.costo_unitario
+        WHERE cod = NEW.cod_calzado;
         end
         ");
 
