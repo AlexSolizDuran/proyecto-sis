@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Venta\CarritoController;
 use App\Http\Controllers\CuentaController;
 
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\StripeController;
 
 
@@ -55,6 +56,7 @@ Route::resource('compra',CompraController::class)->names('admin.compra');
 Route::resource('cliente',ClienteController::class)->names('admin.cliente');
 //gestionar venta
 Route::resource('venta',VentaController::class)->names('admin.venta');
+Route::get('factura/{cod}',[VentaController::class,'factura'])->name('admin.venta.factura');
 
 Route::get('venta/sin-cancelar/{nro}', [VentaController::class, 'pagado'])->name('venta.sinCancelar');
 
@@ -91,3 +93,14 @@ Route::get('/paypal/success', [PayPalController::class, 'success'])->name('paypa
 
 Route::get('/payment-form', [StripeController::class, 'showPaymentForm'])->name('stripe.paymentForm');
 Route::post('/process-payment', [StripeController::class, 'processPayment'])->name('stripe.processPayment');
+
+//REPORTES
+route::get('/reporte/inicio',[ReportesController::class, 'inicio'])->name('reporte.inicio');
+route::get('/generar-pdf1', [ReportesController:: class, 'ventafecha'])->name('reporte.ventafecha');
+route::get('/generar-pdf2',[ReportesController::class,'gananciafecha'])->name('reporte.gananciafecha');
+route::get('/generar-pdf3', [ReportesController::class,'marcafecha'])->name('reporte.marcafecha');
+route::get('/generar-pdf4', [ReportesController::class,'colorfecha'])->name('reporte.colorfecha');
+route::get('/generar-pdf5', [ReportesController::class,'tallafecha'])->name('reporte.tallafecha');
+route::get('/generar-pdf6', [ReportesController::class,'generovendido'])->name('reporte.generovendido');
+route::get('/generar-pdf7', [ReportesController::class,'invertidofecha'])->name('reporte.invertidofecha');
+

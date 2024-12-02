@@ -100,13 +100,16 @@ return new class extends Migration
         BEGIN
             -- Actualizar el monto_total sumando el precio de venta del registro
             declare sumaT, cant int;
+            declare desT decimal(5,2);
             set sumaT = New.cantidad * New.precio_venta;
+            set desT = New.cantidad * New.descuento;
             set cant = (select sum(cantidad) from registro_venta where nro_venta = New.nro_venta);
             
             UPDATE nota_venta
-            SET monto_total = monto_total + sumaT, cantidad = cant
+            SET monto_total = monto_total + sumaT,
+            cantidad = cant,
+            descuento_total = descuento_total + desT
             WHERE nro = NEW.nro_venta;
-            
         END");
 
         DB::statement("
@@ -144,6 +147,49 @@ return new class extends Migration
                 WHERE cod = NEW.cod_calzado;
             END IF;
         END");
+
+        DB::statement("
+            CREATE TRIGGER aplicarDescuento
+            BEFORE INSERT
+            ON registro_venta
+            FOR EACH ROW
+            BEGIN
+                DECLARE nroLote INT;
+                DECLARE fechaVenta DATE;
+                DECLARE fechaCompra DATE;
+                DECLARE descuento decimal(5,2);
+                DECLARE dia INT;
+                
+                -- Obtener la fecha de la venta
+                SET fechaVenta = (SELECT fecha FROM nota_venta WHERE nro = NEW.nro_venta);
+                
+                -- Obtener la fecha de compra del calzado
+                SET nroLote = (SELECT cod_lote 
+                            FROM registro_lote 
+                            WHERE cod_calzado = NEW.cod_calzado 
+                            LIMIT 1);
+                
+                SET fechaCompra = (SELECT fecha_compra 
+                                FROM lote_mercaderia 
+                                WHERE cod = nroLote);
+                
+                -- Calcular la diferencia de días entre la compra y la venta
+                SET dia = DATEDIFF(fechaVenta, fechaCompra);
+                
+                -- Obtener el descuento basado en el calzado
+                SET descuento = (SELECT precio_venta - costo_unitario 
+                                FROM calzado 
+                                WHERE cod = NEW.cod_calzado);
+                
+                -- Aplicar el descuento si corresponde
+                IF dia >= 300 THEN
+                    SET NEW.descuento = descuento;
+                ELSE
+                    SET NEW.descuento = 0; -- Sin descuento si no cumple la condición
+                END IF;
+            END
+        ");
+
     }
 
     /**
@@ -158,5 +204,7 @@ return new class extends Migration
         DB::statement("DROP TRIGGER IF EXISTS actualizar_monto_y_cantidad");
         DB::statement("DROP TRIGGER IF EXISTS DescontarAlVender");
         DB::statement("DROP TRIGGER IF EXISTS actualizar_costoPP_after_insert");
+        DB::statement("DROP TRIGGER IF EXISTS aplicarDescuento");
+
     }
 };

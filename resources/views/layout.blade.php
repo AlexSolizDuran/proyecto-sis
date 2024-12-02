@@ -110,6 +110,7 @@
                         @can('admin.inicio')
                             <a class="dropdown-item" href="{{ route('admin.inicio') }}">Ir al Inicio de Admin</a>
                             <a class="dropdown-item" href="{{ route('admin.bitacora.index') }}">Bitacora</a>
+                            <a class="dropdown-item" href="{{ route('reporte.inicio') }}">Reportes</a>
                         @endcan
                     </li>
                     <li>
@@ -132,6 +133,9 @@
     <div class="content" style="margin-top: 100px; padding-bottom: 50px;">
         @yield('contenido')
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
     <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>

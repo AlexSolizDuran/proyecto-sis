@@ -30,6 +30,14 @@ class Persona extends Authenticatable
         'tipo',
     ];
 
+    public function getNombreAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+    public function getApellidoAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
     protected $hidden = [
         'password', // Ocultar el password al serializar
     ];

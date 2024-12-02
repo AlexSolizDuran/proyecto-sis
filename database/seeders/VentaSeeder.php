@@ -88,9 +88,6 @@ class VentaSeeder extends Seeder
             ['precio_venta' => 170, 'cod_calzado' => 20, 'nro_venta' => 20, 'cantidad' => 1],
         ];
         
-        
-        
-        
         foreach ($registro_venta as $reg_venta){
             DB::table('registro_venta')->insert($reg_venta);
         }

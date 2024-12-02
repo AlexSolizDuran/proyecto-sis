@@ -37,7 +37,7 @@ class NotaVenta extends Model
         return $this->belongsTo(Cliente::class, 'ci_cliente','ci_persona');
     }
     public function administrador(){
-        return $this->hasMany(Administrador::class, 'cod_admin','cod');
+        return $this->belongsTo(Administrador::class, 'cod_admin', 'cod');
     }
     public function registroventa()
     {

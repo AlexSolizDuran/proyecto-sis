@@ -15,6 +15,7 @@ use App\Models\Persona;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class VentaController extends Controller
@@ -174,5 +175,15 @@ class VentaController extends Controller
         $venta->delete();
         return redirect()->route('admin.venta.index')->with('success','Venta a sido eliminado exitosamente');
  
+    }
+    public function factura(string $id){
+        $venta = NotaVenta::findOrFail($id);
+
+        $pdf = Pdf::loadView('admin.reportes.factura',[
+            'venta' => $venta,
+        ]);
+    
+        // Devolver el PDF como flujo
+        return $pdf->stream('reporte_ventas.pdf');
     }
 }

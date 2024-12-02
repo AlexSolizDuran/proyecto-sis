@@ -38,6 +38,8 @@
                         
                         <td>
                             <!-- Botón para ver los detalles de un venta -->
+                            <a href="{{ route('admin.venta.factura', $venta) }}" target="_blank" class="btn btn-warning btn-sm">factura</a>
+
                             <a href="{{ route('admin.venta.show', $venta) }}" class="btn btn-info btn-sm">Ver</a>
 
                             <!-- Botón para editar un venta -->

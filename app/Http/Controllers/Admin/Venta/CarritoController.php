@@ -35,7 +35,9 @@ class CarritoController extends Controller
         // Filtramos los calzados cuyo lote tiene una fecha de compra más antigua que 10 meses
         $ofertas = Calzado::whereHas('lotes', function ($query) use ($fechaLimite) {
             $query->where('lote_mercaderia.fecha_compra', '<', $fechaLimite);  // Accedemos a la tabla lote_mercaderia
-        })->get();
+        })->inRandomOrder()  // Selecciona aleatoriamente
+        ->take(10)
+        ->get();
 
         
 

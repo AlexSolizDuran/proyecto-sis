@@ -120,7 +120,7 @@ class TablaSeeder extends Seeder
         }
 
         $lote_mercaderia = [
-            ['cantidad_total_pares' => 120, 'impuestos' => 30, 'costo_compra' => 7692, 'fecha_compra' => '2024-01-21' , 'costo_logistica' => 600, 'cod_marca' => 1],
+            ['cantidad_total_pares' => 120, 'impuestos' => 30, 'costo_compra' => 7692, 'fecha_compra' => '2023-05-21' , 'costo_logistica' => 600, 'cod_marca' => 1],
             ['cantidad_total_pares' => 120, 'impuestos' => 30, 'costo_compra' => 11064, 'fecha_compra' => '2024-03-13' , 'costo_logistica' => 700, 'cod_marca' => 5],
             ['cantidad_total_pares' => 60, 'impuestos' => 30, 'costo_compra' => 7735, 'fecha_compra' => '2024-04-01' , 'costo_logistica' => 400, 'cod_marca' => 2],
         ];
