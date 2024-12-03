@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Charge;
 use App\Http\Controllers\Admin\Venta\CarritoController;
+use App\Models\NotaVenta;
 
 class StripeController extends Controller
 {
@@ -25,9 +26,7 @@ class StripeController extends Controller
         try {
             $carritoController = new CarritoController();
             $carritoController->store($request);
-
             $montoTotal = session()->get('montoTotal');
-        // BOB -> USD
             $montoTotal = $montoTotal * 0.15;
             // Realiza el cargo en Stripe
             Charge::create([
@@ -39,11 +38,14 @@ class StripeController extends Controller
 
             // Envía a la vista la confirmación del éxito del pago
             // Redirige con el mensaje de éxito
+            session()->forget('carro');
             session()->forget('montoTotal');
             return redirect()->route('zapato.pedido')->with('success', 'Pago realizado con éxito');
 
         } catch (\Exception $e) {
             // Redirige con el mensaje de error
+            $notaventa = NotaVenta::orderBy('nro', 'desc')->first();
+            $notaventa->delete();
             return redirect()->route('zapato.pedido')->with(['success' => 'Hubo un error en el pago']);
         }
     }

@@ -134,11 +134,7 @@ class CarritoController extends Controller
 
         $montoTotal = $nro_venta->monto_total - $nro_venta->descuento_total;
         session()->put('montoTotal',$montoTotal);
-
-
-        session()->forget('carro');
-
-
+        
         $ci = Auth::check() ? Auth::user()->ci : null;
         if (!Auth::check() || Auth::user()->tipo == 'C') {
             Bitacora::create([
