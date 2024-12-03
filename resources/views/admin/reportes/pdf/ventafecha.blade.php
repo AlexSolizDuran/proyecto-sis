@@ -107,7 +107,7 @@
             <div class="total-label">Sumatoria Total:</div>
             <div>Total Precio Venta: {{ number_format($totalPrecio, 2)}} Bs</div>
             <div>Total Descuento: {{ number_format($totalDescuento, 2) }} Bs</div>
-            <div style="font-size: 18px; font-weight: bold; color: #4CAF50;">Ganancia Neta: {{ number_format($totalPrecio - $totalDescuento, 2) }} Bs</div>
+            <div style="font-size: 18px; font-weight: bold; color: #4CAF50;">Total : {{ number_format($totalPrecio - $totalDescuento, 2) }} Bs</div>
         </div>
     </div>
 </body>

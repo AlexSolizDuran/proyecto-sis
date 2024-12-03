@@ -82,7 +82,11 @@
                 <tr>
                     <td>{{ $calzado->cod }}</td>
                     <td>{{ $calzado->getGeneroCompleto() }}</td>
-                    <td>{{ $calzado->precio_venta }}</td>
+                    @if ($calzado->oferta())
+                        <td class="text-success">{{ $calzado->costo_unitario }}bs</td>
+                    @else
+                        <td>{{ $calzado->precio_venta }}bs</td>
+                    @endif
                     <td>{{ $calzado->cantidad_pares }}</td>
                     <td>{{ $calzado->modelo->nombre }}</td> <!-- Asumiendo relación con Modelo -->
                     <td>{{ $calzado->material->nombre }}</td> <!-- Asumiendo relación con Material -->
@@ -116,6 +120,7 @@
                 <th>Código</th>
                 <th>Marca</th>
                 <th>Precio</th>
+                <th>Descuento</th>
                 <th>Cantidad</th>
                 <th>Total</th>
             </tr>
@@ -128,9 +133,17 @@
                     <tr>
                     <td>{{ $item['calzado']->cod }}</td>
                     <td>{{ $item['calzado']->modelo->marca->nombre }}</td>
-                    <td>${{ number_format($item['calzado']->precio_venta, 2) }}</td>
+                    <td>{{ number_format($item['calzado']->precio_venta, 2) }}Bs</td>
+                    <td> @if ($item['calzado']->oferta()) 
+                        {{ number_format($item['calzado']->costo_unitario, 2) }}Bs 
+                        @else 0 Bs @endif</td>
                     <td>{{ $item['cantidad'] }}</td>
-                    <td>${{ number_format($item['calzado']->precio_venta * $item['cantidad'], 2) }}</td>
+                    <td> @if ($item['calzado']->oferta())
+                            {{ number_format($item['calzado']->precio_venta * $item['cantidad'] - $item['calzado']->costo_unitario * $item['cantidad'], 2  ) }}
+                        @else
+                            {{ number_format($item['calzado']->precio_venta * $item['cantidad'] , 2  ) }}
+                        @endif
+                        </td>
                     <td>
                   
                         <!-- Botón de eliminar -->
@@ -142,7 +155,13 @@
                     </td>
                     </tr>
                     @php
-                    $precioTotal += $item['calzado']->precio_venta * $item['cantidad'];
+                    if ($item['calzado']->oferta()){
+                        $precioTotal += ($item['calzado']->precio_venta * $item['cantidad']) -
+                                    ($item['calzado']->costo_unitario * $item['cantidad']);
+                    }else{
+                        $precioTotal += ($item['calzado']->precio_venta * $item['cantidad']);
+                    }
+                    
                     @endphp
                 @endforeach
             </tbody>

@@ -17,6 +17,7 @@ class RegistroVenta extends Model
         'cod_calzado',
         'cantidad',
         'nro_venta',
+        'descuento'
     ];
 
     // Relación con el modelo Calzado

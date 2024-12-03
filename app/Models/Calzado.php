@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Calzado extends Model
 {
@@ -71,7 +72,28 @@ class Calzado extends Model
 
     public function lotes()
     {
-        return $this->belongsToMany(LoteMercaderia::class, 'registro_lote', 'cod_calzado', 'cod_lote')
-                    ->withPivot('cantidad', 'costo_unitario');
+        return $this->hasMany(RegistroLote::class, 'cod_calzado','cod'); // Asegúrate de usar el nombre correcto de la clave foránea.
+
+    }
+
+    public function oferta()
+    {
+    // Obtén el último registro de lote relacionado
+        $ultimoLote = $this->lotes()
+                    ->whereHas('loteMercaderia') // Asegúrate de que exista la relación
+                    ->with('loteMercaderia') // Carga la relación
+                    ->get()
+                    ->sortByDesc(function ($registroLote) {
+                        return $registroLote->lote_mercaderia->fecha_compra ?? null;
+                    })->first();
+        $fechaCompra = $ultimoLote->loteMercaderia->fecha_compra;
+        $fechaLimite = Carbon::now()->subMonths(10);
+       
+        if ($fechaCompra < $fechaLimite) {
+            
+            return true ;
+        }
+
+        return false;
     }
 }

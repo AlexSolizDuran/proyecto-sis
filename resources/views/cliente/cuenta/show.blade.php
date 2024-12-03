@@ -7,7 +7,7 @@
     <div class="card" >
         
         <div class="card-body">
-            <p class="card-text"><strong>Codigo: </strong> {{ $persona->ci }}</p>
+            <p class="card-text"><strong>C.I. : </strong> {{ $persona->ci }}</p>
             <p class="card-text"><strong>Nombres: </strong> {{ $persona->nombre }}</p>
             <p class="card-text"><strong>Apellidos: </strong> {{ $persona->apellido}}</p>
             <p class="card-text"><strong>Telefono: </strong> {{ $persona->cel}} </p>
@@ -27,6 +27,9 @@
             <th>Codigo de venta</th>
             <th>Fecha</th>
             <th>Monto Total</th>
+            <th>Descuento Total</th>
+            <th>Total a Cobrar</th>
+            <th>Vista</th>
         </tr>
         </thead>
     <tbody>
@@ -35,6 +38,11 @@
             <td>{{ $venta->nro }}</td>
             <td>{{ $venta->fecha }}</td>
             <td>{{ $venta->monto_total }}</td>
+            <td>{{ $venta->descuento_total }}</td>
+            <td>{{ $venta->monto_total - $venta->descuento_total }}</td>
+            <td>
+            <a href="{{ route('admin.venta.factura', $venta) }}" target="_blank" class="btn btn-warning btn-sm">factura</a>
+            </td>
         </tr>
             @endforeach
     </tbody>

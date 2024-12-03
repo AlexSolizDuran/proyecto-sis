@@ -27,21 +27,15 @@ class CarritoController extends Controller
      */
     public function inicio(Request $request)
     {
-        $fechaActual = Carbon::now();
+        $fechaLimite = Carbon::now()->subMonths(10);
 
-        // Calculamos la fecha de hace 10 meses
-        $fechaLimite = $fechaActual->subMonths(9)->toDateString();
-    
-        // Filtramos los calzados cuyo lote tiene una fecha de compra más antigua que 10 meses
-        $ofertas = Calzado::whereHas('lotes', function ($query) use ($fechaLimite) {
-            $query->where('lote_mercaderia.fecha_compra', '<', $fechaLimite);  // Accedemos a la tabla lote_mercaderia
-        })->inRandomOrder()  // Selecciona aleatoriamente
-        ->take(10)
-        ->get();
+        $ofertas = Calzado::whereHas('lotes.loteMercaderia', function ($query) use ($fechaLimite) {
+            $query->where('fecha_compra', '<', $fechaLimite);
+        })->inRandomOrder()->take(10)->get();
 
-        
-
-        $calzados = Calzado::inRandomOrder()->take(10)->get();
+        $calzados = Calzado::whereHas('lotes.loteMercaderia', function ($query) use ($fechaLimite) {
+            $query->where('fecha_compra', '>=', $fechaLimite);
+        })->inRandomOrder()->take(10)->get();
         
         return view('welcome',compact('calzados','ofertas'));
     }
@@ -85,14 +79,6 @@ class CarritoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -125,31 +111,28 @@ class CarritoController extends Controller
         }
 
         $carro = session()->get('carro', []);
-        $nro_venta = DB::table('nota_venta')->insert([
+        $nro_venta = NotaVenta::create([
             'ci_cliente' => $request->ci,
             'fecha' => Carbon::now()->format('Y-m-d'), // Formato de fecha
             'monto_total' => 0,
             'cantidad' => 0,
+            'descuento_total' => 0,
             'estado' => 0, // sin cancelar
             'cod_admin' => 'AD-1',
         ]);
-
-        $nro_venta = DB::getPdo()->lastInsertId();
+        
         foreach ($carro as $item) {
-            
-            DB::table('registro_venta')->insert([
-                'nro_venta' => $nro_venta, // Usando el id de la nota de venta
+            $registroVenta = RegistroVenta::create([
+                'nro_venta' => $nro_venta->nro, // Usando el id de la nota de venta
                 'cod_calzado' => $item['calzado']->cod,
                 'cantidad' => $item['cantidad'],
                 'precio_venta' => $item['calzado']->precio_venta,
+                'descuento' => 0,
             ]);
-
         }
-        $montoTotal = 0;
+        $nro_venta = NotaVenta::where('nro', $nro_venta->nro)->first();
 
-        foreach ($carro as $item) {
-            $montoTotal += $item['calzado']->precio_venta * $item['cantidad'];
-        }
+        $montoTotal = $nro_venta->monto_total - $nro_venta->descuento_total;
         session()->put('montoTotal',$montoTotal);
 
 
@@ -176,7 +159,6 @@ class CarritoController extends Controller
     public function show($cod)
     {
         $calzado = Calzado::find($cod);
-        
         $ci = Auth::check() ? Auth::user()->ci : null;
 
         // Verifica si el usuario está autenticado y su rol

@@ -19,7 +19,8 @@ class NotaVenta extends Model
         'cantidad',
         'estado',
         'ci_cliente',
-        'cod_admin'
+        'cod_admin',
+        'descuento_total'
     ];
     public function getEstado()
     {

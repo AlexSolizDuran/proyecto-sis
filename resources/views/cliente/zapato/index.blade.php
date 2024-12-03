@@ -76,9 +76,15 @@
                                 <h5 class="card-title" style="font-size: 1rem; font-weight: bold; margin-bottom: 5px;">
                                     {{ $calzado->modelo->marca->nombre }} {{ $calzado->modelo->nombre }}
                                 </h5>
-                                <p class="card-text" style="font-size: 0.9rem; margin-bottom: 0;">
-                                    <strong>Precio:</strong> ${{ $calzado->precio_venta }}
+                                <p class="card-text" style="font-size: 14px; margin-bottom: 0; display: flex; flex-direction: column; gap: 5px;">
+                                    @if ($calzado->oferta())
+                                        <strong style="text-decoration: line-through;" >Precio: {{ $calzado->precio_venta }} Bs </strong> 
+                                        <strong style="color: green;">Ahora: {{ $calzado->costo_unitario }}Bs </strong> 
+                                    @else
+                                    <strong>Precio: {{ $calzado->precio_venta }}Bs</strong> 
+                                    @endif
                                 </p>
+
                             </div>
                         </div>
                     </a>

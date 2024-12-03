@@ -46,9 +46,28 @@
                         </h5>
                         <p class="card-text mb-2"><strong>Código:</strong> {{ $item['calzado']->cod }}</p>
                         <p class="card-text mb-2"><strong>Talla:</strong> {{ $item['calzado']->talla->numero }}</p>
-                        <p class="card-text mb-2"><strong>Precio Unidad:</strong> ${{ number_format($item['calzado']->precio_venta, 2) }}</p>
+                        
+                        @if ($item['calzado']->oferta())
+                            <p class="card-text mb-2">
+                                <strong>Precio Unidad:</strong>
+                                <span style="text-decoration: line-through; color: gray;">
+                                    {{ number_format($item['calzado']->precio_venta, 2) }}Bs
+                                </span>
+                                <span style="color: green; font-weight: bold;">
+                                    {{ number_format($item['calzado']->costo_unitario, 2) }}Bs
+                                </span>
+                            </p>
+                        @else
+                            <p class="card-text mb-2"><strong>Precio Unidad:</strong>{{ number_format($item['calzado']->precio_venta, 2) }} Bs</p>
+                        @endif
+
                         <p class="card-text mb-2"><strong>Cantidad:</strong> {{ $item['cantidad'] }}</p>
-                        <p class="card-text"><strong>Total:</strong> ${{ number_format($item['calzado']->precio_venta * $item['cantidad'], 2) }}</p>
+                        
+                        @php
+                            $precioUnitario = $item['calzado']->oferta() ? $item['calzado']->costo_unitario : $item['calzado']->precio_venta;
+                        @endphp
+                        
+                        <p class="card-text"><strong>Total:</strong> {{ number_format($precioUnitario * $item['cantidad'], 2) }}Bs</p>
                         <div class="d-flex justify-content-end mt-3">
                             <form action="{{ route('cliente.zapato.quitar', $item['calzado']->cod) }}" method="POST" class="me-2">
                                 @csrf
@@ -60,13 +79,13 @@
                 </div>
             </div>
             @php
-                $precioTotal += $item['calzado']->precio_venta * $item['cantidad'];
+                $precioTotal += $precioUnitario * $item['cantidad'];
             @endphp
         @endforeach
     </div>
 
     <div class="d-flex justify-content-between align-items-center my-4">
-        <h4><strong>Precio Total: ${{ number_format($precioTotal, 2) }}</strong></h4>
+        <h4><strong>Precio Total: {{ number_format($precioTotal, 2) }}Bs</strong></h4>
     </div>
 
     <div class="d-flex justify-content-center">
@@ -74,11 +93,15 @@
             @csrf
             <button type="submit" class="btn btn-danger btn-lg px-4 py-2">Cancelar carro</button>
         </form>
+        @if (Auth::user()->can('admin.inicio'))
+            
+        @else
         <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#crearclienteModal">Paypal</button>
         <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#payment-form1">Stripe</button>
-
+        @endif
     </div>
 </div>
+
 
 @else
     <p class="text-center">No hay calzados en el carro.</p>
