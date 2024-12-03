@@ -93,12 +93,9 @@
             @csrf
             <button type="submit" class="btn btn-danger btn-lg px-4 py-2">Cancelar carro</button>
         </form>
-        @if (Auth::user()->can('admin.inicio'))
-            
-        @else
         <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#crearclienteModal">Paypal</button>
         <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#payment-form1">Stripe</button>
-        @endif
+        
     </div>
 </div>
 
