@@ -35,6 +35,7 @@ return new class extends Migration
             $table->integer('cantidad');  // Campo 'cantidad' de tipo INT
             $table->tinyInteger('estado')->default(1);
             $table->decimal('descuento_total')->default(0)->nullable();// Estado de la venta 1 cancelado, 2 por cancelar
+            $table->char('tipo_pago');  // Llave foránea a la tabla 'cliente'
             $table->integer('ci_cliente');  // Llave foránea a la tabla 'cliente'
             $table->string('cod_admin', 5);  // Llave foránea a la tabla 'administrador'
 
@@ -231,6 +232,33 @@ return new class extends Migration
                   ->onUpdate('cascade')
                   ->onDelete('cascade');
         });
+
+        Schema::create('credito', function (Blueprint $table) {
+            $table->id();
+            $table->integer('nro_venta')->unsigned();  // Dirección IP
+            $table->date('fecha'); // Fecha de la acción
+            $table->decimal('monto_c'); // Hora de la acción
+
+            $table->foreign('nro_venta')
+                  ->references('nro')
+                  ->on('nota_venta')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
+        });
+
+        Schema::create('resena', function (Blueprint $table) {
+            $table->id();
+            $table->integer('cod_calzado')->unsigned();  // Dirección IP
+            $table->string('comentario'); // Fecha de la acción
+            $table->tinyInteger('estrella'); 
+
+            $table->foreign('cod_calzado')
+                  ->references('cod')
+                  ->on('calzado')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
+        });
+
     }
 
     /**

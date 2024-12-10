@@ -20,7 +20,8 @@ class NotaVenta extends Model
         'estado',
         'ci_cliente',
         'cod_admin',
-        'descuento_total'
+        'descuento_total',
+        'tipo_pago'
     ];
     public function getEstado()
     {
@@ -29,6 +30,17 @@ class NotaVenta extends Model
                 return 'CANCELADO';
             case '0':
                 return 'PENDIENTE';
+            default:
+                return 'No definido';
+        }
+    }
+    public function getPago()
+    {
+        switch ($this->tipo_pago) {
+            case 'c':
+                return 'CONTADO';
+            case 'k':
+                return 'CREDITO';
             default:
                 return 'No definido';
         }
@@ -43,6 +55,10 @@ class NotaVenta extends Model
     public function registroventa()
     {
         return $this->hasMany(RegistroVenta::class, 'nro_venta', 'nro');
+    }
+    public function creditos()
+    {
+        return $this->hasMany(Credito::class, 'nro_venta', 'nro');
     }
 
 }

@@ -178,8 +178,17 @@
         </div>
         
         <div class="text-center">
+
             <form action="{{ route('admin.venta.store') }}" method="POST">
                 @csrf
+                <div class="mb-3">
+                    <label for="tipo_pago" class="form-label">Tipo</label>
+                    <select class="form-select" id="tipo_pago" name="tipo_pago" required>
+                        <option value="">Seleccione un Tipo de pago</option>
+                        <option value="c">Contado</option>
+                        <option value="k">Credito</option>
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-primary">Enviar Carrito</button>
             </form>
         </div>

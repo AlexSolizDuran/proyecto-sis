@@ -99,12 +99,14 @@ class VentaController extends Controller
         $cliente = session()->get('ci_persona');
         $carrito = session()->get('carrito', []);
         
+
         $nro_venta = DB::table('nota_venta')->insert([
             'ci_cliente' => $cliente,
             'fecha' => Carbon::now()->format('Y-m-d'), // Formato de fecha
             'monto_total' => 0,
             'cantidad' => 0,
             'estado' => 0, // sin cancelar
+            'tipo_pago'=> $request->tipo_pago,
             'cod_admin' => Auth::user()->administrador->cod,
         ]);
         $nro_venta = DB::getPdo()->lastInsertId();
@@ -120,7 +122,16 @@ class VentaController extends Controller
         session()->forget('ci_persona');
         session()->forget('carrito');
         session()->forget('persona');
-    return redirect()->route('admin.venta.show',$nro_venta)->with('success', 'Venta realizada correctamente.');
+
+
+        if ($request->tipo_pago == 'k'){
+            $notaVenta = NotaVenta::find($nro_venta);
+            $nuevo_monto = $notaVenta->monto_total * 0.2 ;
+            $notaVenta->monto_total += $nuevo_monto;
+            $notaVenta->save();
+        }
+
+        return redirect()->route('admin.venta.show',$nro_venta)->with('success', 'Venta realizada correctamente.');
     }
 
     public function filtrar(Request $request)

@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\Inventario\CalzadoController;
 use App\Http\Controllers\Admin\Compra\CompraController;
 use App\Http\Controllers\Admin\Cliente\ClienteController;
 use App\Http\Controllers\Admin\Venta\VentaController;
+use App\Http\Controllers\Admin\Venta\CreditoController;
+
 use App\Http\Controllers\Admin\BitacoraController;
 
 use App\Http\Controllers\Admin\Categoria\ColorController;
@@ -86,8 +88,6 @@ Route::get('/change-password', [CuentaController::class, 'showChangePasswordForm
 Route::post('/change-password', [CuentaController::class, 'changePassword'])->name('password.change');
 
 //paypal
-
-
 Route::get('/pay-with-paypal', [PayPalController::class, 'payWithPayPal'])->name('paypal.pay');
 Route::get('/paypal/success', [PayPalController::class, 'success'])->name('paypal.success');
 
@@ -95,8 +95,8 @@ Route::get('/payment-form', [StripeController::class, 'showPaymentForm'])->name(
 Route::post('/process-payment', [StripeController::class, 'processPayment'])->name('stripe.processPayment');
 
 //REPORTES
-route::get('/reporte/inicio',[ReportesController::class, 'inicio'])->name('reporte.inicio');
-route::get('/generar-pdf1', [ReportesController:: class, 'ventafecha'])->name('reporte.ventafecha');
+route::get('/reporte/inicio',[ReportesController::class,'inicio'])->name('reporte.inicio');
+route::get('/generar-pdf1', [ReportesController:: class,'ventafecha'])->name('reporte.ventafecha');
 route::get('/generar-pdf2',[ReportesController::class,'gananciafecha'])->name('reporte.gananciafecha');
 route::get('/generar-pdf3', [ReportesController::class,'marcafecha'])->name('reporte.marcafecha');
 route::get('/generar-pdf4', [ReportesController::class,'colorfecha'])->name('reporte.colorfecha');
@@ -104,3 +104,4 @@ route::get('/generar-pdf5', [ReportesController::class,'tallafecha'])->name('rep
 route::get('/generar-pdf6', [ReportesController::class,'generovendido'])->name('reporte.generovendido');
 route::get('/generar-pdf7', [ReportesController::class,'invertidofecha'])->name('reporte.invertidofecha');
 
+Route::resource('credito',CreditoController::class)->only(['store'])->names('admin.credito');

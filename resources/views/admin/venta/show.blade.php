@@ -46,6 +46,10 @@
                     <p class="card-text"><i class="bi bi-circle-fill"></i> <strong>Estado de Venta:</strong> {{ $venta->getEstado() }}</p>
                     <hr>
                 </div>
+                <div class="col-md-6 mb-4 fs-5">
+                    <p class="card-text"><i class="bi bi-circle-fill"></i> <strong>Tipo de Pago:</strong> {{ $venta->getPago() }}</p>
+                    <hr>
+                </div>
 
                 {{-- Botón de Pagado debajo de la información --}}
                 
@@ -91,7 +95,53 @@
             </tbody>
         </table>
     </div>
-
+    @if ($venta->tipo_pago == 'k')
+        
+    <div class="table-responsive">
+        <h2 class="text-center mb-4">Cuotas</h2>
+        @if (DB::table('credito')->where('nro_venta', $venta->nro)->count() < 3)
+        <form action="{{ route('admin.credito.store') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label for="monto_c" class="form-label">Cuota a Cobrar</label>
+                <input 
+                    type="number" 
+                    class="form-control" 
+                    id="monto_c" 
+                    name="monto_c"
+                    value="{{ round(($venta->monto_total - $venta->descuento_total) / 3, 2) }}" 
+                    readonly
+                >
+                <input 
+                type="hidden" 
+                name="nro_venta" 
+                id="nro_venta"
+                value="{{ $venta->nro }}"
+                >
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Cancelar Cuota</button>
+        </form>
+        @endif
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Monto</th>  
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($venta->creditos as $credito)
+                        <tr>
+                            <td>{{ $credito->fecha }}</td>  
+                            <td>{{ $credito->monto_c }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    @endif
     {{-- Enlace para volver a la lista de ventas --}}
     <a href="{{ route('admin.venta.index') }}" class="btn btn-secondary mt-3">Volver a la lista</a>
 </div>
