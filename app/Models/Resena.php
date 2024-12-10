@@ -18,13 +18,13 @@ class Resena extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'cod_calzado',
+        'nro_reg',
         'comentario',
         'estrella',
     ];
 
-    public function calzado()
-    {
-        return $this->belongsTo(Calzado::class, 'cod_calzado', 'cod');
-    }
+    public function registroVenta()
+{
+    return $this->belongsTo(RegistroVenta::class, 'nro_reg','cod'); // Usa el nombre correcto de la columna
+}
 }

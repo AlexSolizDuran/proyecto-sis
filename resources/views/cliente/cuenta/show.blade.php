@@ -42,7 +42,10 @@
             <td>{{ $venta->monto_total - $venta->descuento_total }}</td>
             <td>
             <a href="{{ route('admin.venta.factura', $venta) }}" target="_blank" class="btn btn-warning btn-sm">factura</a>
-            </td>
+            
+            <a href="{{ route('cliente.detalle', $venta) }}" class="btn btn-danger btn-sm">Ver</a>
+    
+        </td>
         </tr>
             @endforeach
     </tbody>

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Inventario\CalzadoController;
+use App\Http\Controllers\Admin\Inventario\ResenaController;
+
 use App\Http\Controllers\Admin\Compra\CompraController;
 use App\Http\Controllers\Admin\Cliente\ClienteController;
 use App\Http\Controllers\Admin\Venta\VentaController;
@@ -40,6 +42,7 @@ Route::get('/admin',function(){
 Route::post('zapato/añadir-zapato', [CarritoController::class, 'añadir'])->name('cliente.zapato.add');
 Route::delete('zapato/quitar-zapato/{calzadoCod}', [CarritoController::class, 'quitar'])->name('cliente.zapato.quitar');
 Route::get('zapato/pedido',[CarritoController::class,'pedido'])->name('zapato.pedido');
+Route::get('/notaventa/{nro}', [CuentaController::class, 'detalle'])->name('cliente.detalle');
 
 Route::post('zapato/cancelar', [CarritoController::class, 'cancelar'])->name('cliente.zapato.cancelar');
 
@@ -105,3 +108,7 @@ route::get('/generar-pdf6', [ReportesController::class,'generovendido'])->name('
 route::get('/generar-pdf7', [ReportesController::class,'invertidofecha'])->name('reporte.invertidofecha');
 
 Route::resource('credito',CreditoController::class)->only(['store'])->names('admin.credito');
+
+Route::resource('resena',ResenaController::class)->only(['store'])->names('cliente.resena');
+Route::get('/resenas/{cod}', [ResenaController::class, 'mostrarComentarios'])->name('cliente.resena.filtrar');
+

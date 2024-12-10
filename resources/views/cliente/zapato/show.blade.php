@@ -70,6 +70,41 @@
             </div>
         </div>
     </div>
+    <div class="mt-4 mb-3">
+        <form action="{{ route('cliente.resena.filtrar',['cod' => $calzado->cod] ) }}" method="GET" class="d-flex justify-content-end">
+            <select name="orden" class="form-select w-auto" onchange="this.form.submit()">
+                <option value="">Ordenar por estrellas</option>
+                <option value="asc" {{ request('orden') == 'asc' ? 'selected' : '' }}>Mejores estrellas</option>
+                <option value="desc" {{ request('orden') == 'desc' ? 'selected' : '' }}>Peores estrellas</option>
+            </select>
+        </form>
+    </div>
+    @if ($comentarios->isNotEmpty())
+    <div class="mt-5">
+        <h4 class="mb-3">Comentarios</h4>
+        @foreach ($comentarios as $comentario)
+            <div class="border-bottom mb-4 pb-3 p-3 rounded shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">{{ $comentario->registroventa->notaventa->cliente->persona->nombre}}</h5>
+                    <div>
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= $comentario->estrella)
+                                <span class="text-warning">&#9733;</span> <!-- Estrella llena -->
+                            @else
+                                <span class="text-muted">&#9733;</span> <!-- Estrella vacía -->
+                            @endif
+                        @endfor
+                    </div>
+                </div>
+                <p class="mb-1"><strong></strong> {{ $comentario->comentario }}</p>
+            </div>
+        @endforeach
+    </div>
+@else
+    <div class="mt-5">
+        <p class="text-muted">No hay comentarios para este calzado.</p>
+    </div>
+@endif
 
     <!-- Botón para volver a la lista de calzados -->
     <div class="text-center mt-5">

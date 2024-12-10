@@ -31,4 +31,9 @@ class RegistroVenta extends Model
     {
         return $this->belongsTo(NotaVenta::class, 'nro_venta', 'nro');
     }
+
+    public function resena()
+    {
+        return $this->hasOne(Resena::class, 'nro_reg'); 
+    }
 }

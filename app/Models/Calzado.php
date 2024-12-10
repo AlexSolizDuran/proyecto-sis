@@ -75,10 +75,7 @@ class Calzado extends Model
         return $this->hasMany(RegistroLote::class, 'cod_calzado','cod'); // Asegúrate de usar el nombre correcto de la clave foránea.
 
     }
-    public function resenas()
-    {
-        return $this->hasMany(Resena::class, 'cod_calzado', 'cod');
-    }
+    
 
     public function oferta()
     {

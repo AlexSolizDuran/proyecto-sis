@@ -248,13 +248,13 @@ return new class extends Migration
 
         Schema::create('resena', function (Blueprint $table) {
             $table->id();
-            $table->integer('cod_calzado')->unsigned();  // Dirección IP
+            $table->integer('nro_reg')->unsigned();  // Dirección IP
             $table->string('comentario'); // Fecha de la acción
             $table->tinyInteger('estrella'); 
 
-            $table->foreign('cod_calzado')
+            $table->foreign('nro_reg')
                   ->references('cod')
-                  ->on('calzado')
+                  ->on('registro_venta')
                   ->onUpdate('cascade')
                   ->onDelete('cascade');
         });

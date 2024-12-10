@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Persona;
 use App\Models\Bitacora;
 use App\Models\Cliente;
-use App\Models\Administrador;
+use App\Models\NotaVenta;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
@@ -61,40 +61,18 @@ class CuentaController extends Controller
         return redirect()->route('cliente.cuenta.show', $persona->ci)->with('success', 'Contraseña cambiada exitosamente.');
     }
 
-    
-     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Persona $persona)
     {
         $persona = Auth::user();
         return view('cliente.cuenta.show',compact('persona'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    public function detalle(string $id)
+    {
+        $venta = NotaVenta::findOrFail($id);
+        //$venta = NotaVenta::where('ci_cliente', $cliente)->first();
+        return view('cliente.cuenta.detalle',compact('venta'));
+    }
+  
     public function edit($ci)
     {
         $persona= Persona::find($ci);
@@ -102,9 +80,7 @@ class CuentaController extends Controller
         return view('cliente.cuenta.edit',compact('persona'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(Request $request, $ci)
     {
         
@@ -135,11 +111,5 @@ class CuentaController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Persona $persona)
-    {
-        //
-    }
+  
 }

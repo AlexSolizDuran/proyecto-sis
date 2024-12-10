@@ -168,7 +168,12 @@ class CarritoController extends Controller
                 'hora' => now()->format('H:i:s'), // Hora actual
             ]);
         }
-        return view ('cliente.zapato.show', compact('calzado'));
+        $comentarios = RegistroVenta::where('cod_calzado', $cod)
+                            ->with('resena') // Carga las reseñas relacionadas
+                            ->get()
+                            ->pluck('resena') // Obtiene solo las reseñas
+                            ->filter(); // Filtra los valores nulos
+        return view ('cliente.zapato.show', compact('calzado','comentarios'));
     }
 
     /**
