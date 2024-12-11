@@ -118,7 +118,7 @@ class CarritoController extends Controller
             'cantidad' => 0,
             'descuento_total' => 0,
             'estado' => 0, // sin cancelar
-            'tipo_pago'=>0,
+            'tipo_pago'=> 'c',
             'cod_admin' => 'AD-1',
         ]);
         

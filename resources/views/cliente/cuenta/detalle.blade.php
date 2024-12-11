@@ -83,7 +83,6 @@
                         <td>{{ ($registro->cantidad * $registro->precio_venta)- ($registro->cantidad * $registro->descuento) }}</td>  
                         <td>
                             @php
-                            // Verificar si ya existe un comentario para este registro
                             $comentarioExistente = \App\Models\Resena::where('nro_reg', $registro->cod)->first();
                             @endphp
 
